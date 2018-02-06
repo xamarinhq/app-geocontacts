@@ -29,6 +29,11 @@ We use serverless architecture for several features of the application including
 ### [Cognitive Services](https://azure.microsoft.com/en-us/services/cognitive-services/)
 When adding smarts the application Cognitive Services enables the application to build in automatic login based on facial recognition.
 
+
+### [Visual Studio Team Services](https://www.visualstudio.com/team-services/)
+
+### [Visual Studio App Center](https://appcenter.ms)
+
 ## Libraries Used
 * Xamarin.Forms
 * Settings Plugin
