@@ -3,7 +3,7 @@
 Awesome Contactz is a cross-platform mobile application sample for iOS, Android, and Windows built with Xamarin.Forms and leverages several service sinside of Azure including Azure AD B2C, Functions, CosmosDB, and cognitive services.
 
 
-###Data
+### Data
 Sample data for this application was imported from the [Microsoft Cloud Developer Advocates](https://developer.microsoft.com/en-us/advocates/) (CDAs). When a CDA logs in (who is part of Azure Active Directory) they are able to update their profile, photos, and location. All users have the ability to skip login and browse our beautiful contact list of CDAs.
 
 ## Smarts
@@ -23,7 +23,6 @@ Our CDAs are located all through the world. We leverage CosmosDB for it's geo-re
 ### [Azure Functions](https://azure.microsoft.com/en-us/services/functions/)
 We use serverless architecture for several features of the application including:
 
-* Image Resizing and circle cropping when a CDA uploads a new photo to blob storage
 * Updating geolocation data. The CDA will update their location with an Azure Function that will detect their city/state/country and get an annonymous Latitude and Longitude for that location. This ensure privacy so exact location is not stored.
 
 ### [Cognitive Services](https://azure.microsoft.com/en-us/services/cognitive-services/)
