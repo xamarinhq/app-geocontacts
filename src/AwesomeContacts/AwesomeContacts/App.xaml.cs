@@ -19,7 +19,7 @@ namespace AwesomeContacts
 		{
 			InitializeComponent();
 
-            MainPage = new NavigationPage(new ContentPage());
+            MainPage = new NavigationPage(new TestPage());
 		}
 
 		protected override void OnStart ()
