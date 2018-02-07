@@ -1,9 +1,15 @@
-﻿using System;
+﻿using AwesomeContacts.Helpers;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using Microsoft.AppCenter.Distribute;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 using Xamarin.Forms;
+using Device = Xamarin.Forms.Device;
 
 namespace AwesomeContacts
 {
@@ -18,10 +24,19 @@ namespace AwesomeContacts
 
 		protected override void OnStart ()
 		{
-			// Handle when your app starts
-		}
+            // Handle when your app starts
+			if ((Device.RuntimePlatform == Device.Android && CommonConstants.AppCenterAndroid != "AC_ANDROID") ||
+				(Device.RuntimePlatform == Device.iOS && CommonConstants.AppCenteriOS != "AC_IOS") ||
+				(Device.RuntimePlatform == Device.UWP && CommonConstants.AppCenterUWP != "AC_UWP"))
+			{
+				AppCenter.Start($"android={CommonConstants.AppCenterAndroid};" +
+				   $"uwp={CommonConstants.AppCenterUWP};" +
+				   $"ios={CommonConstants.AppCenteriOS}",
+				   typeof(Analytics), typeof(Crashes), typeof(Distribute));
+			}
+        }
 
-		protected override void OnSleep ()
+        protected override void OnSleep ()
 		{
 			// Handle when your app sleeps
 		}
