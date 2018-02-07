@@ -3,14 +3,14 @@
 Awesome Contactz is a cross-platform mobile application sample for iOS, Android, and Windows built with Xamarin.Forms and leverages several service sinside of Azure including Azure AD B2C, Functions, CosmosDB, and cognitive services.
 
 <p >
-  &ensp;&ensp;&ensp;&ensp; <img alt="platform" src="images/platform.png">
+ Â &ensp;&ensp;&ensp;&ensp; <img alt="platform" src="art/platform.png">
 </p>
 
 &ensp;&ensp;&ensp;&ensp;&ensp;IOS&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Android&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Windows
 
-<a target="_blank"  href="">iTunes App Store</a>&ensp;&ensp;&ensp;&ensp;
+<a target="_blank"  href="javascript:void(0)">iTunes App Store</a>&ensp;&ensp;&ensp;&ensp;
 <a target="_blank"  href="javascript:void(0)">Play App Store</a>&ensp;&ensp;&ensp;&ensp;
-<a target="_blank"  href="">Windows Store</a>
+<a target="_blank"  href="javascript:void(0)">Windows Store</a>
 
 
 <br/>
