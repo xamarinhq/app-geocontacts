@@ -19,7 +19,7 @@ Awesome Contactz is a cross-platform mobile application sample for iOS, Android,
 ## Mobile App Build Status
 
 |Platform|master|
-| ------------------- | :------------------: | :-----------: |
+| ------------------- | :------------------: |
 |iOS|[![Build status](https://build.appcenter.ms/v0.1/apps/a1388de8-47b2-4dd7-b5a2-d45b6cf5552a/branches/master/badge)](https://appcenter.ms)|
 |Android|[![Build status](https://build.appcenter.ms/v0.1/apps/178483a9-b1ef-4410-8397-783d4f14dc05/branches/master/badge)](https://appcenter.ms)|
 
