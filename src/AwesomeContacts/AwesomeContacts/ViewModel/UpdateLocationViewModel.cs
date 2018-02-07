@@ -7,5 +7,7 @@ namespace AwesomeContacts.ViewModel
     public class UpdateLocationViewModel
     {
 
+       
+
     }
 }
