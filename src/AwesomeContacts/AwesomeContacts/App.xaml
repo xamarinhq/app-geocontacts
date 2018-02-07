@@ -3,8 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AwesomeContacts.App">
 	<Application.Resources>
-
-		<!-- Application resource dictionary -->
-
-	</Application.Resources>
+        <ResourceDictionary>
+            <!-- Application resource dictionary -->
+            <Color x:Key="Primary">#b2169c</Color>
+            <Color x:Key="PrimaryDark">#590b4e</Color>
+            <Color x:Key="Accent">#fdb82c</Color>
+            <Color x:Key="CDAYellow">#fdb82c</Color>
+            <Color x:Key="CDABlue">#137ad3</Color>
+            
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="BarTextColor" Value="White" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
 </Application>

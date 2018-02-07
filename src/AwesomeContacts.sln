@@ -9,7 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AwesomeContacts.iOS", "Awes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AwesomeContacts.UWP", "AwesomeContacts\AwesomeContacts.UWP\AwesomeContacts.UWP.csproj", "{567C9102-3DAE-4E9B-BECD-5C18C633E40D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AwesomeContacts", "AwesomeContacts\AwesomeContacts\AwesomeContacts.csproj", "{08D65A14-52B5-447A-AF25-5CC56977EEF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AwesomeContacts", "AwesomeContacts\AwesomeContacts\AwesomeContacts.csproj", "{08D65A14-52B5-447A-AF25-5CC56977EEF4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{249BE0CF-7A1B-4B62-9E71-4AA85501BC2A}"
+	ProjectSection(SolutionItems) = preProject
+		..\README.md = ..\README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
