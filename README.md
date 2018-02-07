@@ -2,6 +2,27 @@
 
 Awesome Contactz is a cross-platform mobile application sample for iOS, Android, and Windows built with Xamarin.Forms and leverages several service sinside of Azure including Azure AD B2C, Functions, CosmosDB, and cognitive services.
 
+<p >
+  &ensp;&ensp;&ensp;&ensp; <img alt="platform" src="images/platform.png">
+</p>
+
+&ensp;&ensp;&ensp;&ensp;&ensp;IOS&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Android&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Windows
+
+<a target="_blank"  href="">iTunes App Store</a>&ensp;&ensp;&ensp;&ensp;
+<a target="_blank"  href="javascript:void(0)">Play App Store</a>&ensp;&ensp;&ensp;&ensp;
+<a target="_blank"  href="">Windows Store</a>
+
+
+<br/>
+<br/>
+
+## Mobile App Build Status
+
+|Platform|master|
+| ------------------- | :------------------: | :-----------: |
+|iOS|[![Build status](https://build.appcenter.ms/v0.1/apps/a1388de8-47b2-4dd7-b5a2-d45b6cf5552a/branches/master/badge)](https://appcenter.ms)|
+|Android|[![Build status](https://build.appcenter.ms/v0.1/apps/178483a9-b1ef-4410-8397-783d4f14dc05/branches/master/badge)](https://appcenter.ms)|
+
 
 ### Data
 Sample data for this application was imported from the [Microsoft Cloud Developer Advocates](https://developer.microsoft.com/en-us/advocates/) (CDAs). When a CDA logs in (who is part of Azure Active Directory) they are able to update their profile, photos, and location. All users have the ability to skip login and browse our beautiful contact list of CDAs.
