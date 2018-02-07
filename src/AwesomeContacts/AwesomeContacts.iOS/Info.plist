@@ -50,5 +50,7 @@
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
 	<string>AwesomeContacts</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need to grab your location if that is okay.</string>
 </dict>
 </plist>
