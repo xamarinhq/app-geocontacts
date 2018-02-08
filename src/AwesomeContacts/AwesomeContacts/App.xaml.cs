@@ -1,8 +1,10 @@
 ﻿using AwesomeContacts.Helpers;
+using AwesomeContacts.Resources;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using Microsoft.AppCenter.Distribute;
+using Plugin.Multilingual;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +20,9 @@ namespace AwesomeContacts
 		public App ()
 		{
 			InitializeComponent();
+
+            var culture = CrossMultilingual.Current.DeviceCultureInfo;
+            AppResources.Culture = culture;
 
             MainPage = new NavigationPage(new TestPage());
 		}

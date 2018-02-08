@@ -1,12 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AwesomeContacts.View.LoginPage">
+             xmlns:i18n="clr-namespace:AwesomeContacts.Helpers" 
+             x:Class="AwesomeContacts.View.LoginPage"
+             Title="{i18n:Translate AppName}">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid Padding="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Image Source="ic_bitmicrosoft" 
+                   HorizontalOptions="Center" 
+                   VerticalOptions="Center"
+                   Aspect="AspectFill"/>
+
+            <Label Grid.Row="1" Text="{i18n:Translate LoginPageWelcome}" HorizontalTextAlignment="Center"/>
+            <Button Grid.Row="2" BackgroundColor="{StaticResource Primary}" TextColor="White"
+                    BorderRadius="15" Text="{i18n:Translate LoginPageLoginWithMicrosoft}"
+                    HorizontalOptions="FillAndExpand" Margin="15,0"/>
+
+
+            <Button Grid.Row="3" BackgroundColor="{StaticResource PrimaryDark}" TextColor="White"
+                    BorderRadius="15" Text="{i18n:Translate LoginPageGuest}"
+                    HorizontalOptions="FillAndExpand" VerticalOptions="End" Margin="15,0"/>
+
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
