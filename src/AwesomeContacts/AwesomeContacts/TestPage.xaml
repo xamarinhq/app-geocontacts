@@ -4,11 +4,17 @@
              x:Class="AwesomeContacts.TestPage">
     <ContentPage.Content>
         <StackLayout>
+            <Button Text="Home Page" x:Name="ButtonHomePage"/>
             <Button Text="All Contacts" x:Name="ButtonAllContacts"/>
             <Button Text="Face Auth" x:Name="ButtonFaceAuth"/>
             <Button Text="Login Page" x:Name="ButtonLogin"/>
             <Button Text="Nearby" x:Name="ButtonNearby"/>
             <Button Text="Update Location" x:Name="ButtonUpdateLocation"/>
+            <Button Text="Details Page" x:Name="ButtonDetails"/>
+            <Label Text="Guest Mode"/>
+            <Switch IsToggled="{Binding Settings.InGuestMode}"/>
+            <Label Text="MSFT Signed In"/>
+            <Switch IsToggled="{Binding Settings.LoggedInMSFT}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

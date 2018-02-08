@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using ImageCircle.Forms.Plugin.Droid;
 
 namespace AwesomeContacts.Droid
 {
@@ -20,6 +21,7 @@ namespace AwesomeContacts.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
+            ImageCircleRenderer.Init();
             LoadApplication(new AwesomeContacts.App());
         }
     }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using MvvmHelpers;
 using Plugin.Settings;
 using Plugin.Settings.Abstractions;
 
@@ -12,33 +12,32 @@ namespace AwesomeContacts.Helpers
     /// of your client applications. All settings are laid out the same exact way with getters
     /// and setters. 
     /// </summary>
-    public static class Settings
+    public class Settings : BaseViewModel
     {
-        private static ISettings AppSettings
+        private static ISettings AppSettings => CrossSettings.Current;
+        static Settings settings;
+        public static Settings Current =>
+          settings ?? (settings = new Settings());
+
+        public bool InGuestMode
         {
-            get
+            get => AppSettings.GetValueOrDefault(nameof(InGuestMode), false);
+            set
             {
-                return CrossSettings.Current;
+                var original = InGuestMode;
+                if (AppSettings.AddOrUpdateValue(nameof(InGuestMode), value))
+                    SetProperty(ref original, value);
             }
         }
 
-        #region Setting Constants
-
-        private const string SettingsKey = "settings_key";
-        private static readonly string SettingsDefault = string.Empty;
-
-        #endregion
-
-
-        public static string GeneralSettings
+        public bool LoggedInMSFT
         {
-            get
-            {
-                return AppSettings.GetValueOrDefault(SettingsKey, SettingsDefault);
-            }
+            get => AppSettings.GetValueOrDefault(nameof(LoggedInMSFT), false);
             set
             {
-                AppSettings.AddOrUpdateValue(SettingsKey, value);
+                var original = LoggedInMSFT;
+                if (AppSettings.AddOrUpdateValue(nameof(LoggedInMSFT), value))
+                    SetProperty(ref original, value);
             }
         }
 

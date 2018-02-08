@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AwesomeContacts.Resources;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,22 @@ namespace AwesomeContacts.View
         public HomePage ()
         {
             InitializeComponent();
+            Title = AppResources.TitleAllContacts;
+            this.CurrentPageChanged += HomePage_CurrentPageChanged;
+        }
+
+        private void HomePage_CurrentPageChanged(object sender, EventArgs e)
+        {
+            switch(CurrentPage)
+            {
+                case AllContactsPage a:
+                    Title = AppResources.TitleAllContacts;
+                    break;
+                case NearbyPage b:
+                    Title = AppResources.TitleNearby;
+                    break;
+
+            }
         }
     }
 }

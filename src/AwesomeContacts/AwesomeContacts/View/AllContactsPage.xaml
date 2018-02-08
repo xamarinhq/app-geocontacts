@@ -1,33 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:i18n="clr-namespace:AwesomeContacts.Helpers" 
+             xmlns:cells="clr-namespace:AwesomeContacts.Cells"
+             xmlns:effects="clr-namespace:AwesomeContacts.Effects"
              x:Class="AwesomeContacts.View.AllContactsPage">
-  <ListView x:Name="MyListView"
-            ItemsSource="{Binding Items}"
-            ItemTapped="Handle_ItemTapped"
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{i18n:Translate ToolbarSettings}" Icon="ic_settings"/>
+    </ContentPage.ToolbarItems>
+    <ListView x:Name="MyListView"
+            ItemsSource="{Binding Contacts}"
+              IsPullToRefreshEnabled="True"
+            RefreshCommand="{Binding ForceRefreshCommand}"
+              IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+              HasUnevenRows="True"
             CachingStrategy="RecycleElement">
-            
-    <!--Built in Cells-->
-    <ListView.ItemTemplate>
-        <DataTemplate>
-            <TextCell Text="{Binding .}" />
-        </DataTemplate>
-    </ListView.ItemTemplate>
-    
-    <!--Custom View Cells-->
-    <!--
-    <ListView.ItemTemplate>
-      <DataTemplate>
-        <ViewCell>
-          <StackLayout>
-            <Label Text="{Binding Text}" 
-                   Style="{DynamicResource ListItemTextStyle}" />
-            <Label Text="{Binding Detail}" 
-                   Style="{DynamicResource ListItemDetailTextStyle}"/>
-          </StackLayout>
-        </ViewCell>
-      </DataTemplate>
-    </ListView.ItemTemplate>
-    -->
-  </ListView>
+        <ListView.Effects>
+            <effects:SelectionOnTopEffect/>
+        </ListView.Effects>
+
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <cells:ContactCell/>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+
+    </ListView>
 </ContentPage>

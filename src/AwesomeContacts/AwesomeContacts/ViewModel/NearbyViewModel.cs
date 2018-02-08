@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AwesomeContacts.ViewModel
 {
-    public class NearbyViewModel
+    public class NearbyViewModel : ViewModelBase
     {
     }
 }

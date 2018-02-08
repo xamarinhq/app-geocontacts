@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AwesomeContacts.ViewModel;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -12,33 +13,20 @@ namespace AwesomeContacts.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AllContactsPage : ContentPage
     {
-        public ObservableCollection<string> Items { get; set; }
+        AllContactsViewModel vm;
 
         public AllContactsPage()
         {
             InitializeComponent();
-
-            Items = new ObservableCollection<string>
-            {
-                "Item 1",
-                "Item 2",
-                "Item 3",
-                "Item 4",
-                "Item 5"
-            };
-			
-			MyListView.ItemsSource = Items;
+            BindingContext = vm = new AllContactsViewModel();
+            MyListView.ItemTapped += (sender, args) => MyListView.SelectedItem = null;
         }
 
-        async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
+        protected override void OnAppearing()
         {
-            if (e.Item == null)
-                return;
-
-            await DisplayAlert("Item Tapped", "An item was tapped.", "OK");
-
-            //Deselect Item
-            ((ListView)sender).SelectedItem = null;
+            base.OnAppearing();
+            if (vm.Contacts.Count == 0)
+                vm.RefreshCommand.Execute(null);
         }
     }
 }
