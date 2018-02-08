@@ -7,14 +7,14 @@
     <ContentPage.Content>
         <Grid Padding="10">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="200"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Image Source="ic_bitmicrosoft" 
-                   HorizontalOptions="Center" 
-                   VerticalOptions="Center"
+                   HorizontalOptions="CenterAndExpand" 
+                   VerticalOptions="CenterAndExpand"
                    Aspect="AspectFill"/>
 
             <Label Grid.Row="1" Text="{i18n:Translate LoginPageWelcome}" HorizontalTextAlignment="Center"/>
