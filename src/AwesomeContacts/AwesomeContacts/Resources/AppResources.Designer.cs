@@ -70,6 +70,15 @@ namespace AwesomeContacts.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sync Current Location.
+        /// </summary>
+        internal static string ButtonSyncLocation {
+            get {
+                return ResourceManager.GetString("ButtonSyncLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Continue as Guest.
         /// </summary>
         internal static string LoginPageGuest {
@@ -93,6 +102,60 @@ namespace AwesomeContacts.Resources {
         internal static string LoginPageWelcome {
             get {
                 return ResourceManager.GetString("LoginPageWelcome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contacts.
+        /// </summary>
+        internal static string TitleAllContacts {
+            get {
+                return ResourceManager.GetString("TitleAllContacts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nearby.
+        /// </summary>
+        internal static string TitleNearby {
+            get {
+                return ResourceManager.GetString("TitleNearby", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update Current Town.
+        /// </summary>
+        internal static string TitleUpdateLocation {
+            get {
+                return ResourceManager.GetString("TitleUpdateLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        internal static string ToolbarSettings {
+            get {
+                return ResourceManager.GetString("ToolbarSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update Location.
+        /// </summary>
+        internal static string ToolbarUpdateLocation {
+            get {
+                return ResourceManager.GetString("ToolbarUpdateLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to When updating your current location the town that you are currently in will be updated for everyone to see and to help find CDAs nearby..
+        /// </summary>
+        internal static string UpdateLocationMessage {
+            get {
+                return ResourceManager.GetString("UpdateLocationMessage", resourceCulture);
             }
         }
     }

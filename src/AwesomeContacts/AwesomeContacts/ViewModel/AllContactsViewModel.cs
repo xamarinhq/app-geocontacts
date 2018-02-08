@@ -1,10 +1,42 @@
-﻿using System;
+﻿using AwesomeContacts.Model;
+using MvvmHelpers;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace AwesomeContacts.ViewModel
 {
-    class AllContactsViewModel
+    public class AllContactsViewModel : ViewModelBase
     {
+        public ObservableRangeCollection<Contact> Contacts { get; }
+
+        public ICommand RefreshCommand { get; }
+        public ICommand ForceRefreshCommand { get; }
+
+        public AllContactsViewModel()
+        {
+            Contacts = new ObservableRangeCollection<Contact>();
+            RefreshCommand = new Command(async () => await (ExecuteRefreshCommand(false)));
+            ForceRefreshCommand = new Command(async () => await (ExecuteRefreshCommand(true)));
+        }
+
+        async Task ExecuteRefreshCommand(bool forceRefresh)
+        {
+            try
+            {
+                var contacts = await DataService.GetAllAsync();
+                if (contacts != null && contacts.Count() > 0)
+                    Contacts.ReplaceRange(contacts);
+            }
+            catch (Exception)
+            {
+                
+            }
+        }
+
     }
 }

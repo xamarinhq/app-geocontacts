@@ -120,6 +120,9 @@
   <data name="AppName" xml:space="preserve">
     <value>Cloud Developer Advocates</value>
   </data>
+  <data name="ButtonSyncLocation" xml:space="preserve">
+    <value>Sync Current Location</value>
+  </data>
   <data name="LoginPageGuest" xml:space="preserve">
     <value>Continue as Guest</value>
   </data>
@@ -128,5 +131,23 @@
   </data>
   <data name="LoginPageWelcome" xml:space="preserve">
     <value>Welcome to the Microsoft Cloud Developer Advocate contacts application. This app enables you to browse and find CDAs near you.</value>
+  </data>
+  <data name="TitleAllContacts" xml:space="preserve">
+    <value>Contacts</value>
+  </data>
+  <data name="TitleNearby" xml:space="preserve">
+    <value>Nearby</value>
+  </data>
+  <data name="TitleUpdateLocation" xml:space="preserve">
+    <value>Update Current Town</value>
+  </data>
+  <data name="ToolbarSettings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="ToolbarUpdateLocation" xml:space="preserve">
+    <value>Update Location</value>
+  </data>
+  <data name="UpdateLocationMessage" xml:space="preserve">
+    <value>When updating your current location the town that you are currently in will be updated for everyone to see and to help find CDAs nearby.</value>
   </data>
 </root>

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AwesomeContacts.ViewModel
 {
-    class LoginViewModel
+    class LoginViewModel : ViewModelBase
     {
     }
 }

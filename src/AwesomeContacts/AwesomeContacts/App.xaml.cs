@@ -1,5 +1,6 @@
 ﻿using AwesomeContacts.Helpers;
 using AwesomeContacts.Resources;
+using AwesomeContacts.Services;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
@@ -23,6 +24,8 @@ namespace AwesomeContacts
 
             var culture = CrossMultilingual.Current.DeviceCultureInfo;
             AppResources.Culture = culture;
+
+            DependencyService.Register<IDataService, MockDataService>();
 
             MainPage = new NavigationPage(new TestPage());
 		}

@@ -7,23 +7,24 @@
     <ContentPage.Content>
         <Grid Padding="10">
             <Grid.RowDefinitions>
-                <RowDefinition Height="200"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height=".5*"/>
+                <RowDefinition Height="150"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Image Source="ic_bitmicrosoft" 
-                   HorizontalOptions="CenterAndExpand" 
-                   VerticalOptions="CenterAndExpand"
-                   Aspect="AspectFill"/>
+            <Image Grid.Row="1" Source="ic_bitmicrosoft" 
+                   HorizontalOptions="FillAndExpand" 
+                   VerticalOptions="FillAndExpand"
+                   Aspect="AspectFit"/>
 
-            <Label Grid.Row="1" Text="{i18n:Translate LoginPageWelcome}" HorizontalTextAlignment="Center"/>
-            <Button Grid.Row="2" BackgroundColor="{StaticResource Primary}" TextColor="White"
+            <Label Grid.Row="2" Text="{i18n:Translate LoginPageWelcome}" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+            <Button Grid.Row="3" BackgroundColor="{StaticResource Primary}" TextColor="White"
                     BorderRadius="15" Text="{i18n:Translate LoginPageLoginWithMicrosoft}"
                     HorizontalOptions="FillAndExpand" Margin="15,0"/>
 
 
-            <Button Grid.Row="3" BackgroundColor="{StaticResource PrimaryDark}" TextColor="White"
+            <Button Grid.Row="4" BackgroundColor="{StaticResource PrimaryDark}" TextColor="White"
                     BorderRadius="15" Text="{i18n:Translate LoginPageGuest}"
                     HorizontalOptions="FillAndExpand" VerticalOptions="End" Margin="15,0"/>
 

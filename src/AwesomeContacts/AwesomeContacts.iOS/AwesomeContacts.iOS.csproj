@@ -50,6 +50,7 @@
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchExtraArgs>--linkskip=ImageCircle.Forms.Plugin.iOS --linkskip=ImageCircle.Forms.Plugin.Abstractions</MtouchExtraArgs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
@@ -57,10 +58,12 @@
     <OutputPath>bin\iPhone\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <MtouchArch>ARM64</MtouchArch>
+    <MtouchArch>ARMv7, ARM64</MtouchArch>
     <ConsolePause>false</ConsolePause>
     <CodesignKey>iPhone Developer</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchUseLlvm>true</MtouchUseLlvm>
+    <MtouchExtraArgs>--linkskip=ImageCircle.Forms.Plugin.iOS --linkskip=ImageCircle.Forms.Plugin.Abstractions</MtouchExtraArgs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
     <DebugType>none</DebugType>
@@ -69,11 +72,13 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
-    <MtouchArch>ARM64</MtouchArch>
+    <MtouchArch>ARMv7s, ARM64</MtouchArch>
     <BuildIpa>True</BuildIpa>
+    <MtouchUseLlvm>true</MtouchUseLlvm>
     <CodesignProvision>Automatic:AdHoc</CodesignProvision>
     <CodesignKey>iPhone Distribution</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchExtraArgs>--linkskip=ImageCircle.Forms.Plugin.iOS --linkskip=ImageCircle.Forms.Plugin.Abstractions</MtouchExtraArgs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
     <DebugType>none</DebugType>
@@ -82,10 +87,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
-    <MtouchArch>ARM64</MtouchArch>
+    <MtouchArch>ARMv7, ARM64</MtouchArch>
+    <MtouchUseLlvm>true</MtouchUseLlvm>
     <CodesignProvision>Automatic:AppStore</CodesignProvision>
     <CodesignKey>iPhone Distribution</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchExtraArgs>--linkskip=ImageCircle.Forms.Plugin.iOS --linkskip=ImageCircle.Forms.Plugin.Abstractions</MtouchExtraArgs>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -157,6 +164,9 @@
     </PackageReference>
     <PackageReference Include="Xam.Plugin.Media">
       <Version>3.1.3</Version>
+    </PackageReference>
+    <PackageReference Include="Xam.Plugins.Forms.ImageCircle">
+      <Version>2.0.2</Version>
     </PackageReference>
     <PackageReference Include="Xam.Plugins.Messaging">
       <Version>5.1.0</Version>
