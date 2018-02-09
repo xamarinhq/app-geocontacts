@@ -15,6 +15,39 @@
                 <Setter Property="BarBackgroundColor" Value="{StaticResource Primary}" />
                 <Setter Property="BarTextColor" Value="White" />
             </Style>
+
+            <OnPlatform x:Key="ButtonOutlineBackgroundColor" x:TypeArguments="Color">
+                <On Platform="Android" Value="{StaticResource Primary}"/>
+                <On Platform="iOS" Value="Transparent"/>
+            </OnPlatform>
+
+            <OnPlatform x:Key="ButtonOutlineTextColor" x:TypeArguments="Color">
+                <On Platform="Android" Value="White"/>
+                <On Platform="iOS" Value="{StaticResource Primary}"/>
+            </OnPlatform>
+
+            <OnPlatform x:Key="ButtonOutlineBorderColor" x:TypeArguments="Color">
+                <On Platform="iOS" Value="{StaticResource Primary}"/>
+                <On Platform="Android" Value="Transparent"/>
+            </OnPlatform>
+
+            <OnPlatform x:Key="ButtonOutlineBorderWidth" x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="1"/>
+                <On Platform="Android" Value="0"/>
+            </OnPlatform>
+
+            <OnPlatform x:Key="ButtonOutlineBorderRadius" x:TypeArguments="x:Int32">
+                <On Platform="iOS" Value="15"/>
+                <On Platform="Android" Value="0"/>
+            </OnPlatform>
+
+            <Style x:Key="ButtonOutline" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource ButtonOutlineBackgroundColor}"/>
+                <Setter Property="TextColor" Value="{StaticResource ButtonOutlineTextColor}"/>
+                <Setter Property="BorderColor" Value="{StaticResource ButtonOutlineBorderColor}"/>
+                <Setter Property="BorderWidth" Value="{StaticResource ButtonOutlineBorderWidth}"/>
+                <Setter Property="BorderRadius" Value="{StaticResource ButtonOutlineBorderRadius}"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

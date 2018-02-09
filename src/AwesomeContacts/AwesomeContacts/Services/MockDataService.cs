@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AwesomeContacts.Model;
+using Plugin.Geolocator.Abstractions;
 
 namespace AwesomeContacts.Services
 {
@@ -46,6 +47,11 @@ namespace AwesomeContacts.Services
         public Task<IEnumerable<Contact>> GetNearbyAsync()
         {
             return Task.FromResult(contacts as IEnumerable<Contact>);
+        }
+
+        public async Task UpdateLocationAsync(Position position, Address address)
+        {
+            await Task.Delay(2000);
         }
     }
 }

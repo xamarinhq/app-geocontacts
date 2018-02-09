@@ -79,6 +79,15 @@ namespace AwesomeContacts.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Continue as Guest.
         /// </summary>
         internal static string LoginPageGuest {
@@ -88,7 +97,7 @@ namespace AwesomeContacts.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Login with @microsoft.com (CDA).
+        ///   Looks up a localized string similar to CDA Login.
         /// </summary>
         internal static string LoginPageLoginWithMicrosoft {
             get {
@@ -102,6 +111,24 @@ namespace AwesomeContacts.Resources {
         internal static string LoginPageWelcome {
             get {
                 return ResourceManager.GetString("LoginPageWelcome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Un oh, looks like your device is offline. Check your connection and try again..
+        /// </summary>
+        internal static string NoInternet {
+            get {
+                return ResourceManager.GetString("NoInternet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        internal static string OK {
+            get {
+                return ResourceManager.GetString("OK", resourceCulture);
             }
         }
         
@@ -151,11 +178,56 @@ namespace AwesomeContacts.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Syncing with the cloud....
+        /// </summary>
+        internal static string UpdateLocationBackend {
+            get {
+                return ResourceManager.GetString("UpdateLocationBackend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uh oh, looks like we weren&apos;t able to update your location..
+        /// </summary>
+        internal static string UpdateLocationError {
+            get {
+                return ResourceManager.GetString("UpdateLocationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Being smart and doing some geocoding....
+        /// </summary>
+        internal static string UpdateLocationGeocoding {
+            get {
+                return ResourceManager.GetString("UpdateLocationGeocoding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to When updating your current location the town that you are currently in will be updated for everyone to see and to help find CDAs nearby..
         /// </summary>
         internal static string UpdateLocationMessage {
             get {
                 return ResourceManager.GetString("UpdateLocationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Getting your location....
+        /// </summary>
+        internal static string UpdatingLocation {
+            get {
+                return ResourceManager.GetString("UpdatingLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Location has been updated and synced!.
+        /// </summary>
+        internal static string UpdatingLocationUpdated {
+            get {
+                return ResourceManager.GetString("UpdatingLocationUpdated", resourceCulture);
             }
         }
     }

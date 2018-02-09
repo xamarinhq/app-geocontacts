@@ -3,6 +3,7 @@ using Microsoft.Azure.Documents.Client;
 using MonkeyCache.FileStore;
 using Newtonsoft.Json;
 using Plugin.Connectivity;
+using Plugin.Geolocator.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -71,6 +72,12 @@ namespace AwesomeContacts.Services
             }
 
             return default(T);
+        }
+
+        public Task UpdateLocationAsync(Position position, Address address)
+        {
+            //This should call an azure service
+            return Task.CompletedTask;
         }
     }
 }
