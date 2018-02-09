@@ -8,8 +8,10 @@
         <Grid Padding="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height=".5*"/>
-                <RowDefinition Height="250"/>
+                <RowDefinition Height="200"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
@@ -19,13 +21,17 @@
                    Aspect="AspectFit"/>
 
             <Label Grid.Row="2" Text="{i18n:Translate UpdateLocationMessage}" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
-            <!--Put some fancy thing here-->
 
+            <ActivityIndicator Grid.Row="3" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Color="{StaticResource PrimaryDark}" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
 
-            <Button Grid.Row="4" BackgroundColor="{StaticResource PrimaryDark}" TextColor="White"
+            <Label Grid.Row="4" Text="{Binding CurrentLocation}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"/>
+            <Label Grid.Row="5" Text="{Binding UpdateMessage}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"/>
+
+            <Button Grid.Row="6" BackgroundColor="{StaticResource Primary}" TextColor="White"
                     BorderRadius="15" Text="{i18n:Translate ButtonSyncLocation}"
+                    Command="{Binding UpdateLocationCommand}"
                     IsEnabled="{Binding IsNotBusy}"
-                    HorizontalOptions="FillAndExpand" VerticalOptions="End" Margin="15,0"/>
+                    HorizontalOptions="FillAndExpand" VerticalOptions="End" Margin="15,10,15,0"/>
 
         </Grid>
     </ContentPage.Content>

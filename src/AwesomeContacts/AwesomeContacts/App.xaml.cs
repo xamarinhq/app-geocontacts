@@ -26,6 +26,7 @@ namespace AwesomeContacts
             AppResources.Culture = culture;
 
             DependencyService.Register<IDataService, MockDataService>();
+            DependencyService.Register<IDialogs, Dialogs>();
 
             MainPage = new NavigationPage(new TestPage());
 		}

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AwesomeContacts.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,11 @@ namespace AwesomeContacts.View
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class UpdateLocationPage : ContentPage
 	{
+        UpdateLocationViewModel vm;
 		public UpdateLocationPage ()
 		{
 			InitializeComponent ();
+            BindingContext = vm = new UpdateLocationViewModel();
 		}
 	}
 }
