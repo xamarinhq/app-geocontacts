@@ -1,11 +1,13 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:i18n="clr-namespace:AwesomeContacts.Helpers" 
              x:Class="AwesomeContacts.View.LoginPage"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             ios:Page.UseSafeArea="true" 
              Title="{i18n:Translate AppName}">
     <ContentPage.Content>
-        <Grid Padding="10">
+        <Grid Padding="10" RowSpacing="20">
             <Grid.RowDefinitions>
                 <RowDefinition Height=".5*"/>
                 <RowDefinition Height="150"/>
@@ -23,7 +25,7 @@
                    Aspect="AspectFit"/>
 
             <Label Grid.Row="3" Grid.ColumnSpan="2" Text="{i18n:Translate LoginPageWelcome}" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
-            <Button Grid.Row="4" TextColor="White"
+            <Button Grid.Row="4"
                     BorderRadius="15" Text="{i18n:Translate LoginPageLoginWithMicrosoft}"
                     HorizontalOptions="FillAndExpand"
                     Style="{StaticResource ButtonOutline}">
