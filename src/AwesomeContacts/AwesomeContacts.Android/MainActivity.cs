@@ -7,6 +7,9 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using ImageCircle.Forms.Plugin.Droid;
+using Android.Content;
+using Microsoft.Identity.Client;
+using Plugin.CurrentActivity;
 
 namespace AwesomeContacts.Droid
 {
@@ -22,7 +25,17 @@ namespace AwesomeContacts.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             ImageCircleRenderer.Init();
+
             LoadApplication(new AwesomeContacts.App());
+
+            AuthenticationService.UIParent = new UIParent(CrossCurrentActivity.Current.Activity);
+        }
+
+        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+
+            AuthenticationContinuationHelper.SetAuthenticationContinuationEventArgs(requestCode, resultCode, data);
         }
     }
 }

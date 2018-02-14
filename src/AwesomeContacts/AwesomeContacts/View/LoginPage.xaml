@@ -26,6 +26,7 @@
 
             <Label Grid.Row="3" Grid.ColumnSpan="2" Text="{i18n:Translate LoginPageWelcome}" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
             <Button Grid.Row="4"
+                    Command="{Binding LoginCommand}"
                     BorderRadius="15" Text="{i18n:Translate LoginPageLoginWithMicrosoft}"
                     HorizontalOptions="FillAndExpand"
                     Style="{StaticResource ButtonOutline}">

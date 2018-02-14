@@ -5,6 +5,7 @@ using System.Linq;
 using Foundation;
 using ImageCircle.Forms.Plugin.iOS;
 using UIKit;
+using Microsoft.Identity.Client;
 
 namespace AwesomeContacts.iOS
 {
@@ -23,13 +24,19 @@ namespace AwesomeContacts.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-
-            UITabBar.Appearance.SelectedImageTintColor = UIColor.FromRGB(178,  22,  9);
+            UITabBar.Appearance.SelectedImageTintColor = UIColor.FromRGB(178, 22, 9);
             global::Xamarin.Forms.Forms.Init();
             ImageCircleRenderer.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
+        }
+
+        public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
+        {
+            AuthenticationContinuationHelper.SetAuthenticationContinuationEventArgs(url);
+
+            return true;
         }
     }
 }
