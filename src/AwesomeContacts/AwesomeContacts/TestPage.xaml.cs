@@ -15,13 +15,15 @@ namespace AwesomeContacts
     {
 
     }
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class TestPage : ContentPage
-	{
-		public TestPage ()
-		{
-			InitializeComponent ();
-            BindingContext = new TestViewModel();
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class TestPage : ContentPage
+    {
+        TestViewModel vm;
+        public TestPage()
+        {
+            InitializeComponent();
+            vm = new TestViewModel();
+            BindingContext = vm;
 
             ButtonAllContacts.Clicked += (sender, args) => Navigation.PushAsync(new AllContactsPage());
 
@@ -34,10 +36,19 @@ namespace AwesomeContacts
             };
 
             ButtonFaceAuth.Clicked += (sender, args) => Navigation.PushAsync(new FaceAuthPage());
-            ButtonLogin.Clicked += (sender, args) => Navigation.PushAsync(new LoginPage());
+
+            ButtonLogin.Clicked += async (sender, args) =>
+            {
+                if (!await vm.AuthenticationService.IsLoggedIn())
+                    await Navigation.PushAsync(new LoginPage());
+                else
+                    await DisplayAlert("Already logged in", "You're already logged in!", "OK");
+            };
+            ButtonLogout.Clicked += (sender, args) => vm.AuthenticationService.Logout();
+
             ButtonNearby.Clicked += (sender, args) => Navigation.PushAsync(new NearbyPage());
             ButtonUpdateLocation.Clicked += (sender, args) => Navigation.PushAsync(new UpdateLocationPage());
             ButtonDetails.Clicked += (sender, args) => Navigation.PushAsync(new DetailsPage());
         }
-	}
+    }
 }

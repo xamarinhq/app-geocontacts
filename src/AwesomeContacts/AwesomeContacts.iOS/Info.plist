@@ -42,5 +42,18 @@
 	<string>1.0</string>
 	<key>CFBundleName</key>
 	<string>CDA Contacts</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.microsoft.advocates</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>msal9f43032f-f539-4c7e-9639-3114d38d43ed</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>
