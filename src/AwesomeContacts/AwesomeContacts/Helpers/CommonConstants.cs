@@ -16,6 +16,7 @@ namespace AwesomeContacts.Helpers
         public const string ADApplicationID = "9f43032f-f539-4c7e-9639-3114d38d43ed";
         public const string ADRedirectID = "msal" + ADApplicationID + "://auth";
         public static readonly string[] ADScopes = new string[] { "User.Read" };
+        public const string ADAuthority = "https://login.microsoftonline.com/organizations/";
         #endregion
 
     }

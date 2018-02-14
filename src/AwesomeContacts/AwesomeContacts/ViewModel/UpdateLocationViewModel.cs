@@ -25,7 +25,6 @@ namespace AwesomeContacts.ViewModel
             set => SetProperty(ref currentLocation, value);
         }
 
-
         public ICommand UpdateLocationCommand { get; }
 
         async Task ExecuteUpdateLocationCommand()
@@ -34,6 +33,10 @@ namespace AwesomeContacts.ViewModel
                 return;
 
             if (!await CheckConnectivityAsync())
+                return;
+
+            var authResult = await AuthenticationService.Login();
+            if (authResult == null)
                 return;
 
             try
@@ -76,7 +79,7 @@ namespace AwesomeContacts.ViewModel
                 IsBusy = false;
             }
         }
-       
+
 
     }
 }

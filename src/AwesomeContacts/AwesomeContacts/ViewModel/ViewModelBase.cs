@@ -19,6 +19,9 @@ namespace AwesomeContacts.ViewModel
         public IDataService DataService => dataService ?? (dataService = DependencyService.Get<IDataService>());
         IDialogs dialogs;
         public IDialogs Dialogs => dialogs ?? (dialogs = DependencyService.Get<IDialogs>());
+        IAuthenticationService authenticationService;
+        public IAuthenticationService AuthenticationService => authenticationService ??
+            (authenticationService = DependencyService.Get<IAuthenticationService>());
 
         string updateMessage;
         public string UpdateMessage

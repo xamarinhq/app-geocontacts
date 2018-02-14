@@ -3,58 +3,89 @@ using Microsoft.Identity.Client;
 using AwesomeContacts.Helpers;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace AwesomeContacts
 {
-    public static class AuthenticationService
+    public class AuthenticationService : IAuthenticationService
     {
         public static UIParent UIParent = null;
 
-        static PublicClientApplication authClient;
+        PublicClientApplication authClient;
 
-        static void Init()
+        void Init()
         {
             if (authClient != null)
                 return;
 
-            authClient = new PublicClientApplication(CommonConstants.ADApplicationID, "https://login.microsoftonline.com/organizations/");
+            authClient = new PublicClientApplication(CommonConstants.ADApplicationID, CommonConstants.ADAuthority);
             authClient.ValidateAuthority = false;
             authClient.RedirectUri = CommonConstants.ADRedirectID;
         }
 
-        public async static Task<string> Login()
+        public async Task<AuthenticationResult> Login()
         {
-            string authToken = "";
+            AuthenticationResult result = null;
 
             Init();
 
             try
             {
-                var loginResult = await authClient.AcquireTokenAsync(CommonConstants.ADScopes, UIParent);
+                result = await SilentLogin();
 
-                Debug.WriteLine($"The id token: {loginResult.IdToken}");
+                if (result != null)
+                    return result;
+
+                result = await authClient.AcquireTokenAsync(CommonConstants.ADScopes, UIParent);
             }
             catch (MsalServiceException ex)
             {
-                Debug.WriteLine($"*** ERROR!: {ex.Message}");
+                Debug.WriteLine($"Error occurred during the webview displayed - most likely a cancel. {ex.Message}");
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"*** ERROR: {ex.Message}");
+                Debug.WriteLine($"*** UNIDENTIFIED ERROR: {ex.Message}");
             }
 
-            return authToken;
+            return result;
         }
 
-        public static bool IsLoggedIn()
+        public async Task<AuthenticationResult> SilentLogin()
         {
             Init();
-            return false;
+
+            AuthenticationResult result = null;
+
+            try
+            {
+                result = await authClient.AcquireTokenSilentAsync(CommonConstants.ADScopes, authClient.Users.FirstOrDefault());
+            }
+            catch (Exception ex)
+            {
+                // Most likely means the user hasn't been found
+                Debug.WriteLine($"*** Error: {ex?.Message}");
+            }
+
+            return result;
         }
 
-        public static void Logout()
+        public async Task<bool> IsLoggedIn()
         {
             Init();
+
+            var result = await SilentLogin();
+
+            return result != null;
+        }
+
+        public void Logout()
+        {
+            Init();
+
+            foreach (var user in authClient.Users)
+            {
+                authClient.Remove(user);
+            }
         }
     }
 }
