@@ -1,5 +1,5 @@
 ﻿using AwesomeContacts.Model;
-using Microsoft.Azure.Documents.Client;
+//using Microsoft.Azure.Documents.Client;
 using MonkeyCache.FileStore;
 using Newtonsoft.Json;
 using Plugin.Connectivity;
@@ -19,9 +19,9 @@ namespace AwesomeContacts.Services
         const string collectionId = @"UserItems";
         const string resourceTokenBrokerURL = @"{resource token broker base url, e.g. https://xamarin.azurewebsites.net}";
 
-        private Uri collectionLink = UriFactory.CreateDocumentCollectionUri(databaseId, collectionId);
+        //private Uri collectionLink = UriFactory.CreateDocumentCollectionUri(databaseId, collectionId);
 
-        public DocumentClient Client { get; private set; }
+        //public DocumentClient Client { get; private set; }
         public string UserId { get; private set; }
         HttpClient httpClient;
 

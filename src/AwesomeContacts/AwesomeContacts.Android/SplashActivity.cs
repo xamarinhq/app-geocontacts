@@ -13,7 +13,7 @@ using Android.Widget;
 
 namespace AwesomeContacts.Droid
 {
-    [Activity(Label = "Cloud Advoctes",
+    [Activity(Label = "CDA Contacts",
           Icon = "@mipmap/ic_launcher",
           Theme = "@style/SplashTheme",
           MainLauncher = true)]
