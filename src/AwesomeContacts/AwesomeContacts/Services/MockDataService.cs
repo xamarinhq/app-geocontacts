@@ -49,9 +49,25 @@ namespace AwesomeContacts.Services
             return Task.FromResult(contacts as IEnumerable<Contact>);
         }
 
+        public string AuthToken { get; set; }
         public async Task UpdateLocationAsync(Position position, Address address)
         {
-            await Task.Delay(2000);
+            try
+            {
+                var client = new System.Net.Http.HttpClient();
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", AuthToken);
+
+                var location = new AwesomeContacts.SharedModels.LocationUpdate { Latitude = 43, Longitude = -89 };
+                var json = Newtonsoft.Json.JsonConvert.SerializeObject(location);
+                var content = new System.Net.Http.StringContent(json);
+                var resp = await client.PostAsync("https://awesomecontactz.azurewebsites.net/api/UpdateGeolocation?code=ydzVA5QVXHIlAZgLlLhSdOsdTh8UAyHO2dSgaxjA7OmQUbFfVF26dw==&clientId=default", content);
+
+                var respBody = await resp.Content.ReadAsStringAsync();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"ERROR: {ex.Message}");
+            }
         }
     }
 }

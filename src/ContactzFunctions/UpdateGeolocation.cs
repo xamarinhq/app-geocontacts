@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Host;
+using Microsoft.Azure.Documents;
+using Microsoft.Azure.Documents.Client;
+
 using AwesomeContacts.SharedModels;
 using BingMapsRESTToolkit;
 using System;
@@ -15,11 +18,11 @@ namespace AwesomeContacts.Functions
     public static class UpdateGeolocation
     {
         [FunctionName("UpdateGeolocation")]
-        public static async Task<object> Run([HttpTrigger(WebHookType = "genericJson")]HttpRequestMessage req, TraceWriter log)
+        public static async Task<object> Run([HttpTrigger(WebHookType = "genericJson")]HttpRequestMessage req,
+            //[DocumentDB(databaseName:"asdf",collectionName:"asdf",ConnectionStringSetting ="AwesomeContactz_CosmosDB")] out dynamic document,
+            TraceWriter log)
         {
             log.Info($"Webhook was triggered!");
-
-            
 
             string jsonContent = await req.Content.ReadAsStringAsync();
             LocationUpdate data = null;
@@ -35,13 +38,12 @@ namespace AwesomeContacts.Functions
                 };
 #endif
 
-
             var key = System.Environment.GetEnvironmentVariable("BingMapsKey", EnvironmentVariableTarget.Process);
 
             //if we can't detect the city in app, let's figure it out!
-            if(string.IsNullOrWhiteSpace(data.Country) || string.IsNullOrWhiteSpace(data.State) || string.IsNullOrWhiteSpace(data.Town))
+            if (string.IsNullOrWhiteSpace(data.Country) || string.IsNullOrWhiteSpace(data.State) || string.IsNullOrWhiteSpace(data.Town))
             {
-                var  reverse = await ServiceManager.GetResponseAsync(new ReverseGeocodeRequest()
+                var reverse = await ServiceManager.GetResponseAsync(new ReverseGeocodeRequest()
                 {
                     BingMapsKey = key,
                     Point = new Coordinate(data.Latitude, data.Longitude),
@@ -54,7 +56,7 @@ namespace AwesomeContacts.Functions
                 });
 
                 var result1 = reverse.ResourceSets.FirstOrDefault()?.Resources.FirstOrDefault() as Location;
-                if(result1 != null)
+                if (result1 != null)
                 {
                     //update the city/state here
                     data.State = result1.Address.AdminDistrict;
@@ -69,7 +71,6 @@ namespace AwesomeContacts.Functions
                 BingMapsKey = key,
                 Query = $"{data.Town}, {data.State} {data.Country}"
             });
-
 
             var result2 = r.ResourceSets.FirstOrDefault()?.Resources.FirstOrDefault() as Location;
 
