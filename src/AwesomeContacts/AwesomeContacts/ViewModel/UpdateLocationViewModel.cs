@@ -62,8 +62,7 @@ namespace AwesomeContacts.ViewModel
                 UpdateMessage = AppResources.UpdateLocationBackend;
 
                 //it is okay if we don't have the address we will send it to the backend to diagnose
-                ((MockDataService)DataService).AuthToken = authResult.AccessToken;
-                await DataService.UpdateLocationAsync(position, address);
+                await DataService.UpdateLocationAsync(position, address, authResult.AccessToken);
 
                 UpdateMessage = AppResources.UpdatingLocationUpdated;
 

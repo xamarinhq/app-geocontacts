@@ -19,5 +19,9 @@ namespace AwesomeContacts.Helpers
         public const string ADAuthority = "https://login.microsoftonline.com/organizations/";
         #endregion
 
+        #region LocationFunction
+        public const string FunctionUrl = "https://awesomecontactz.azurewebsites.net/api/UpdateGeolocation?code=dbn/fuOeJ460IEGCuA7M5AZoKeWQsc81haxZiHokFGazXHku/ZY3Zw==&clientId=_master";
+        #endregion
+
     }
 }

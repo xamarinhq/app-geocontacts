@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AwesomeContacts.Model;
 using Plugin.Geolocator.Abstractions;
+using AwesomeContacts.Helpers;
 
 namespace AwesomeContacts.Services
 {
@@ -49,13 +50,12 @@ namespace AwesomeContacts.Services
             return Task.FromResult(contacts as IEnumerable<Contact>);
         }
 
-        public string AuthToken { get; set; }
-        public async Task UpdateLocationAsync(Position position, Address address)
+        public async Task UpdateLocationAsync(Position position, Address address, string accessToken)
         {
             try
             {
                 var client = new System.Net.Http.HttpClient();
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", AuthToken);
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
 
                 var location = new AwesomeContacts.SharedModels.LocationUpdate
                 {
@@ -68,8 +68,7 @@ namespace AwesomeContacts.Services
 
                 var json = Newtonsoft.Json.JsonConvert.SerializeObject(location);
                 var content = new System.Net.Http.StringContent(json);
-                var resp = await client.PostAsync("https://awesomecontactz.azurewebsites.net/api/UpdateGeolocation?code=dbn/fuOeJ460IEGCuA7M5AZoKeWQsc81haxZiHokFGazXHku/ZY3Zw==&clientId=_master", content);
-                //var resp = await client.PostAsync("https://awesomecontactz.azurewebsites.net/api/UpdateGeolocation?code=dbn/fuOeJ460IEGCuA7M5AZoKeWQsc81haxZiHokFGazXHku/ZY3Zw==&clientId=_master", content);
+                var resp = await client.PostAsync(CommonConstants.FunctionUrl, content);
 
                 var respBody = await resp.Content.ReadAsStringAsync();
             }

@@ -13,7 +13,7 @@ namespace AwesomeContacts.Services
         Task<Contact> GetAsync(string id);
         Task<IEnumerable<Contact>> GetNearbyAsync();
 
-        Task UpdateLocationAsync(Position position, Address address);
+        Task UpdateLocationAsync(Position position, Address address, string accessToken);
 
     }
 }
