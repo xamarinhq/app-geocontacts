@@ -37,6 +37,7 @@ namespace AwesomeContacts
                     return result;
 
                 result = await authClient.AcquireTokenAsync(CommonConstants.ADScopes, UIParent);
+                var scope = result.Scopes.FirstOrDefault();
             }
             catch (MsalServiceException ex)
             {

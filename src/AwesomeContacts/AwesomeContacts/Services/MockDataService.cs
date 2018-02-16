@@ -55,12 +55,13 @@ namespace AwesomeContacts.Services
             try
             {
                 var client = new System.Net.Http.HttpClient();
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", AuthToken);
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", AuthToken);
 
                 var location = new AwesomeContacts.SharedModels.LocationUpdate { Latitude = 43, Longitude = -89 };
                 var json = Newtonsoft.Json.JsonConvert.SerializeObject(location);
                 var content = new System.Net.Http.StringContent(json);
-                var resp = await client.PostAsync("https://awesomecontactz.azurewebsites.net/api/UpdateGeolocation?code=ydzVA5QVXHIlAZgLlLhSdOsdTh8UAyHO2dSgaxjA7OmQUbFfVF26dw==&clientId=default", content);
+                //var resp = await client.PostAsync("https://awesomecontactz.azurewebsites.net/api/UpdateGeolocation?code=dbn/fuOeJ460IEGCuA7M5AZoKeWQsc81haxZiHokFGazXHku/ZY3Zw==&clientId=_master", content);
+                var resp = await client.GetAsync("https://secfunc.azurewebsites.net/api/HttpTriggerCSharp1?code=CLY6yS20rbpEj5o06qJjLidwS9oQN31c/YfqHS5tNAYVObjN3vqn6g==&name=dude");
 
                 var respBody = await resp.Content.ReadAsStringAsync();
             }
