@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using AwesomeContacts.Helpers;
 
 namespace AwesomeContacts.Services
 {
@@ -74,10 +75,33 @@ namespace AwesomeContacts.Services
             return default(T);
         }
 
-        public Task UpdateLocationAsync(Position position, Address address)
+        public async Task UpdateLocationAsync(Position position, Address address, string accessToken)
         {
             //This should call an azure service
-            return Task.CompletedTask;
+            try
+            {
+                var client = new System.Net.Http.HttpClient();
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+
+                var location = new AwesomeContacts.SharedModels.LocationUpdate
+                {
+                    Country = address.CountryCode,
+                    Latitude = position.Latitude,
+                    Longitude = position.Longitude,
+                    State = address.AdminArea,
+                    Town = address.Locality
+                };
+
+                var json = Newtonsoft.Json.JsonConvert.SerializeObject(location);
+                var content = new System.Net.Http.StringContent(json);
+                var resp = await client.PostAsync(CommonConstants.FunctionUrl, content);
+
+                var respBody = await resp.Content.ReadAsStringAsync();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"ERROR: {ex.Message}");
+            }
         }
     }
 }
