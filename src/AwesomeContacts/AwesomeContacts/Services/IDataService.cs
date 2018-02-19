@@ -9,11 +9,11 @@ namespace AwesomeContacts.Services
 {
     public interface IDataService
     {
-        Task<IEnumerable<Contact>> GetAllAsync();
+        IEnumerable<Contact> GetAll();
         Task<Contact> GetAsync(string id);
         Task<IEnumerable<Contact>> GetNearbyAsync();
 
-        Task UpdateLocationAsync(Position position, Address address, string accessToken);
+        Task UpdateLocationAsync(Plugin.Geolocator.Abstractions.Position position, Address address, string accessToken);
 
     }
 }

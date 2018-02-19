@@ -20,21 +20,21 @@ namespace AwesomeContacts.ViewModel
         public AllContactsViewModel()
         {
             Contacts = new ObservableRangeCollection<Contact>();
-            RefreshCommand = new Command(async () => await (ExecuteRefreshCommand(false)));
-            ForceRefreshCommand = new Command(async () => await (ExecuteRefreshCommand(true)));
+            RefreshCommand = new Command(() => ExecuteRefreshCommand(false));
+            ForceRefreshCommand = new Command(() => ExecuteRefreshCommand(true));
         }
 
-        async Task ExecuteRefreshCommand(bool forceRefresh)
+        void ExecuteRefreshCommand(bool forceRefresh)
         {
             try
             {
-                var contacts = await DataService.GetAllAsync();
+                var contacts = DataService.GetAll();
                 if (contacts != null && contacts.Count() > 0)
                     Contacts.ReplaceRange(contacts);
             }
             catch (Exception)
             {
-                
+
             }
         }
 

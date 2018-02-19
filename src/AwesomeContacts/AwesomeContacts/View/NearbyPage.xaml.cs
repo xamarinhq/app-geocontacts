@@ -22,7 +22,7 @@ namespace AwesomeContacts.View
             InitializeComponent();
 
             BindingContext = vm = new NearbyViewModel();
-            if(vm.Settings.LoggedInMSFT)
+            if (vm.Settings.LoggedInMSFT)
             {
                 // Allow MSFT to update location
                 ToolbarItems.Add(new ToolbarItem
@@ -33,8 +33,15 @@ namespace AwesomeContacts.View
                 });
             }
 
-          
+
         }
-        
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            vm.GetNearby();
+        }
+
     }
 }

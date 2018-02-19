@@ -23,5 +23,14 @@ namespace AwesomeContacts.Helpers
         public const string FunctionUrl = "https://awesomecontactz.azurewebsites.net/api/UpdateGeolocation?code=dbn/fuOeJ460IEGCuA7M5AZoKeWQsc81haxZiHokFGazXHku/ZY3Zw==&clientId=_master";
         #endregion
 
+        #region DodcumentDb
+
+        public const string CDADatabaseId = "CDALocations";
+        public const string AllCDACollectionId = "CDAInfo";
+        public const string CDALocationCollectionId = "Location";
+        public const string CosmosDbUrl = "";
+        public const string CosmosAuthKey = "";
+
+        #endregion
     }
 }

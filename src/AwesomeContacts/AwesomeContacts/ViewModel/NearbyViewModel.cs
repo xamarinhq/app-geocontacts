@@ -6,5 +6,9 @@ namespace AwesomeContacts.ViewModel
 {
     public class NearbyViewModel : ViewModelBase
     {
+        public void GetNearby()
+        {
+            DataService.GetNearbyAsync();
+        }
     }
 }

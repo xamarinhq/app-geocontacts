@@ -25,7 +25,8 @@ namespace AwesomeContacts
             var culture = CrossMultilingual.Current.DeviceCultureInfo;
             AppResources.Culture = culture;
 
-            DependencyService.Register<IDataService, MockDataService>();
+            //DependencyService.Register<IDataService, MockDataService>();
+            DependencyService.Register<IDataService, AzureDataService>();
             DependencyService.Register<IDialogs, Dialogs>();
             DependencyService.Register<IAuthenticationService, AuthenticationService>();
 
