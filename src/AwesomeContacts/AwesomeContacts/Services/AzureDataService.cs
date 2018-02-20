@@ -17,21 +17,6 @@ using Microsoft.Azure.Documents.Spatial;
 
 namespace AwesomeContacts.Services
 {
-    public class LocationUpdate
-    {
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
-
-        [JsonProperty("position")]
-        public Microsoft.Azure.Documents.Spatial.Geometry Position { get; set; }
-
-        public string Country { get; set; }
-        public string Town { get; set; }
-        public string State { get; set; }
-        public string UserPrincipalName { get; set; }
-        public DateTimeOffset InsertTime { get; set; }
-    }
-
     public class AzureDataService : IDataService
     {
         const string accountURL = @"{account url}";
@@ -87,7 +72,7 @@ namespace AwesomeContacts.Services
                 CommonConstants.CDADatabaseId, CommonConstants.AllCDACollectionId
             );
 
-            var lu = new AwesomeContacts.Services.LocationUpdate();
+            var lu = new LocationUpdate();
 
             // Get a distinct list of the latest locations
 
@@ -95,7 +80,7 @@ namespace AwesomeContacts.Services
             var feedOptions = new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true };
 
             var point = new Point(-122.130603, 47.6451);
-            var latestLocations = DocClient.CreateDocumentQuery<AwesomeContacts.Services.LocationUpdate>(locationLink, feedOptions)
+            var latestLocations = DocClient.CreateDocumentQuery<LocationUpdate>(locationLink, feedOptions)
                                            .Where(ll => point.Distance(ll.Position) < 50000)
                                            .OrderByDescending(l => l.InsertTime).ToList();
 
@@ -143,14 +128,13 @@ namespace AwesomeContacts.Services
                 var location = new AwesomeContacts.SharedModels.LocationUpdate
                 {
                     Country = address.CountryCode,
-                    Latitude = position.Latitude,
-                    Longitude = position.Longitude,
+                    Position = new Point(position.Longitude, position.Latitude),
                     State = address.AdminArea,
                     Town = address.Locality
                 };
 
-                var json = Newtonsoft.Json.JsonConvert.SerializeObject(location);
-                var content = new System.Net.Http.StringContent(json);
+                var json = JsonConvert.SerializeObject(location);
+                var content = new StringContent(json);
                 var resp = await client.PostAsync(CommonConstants.FunctionUrl, content);
 
                 var respBody = await resp.Content.ReadAsStringAsync();

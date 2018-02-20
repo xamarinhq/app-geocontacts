@@ -28,6 +28,8 @@ namespace AwesomeContacts.Helpers
         public const string CDADatabaseId = "CDALocations";
         public const string AllCDACollectionId = "CDAInfo";
         public const string CDALocationCollectionId = "Location";
+
+#error Populate Cosmos URL and Key
         public const string CosmosDbUrl = "";
         public const string CosmosAuthKey = "";
 

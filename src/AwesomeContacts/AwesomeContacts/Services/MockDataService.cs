@@ -40,7 +40,6 @@ namespace AwesomeContacts.Services
         public IEnumerable<Contact> GetAll()
         {
             return contacts;
-            //return Task.FromResult(contacts as IEnumerable<Contact>);
         }
 
         public Task<Contact> GetAsync(string id)
@@ -63,8 +62,7 @@ namespace AwesomeContacts.Services
                 var location = new AwesomeContacts.SharedModels.LocationUpdate
                 {
                     Country = address.CountryCode,
-                    Latitude = position.Latitude,
-                    Longitude = position.Longitude,
+                    Position = new Microsoft.Azure.Documents.Spatial.Point(position.Longitude, position.Latitude),
                     State = address.AdminArea,
                     Town = address.Locality
                 };
