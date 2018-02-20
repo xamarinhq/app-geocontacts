@@ -29,8 +29,9 @@ namespace AwesomeContacts.Helpers
         public const string AllCDACollectionId = "CDAInfo";
         public const string CDALocationCollectionId = "Location";
 
-        public const string CosmosDbUrl = "CDC_URL";
-        public const string CosmosAuthKey = "CDC_AUTH";
+        public const string CosmosDbUrl = "https://awesomecontactz.documents.azure.com:443/";
+        //This is a public read only key!
+        public const string CosmosAuthKey = "tT95SR4OLebuny9cx9GxeghbBQhNoAEyWBpaSlOcQ5DdIdS4dN2e431r6GSwG6WM3lTKdz4djn7ldDSiUwytiQ==";
         #endregion
     }
 }
