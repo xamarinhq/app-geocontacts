@@ -43,14 +43,24 @@ namespace AwesomeContacts.Services
         {
             httpClient = new HttpClient();
             DocClient = new DocumentClient(new Uri(CommonConstants.CosmosDbUrl), CommonConstants.CosmosAuthKey);
-
-            DocClient.OpenAsync();
         }
 
-        public IEnumerable<Contact> GetAll()
+        public async Task Initialize()
         {
-            var allCDAs = DocClient.CreateDocumentQuery<Contact>(allCDACollectionLink)
-                                   .OrderBy(cda => cda.Name).ToList();
+            await DocClient.OpenAsync();
+        }
+
+        public async Task<IEnumerable<Contact>> GetAllAsync()
+        {
+            var allCDAQuery = DocClient.CreateDocumentQuery<Contact>(allCDACollectionLink)
+                                   .OrderBy(cda => cda.Name)
+                                   .AsDocumentQuery();
+
+            List<Contact> allCDAs = new List<Contact>();
+            while (allCDAQuery.HasMoreResults)
+            {
+                allCDAs.AddRange(await allCDAQuery.ExecuteNextAsync<Contact>());
+            }
 
             string imgSrc = "";
             foreach (var cda in allCDAs)
@@ -72,27 +82,40 @@ namespace AwesomeContacts.Services
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Contact> GetNearbyAsync(double userLongitude, double userLatitude)
+        public async Task<IEnumerable<Contact>> GetNearbyAsync(double userLongitude, double userLatitude)
         {
-            var allCDAs = GetAll();
+            var allCDAs = await GetAllAsync();
 
             var userPoint = new Point(userLongitude, userLatitude);
             var feedOptions = new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true };
 
             // Find the CDAs with hometowns by the user
-            var hometownCDAs = DocClient.CreateDocumentQuery<Contact>(allCDACollectionLink, feedOptions)
+            var hometownCDAQuery = DocClient.CreateDocumentQuery<Contact>(allCDACollectionLink, feedOptions)
                 .Where(cda => userPoint.Distance(cda.Hometown.Position) < maximumCDADistance)
-                .ToList();
+                .AsDocumentQuery();
+
+            List<Contact> hometownCDAs = new List<Contact>();
+            while (hometownCDAQuery.HasMoreResults)
+            {
+                hometownCDAs.AddRange(await hometownCDAQuery.ExecuteNextAsync<Contact>());
+            }
 
             // Find the CDAs who checked in within the last 24 hours
             var midnightYesterday = DateTimeOffset.UtcNow.AddDays(-1).Date;
 
-            var latestClosestPositions = DocClient.CreateDocumentQuery<LocationUpdate>(locationCollectionLink, feedOptions)
-                                           .Where(ll => ll.InsertTime > midnightYesterday)
-                                           .Where(ll => userPoint.Distance(ll.Position) < maximumCDADistance)
-                                           .ToList();
+            var latestClosestPositionsQuery = DocClient.CreateDocumentQuery<LocationUpdate>(locationCollectionLink, feedOptions)
+                                                       .Where(ll => ll.InsertTime > midnightYesterday)
+                                                       .Where(ll => userPoint.Distance(ll.Position) < maximumCDADistance)
+                                                       .AsDocumentQuery();
 
-            // For now assuming only one check in per day
+            List<LocationUpdate> latestClosestPositions = new List<LocationUpdate>();
+            while (latestClosestPositionsQuery.HasMoreResults)
+            {
+                latestClosestPositions.AddRange(await latestClosestPositionsQuery.ExecuteNextAsync<LocationUpdate>());
+            }
+
+            // Make sure only one upate per person included
+            // todo: make sure it's the most recent update
             latestClosestPositions = latestClosestPositions.Distinct(new LocationUpdateCompare()).ToList();
 
             // Remove any hometownCDAs that are in the latest closest position
