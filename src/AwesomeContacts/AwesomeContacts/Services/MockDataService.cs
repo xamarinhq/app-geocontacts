@@ -47,9 +47,10 @@ namespace AwesomeContacts.Services
             return Task.FromResult(contacts.ElementAt(0));
         }
 
-        public Task<IEnumerable<Contact>> GetNearbyAsync()
+        public IEnumerable<Contact> GetNearbyAsync(double userLongitude, double userLatitude)
         {
-            return Task.FromResult(contacts as IEnumerable<Contact>);
+            return new List<Contact>();
+            //return Task.FromResult(contacts as IEnumerable<Contact>);
         }
 
         public async Task UpdateLocationAsync(Plugin.Geolocator.Abstractions.Position position, Address address, string accessToken)

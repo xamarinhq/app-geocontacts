@@ -32,9 +32,9 @@ namespace AwesomeContacts.ViewModel
                 if (contacts != null && contacts.Count() > 0)
                     Contacts.ReplaceRange(contacts);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                System.Diagnostics.Debug.WriteLine($"*** ERROR: {ex.Message}");
             }
         }
 

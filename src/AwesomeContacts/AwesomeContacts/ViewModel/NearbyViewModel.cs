@@ -8,7 +8,10 @@ namespace AwesomeContacts.ViewModel
     {
         public void GetNearby()
         {
-            DataService.GetNearbyAsync();
+            double seattleLong = -122.3321;
+            double seattleLat = 47.6062;
+
+            DataService.GetNearbyAsync(seattleLong, seattleLat);
         }
     }
 }

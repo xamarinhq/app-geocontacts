@@ -1,51 +1,11 @@
-﻿//using Microsoft.Azure.Documents.Spatial;
-using Microsoft.Azure.Documents.Spatial;
+﻿using Microsoft.Azure.Documents.Spatial;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-//namespace AwesomeContacts.Model
-//{
-//public class Contact
-//{
-//    public string Id { get; set; }
-//    public string FirstName { get; set; }
-//    public string LastName { get; set; }
-//    public string FocusSkill { get; set; }
-//    public string HomeTown { get; set; }
-//    public string CurrentTown { get; set; }
-//    public Position CurrentPosition { get; set; }
-//    public string Biography { get; set; }
-
-
-//    public string PhotoUrl { get; set; }
-
-//    #region Social
-//    public string TwitterHandle { get; set; }
-//    public string LinkedIn { get; set; }
-//    public string GitHub { get; set; }
-//    public string StackOverflow { get; set; }
-//    public string Blog { get; set; }
-//    #endregion
-
-//    [JsonIgnore]
-//    public string FullName => $"{FirstName} {LastName}";
-//}
-
-// To parse this JSON data, add NuGet 'Newtonsoft.Json' then do:
-//
-//    using AwesomeContacts.Model;
-//
-//    var contact = Contact.FromJson(jsonString);
-
 namespace AwesomeContacts.Model
 {
-    using System;
-    using System.Net;
-    using System.Collections.Generic;
-
-    using Newtonsoft.Json;
 
     public partial class Contact
     {
@@ -95,7 +55,7 @@ namespace AwesomeContacts.Model
         public object Podcast { get; set; }
 
         [JsonProperty("Location")]
-        public Location Location { get; set; }
+        public Location Hometown { get; set; }
 
         [JsonProperty("UserPrincipalName")]
         public string UserPrincipalName { get; set; }
@@ -118,11 +78,12 @@ namespace AwesomeContacts.Model
         [JsonProperty("_ts")]
         public long Ts { get; set; }
 
-        [JsonIgnore]
         public string PhotoUrl { get; set; }
 
-        [JsonIgnore]
         public string TwitterHandle { get; set; }
+
+        [JsonIgnore]
+        public Point CurrentLocation { get; set; }
     }
 
     public partial class Location
@@ -131,16 +92,7 @@ namespace AwesomeContacts.Model
         public string Display { get; set; }
 
         [JsonProperty("Position")]
-        public Position Position { get; set; }
-    }
-
-    public partial class Position
-    {
-        [JsonProperty("Type")]
-        public string Type { get; set; }
-
-        [JsonProperty("Coordinates")]
-        public List<double> Coordinates { get; set; }
+        public Point Position { get; set; }
     }
 
     public partial class MetaData

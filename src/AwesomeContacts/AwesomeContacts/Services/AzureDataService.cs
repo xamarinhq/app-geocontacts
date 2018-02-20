@@ -24,7 +24,16 @@ namespace AwesomeContacts.Services
         const string collectionId = @"UserItems";
         const string resourceTokenBrokerURL = @"{resource token broker base url, e.g. https://xamarin.azurewebsites.net}";
 
-        //private Uri collectionLink = UriFactory.CreateDocumentCollectionUri(databaseId, collectionId);
+        const string cdaCacheKey = "allcdas";
+        const int maximumCDADistance = 50000; //meters
+
+        readonly Uri locationCollectionLink = UriFactory.CreateDocumentCollectionUri(
+                CommonConstants.CDADatabaseId, CommonConstants.CDALocationCollectionId
+            );
+
+        readonly Uri allCDACollectionLink = UriFactory.CreateDocumentCollectionUri(
+                CommonConstants.CDADatabaseId, CommonConstants.AllCDACollectionId
+            );
 
         public DocumentClient DocClient { get; private set; }
         public string UserId { get; private set; }
@@ -34,25 +43,25 @@ namespace AwesomeContacts.Services
         {
             httpClient = new HttpClient();
             DocClient = new DocumentClient(new Uri(CommonConstants.CosmosDbUrl), CommonConstants.CosmosAuthKey);
+
+            DocClient.OpenAsync();
         }
 
         public IEnumerable<Contact> GetAll()
         {
-            var allCDACollectionLink = UriFactory.CreateDocumentCollectionUri(
-                CommonConstants.CDADatabaseId, CommonConstants.AllCDACollectionId
-            );
-
             var allCDAs = DocClient.CreateDocumentQuery<Contact>(allCDACollectionLink)
                                    .OrderBy(cda => cda.Name).ToList();
 
+            string imgSrc = "";
             foreach (var cda in allCDAs)
             {
-                string imgSrc = "";
                 if (cda.Image.TryGetValue("Src", out imgSrc))
                     cda.PhotoUrl = $"https://developer.microsoft.com/en-us/advocates/{imgSrc}";
 
-                cda.TwitterHandle = cda.Twitter.Substring(
+                var twitterUserName = cda.Twitter.Substring(
                     cda.Twitter.LastIndexOf("/", StringComparison.OrdinalIgnoreCase) + 1);
+
+                cda.TwitterHandle = $"@{twitterUserName}";
             }
 
             return allCDAs;
@@ -63,29 +72,49 @@ namespace AwesomeContacts.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Contact>> GetNearbyAsync()
+        public IEnumerable<Contact> GetNearbyAsync(double userLongitude, double userLatitude)
         {
-            var locationLink = UriFactory.CreateDocumentCollectionUri(
-                CommonConstants.CDADatabaseId, CommonConstants.CDALocationCollectionId
-            );
-            var allCDALink = UriFactory.CreateDocumentCollectionUri(
-                CommonConstants.CDADatabaseId, CommonConstants.AllCDACollectionId
-            );
+            var allCDAs = GetAll();
 
-            var lu = new LocationUpdate();
-
-            // Get a distinct list of the latest locations
-
-
+            var userPoint = new Point(userLongitude, userLatitude);
             var feedOptions = new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true };
 
-            var point = new Point(-122.130603, 47.6451);
-            var latestLocations = DocClient.CreateDocumentQuery<LocationUpdate>(locationLink, feedOptions)
-                                           .Where(ll => point.Distance(ll.Position) < 50000)
-                                           .OrderByDescending(l => l.InsertTime).ToList();
+            // Find the CDAs with hometowns by the user
+            var hometownCDAs = DocClient.CreateDocumentQuery<Contact>(allCDACollectionLink, feedOptions)
+                .Where(cda => userPoint.Distance(cda.Hometown.Position) < maximumCDADistance)
+                .ToList();
 
+            // Find the CDAs who checked in within the last 24 hours
+            var midnightYesterday = DateTimeOffset.UtcNow.AddDays(-1).Date;
 
-            throw new NotImplementedException();
+            var latestClosestPositions = DocClient.CreateDocumentQuery<LocationUpdate>(locationCollectionLink, feedOptions)
+                                           .Where(ll => ll.InsertTime > midnightYesterday)
+                                           .Where(ll => userPoint.Distance(ll.Position) < maximumCDADistance)
+                                           .ToList();
+
+            // For now assuming only one check in per day
+            latestClosestPositions = latestClosestPositions.Distinct(new LocationUpdateCompare()).ToList();
+
+            // Remove any hometownCDAs that are in the latest closest position
+            foreach (var closeCDA in latestClosestPositions)
+            {
+                hometownCDAs.RemoveAll(cda => closeCDA.UserPrincipalName == cda.UserPrincipalName);
+            }
+
+            List<Contact> allCDAsNearby = new List<Contact>();
+            // Add CDAs in the latest closest position
+            foreach (var closeCDA in latestClosestPositions)
+            {
+                var foundCDA = allCDAs.First(cda => cda.UserPrincipalName == closeCDA.UserPrincipalName);
+                foundCDA.CurrentLocation = closeCDA.Position;
+
+                allCDAsNearby.Add(foundCDA);
+            }
+            // Finally create a list of CDAs that are close by
+            hometownCDAs.ForEach(cda => cda.CurrentLocation = cda.Hometown.Position);
+            allCDAsNearby.AddRange(hometownCDAs);
+
+            return allCDAsNearby;
         }
 
         public async Task<T> GetAsync<T>(string url, int hours = 2, bool forceRefresh = false)

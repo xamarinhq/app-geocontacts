@@ -47,7 +47,7 @@
                     <Label Style="{DynamicResource ListItemTextStyle}" 
                           Text="{Binding Name}"/>
                     <Label Style="{DynamicResource ListItemDetailTextStyle}"
-                           Text="{Binding TagLine}"/>
+                           Text="{Binding Tagline}"/>
                     <Label Style="{DynamicResource ListItemDetailTextStyle}"
                            Text="{Binding TwitterHandle}"/>
                 </StackLayout>

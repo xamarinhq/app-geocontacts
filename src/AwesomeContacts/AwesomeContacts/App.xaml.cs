@@ -30,6 +30,8 @@ namespace AwesomeContacts
             DependencyService.Register<IDialogs, Dialogs>();
             DependencyService.Register<IAuthenticationService, AuthenticationService>();
 
+            MonkeyCache.FileStore.Barrel.ApplicationId = "AwesomeContacts";
+
             MainPage = new NavigationPage(new TestPage());
         }
 

@@ -11,7 +11,7 @@ namespace AwesomeContacts.Services
     {
         IEnumerable<Contact> GetAll();
         Task<Contact> GetAsync(string id);
-        Task<IEnumerable<Contact>> GetNearbyAsync();
+        IEnumerable<Contact> GetNearbyAsync(double userLongitude, double userLatitude);
 
         Task UpdateLocationAsync(Plugin.Geolocator.Abstractions.Position position, Address address, string accessToken);
 
