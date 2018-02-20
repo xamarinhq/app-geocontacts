@@ -88,6 +88,15 @@ namespace AwesomeContacts.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Find Neaby CDAs.
+        /// </summary>
+        internal static string FindCloseCDAs {
+            get {
+                return ResourceManager.GetString("FindCloseCDAs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Continue as Guest.
         /// </summary>
         internal static string LoginPageGuest {

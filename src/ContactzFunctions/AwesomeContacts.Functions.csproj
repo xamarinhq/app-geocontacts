@@ -4,8 +4,7 @@
   </PropertyGroup>
   <ItemGroup>    
     <PackageReference Include="BingMapsRESTToolkit" Version="1.1.1" />    
-    <PackageReference Include="Microsoft.Azure.DocumentDB" Version="1.20.1" />    
-    <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.DocumentDB" Version="1.1.0" />    
+    <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="1.8.1" />    
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.8" />    
     <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
   </ItemGroup>

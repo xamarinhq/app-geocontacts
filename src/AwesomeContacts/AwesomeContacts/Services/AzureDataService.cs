@@ -1,5 +1,5 @@
 ﻿using AwesomeContacts.Model;
-//using Microsoft.Azure.Documents.Client;
+using Microsoft.Azure.Documents.Client;
 using MonkeyCache.FileStore;
 using Newtonsoft.Json;
 using Plugin.Connectivity;
@@ -10,30 +10,74 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using AwesomeContacts.Helpers;
+using System.Linq;
+using AwesomeContacts.SharedModels;
+using Microsoft.Azure.Documents.Linq;
+using Microsoft.Azure.Documents.Spatial;
 
 namespace AwesomeContacts.Services
 {
     public class AzureDataService : IDataService
     {
-        const string accountURL = @"{account url}";
-        const string databaseId = @"{database name}";
-        const string collectionId = @"UserItems";
-        const string resourceTokenBrokerURL = @"{resource token broker base url, e.g. https://xamarin.azurewebsites.net}";
+        const string cdaCacheKey = "allcdas2";
+        const int maximumCDADistance = 50000; //meters
 
-        //private Uri collectionLink = UriFactory.CreateDocumentCollectionUri(databaseId, collectionId);
+        readonly Uri locationCollectionLink = UriFactory.CreateDocumentCollectionUri(
+                CommonConstants.CDADatabaseId, CommonConstants.CDALocationCollectionId
+            );
 
-        //public DocumentClient Client { get; private set; }
+        readonly Uri allCDACollectionLink = UriFactory.CreateDocumentCollectionUri(
+                CommonConstants.CDADatabaseId, CommonConstants.AllCDACollectionId
+            );
+
+        public DocumentClient DocClient { get; private set; }
         public string UserId { get; private set; }
         HttpClient httpClient;
 
         public AzureDataService()
         {
             httpClient = new HttpClient();
+            DocClient = new DocumentClient(new Uri(CommonConstants.CosmosDbUrl), CommonConstants.CosmosAuthKey);
         }
 
-        public Task<IEnumerable<Contact>> GetAllAsync()
+        public async Task Initialize()
         {
-            throw new NotImplementedException();
+            await DocClient.OpenAsync();
+        }
+
+        public async Task<IEnumerable<Contact>> GetAllAsync()
+        {
+            var cache = GetCache(cdaCacheKey);
+
+            if (cache != null)
+                return cache;
+
+
+            var allCDAQuery = DocClient.CreateDocumentQuery<Contact>(allCDACollectionLink)
+                                   .OrderBy(cda => cda.Name)
+                                   .AsDocumentQuery();
+
+            List<Contact> allCDAs = new List<Contact>();
+            while (allCDAQuery.HasMoreResults)
+            {
+                allCDAs.AddRange(await allCDAQuery.ExecuteNextAsync<Contact>());
+            }
+            
+            foreach (var cda in allCDAs)
+            {
+                if (cda.Image.TryGetValue("Src", out string imgSrc))
+                    cda.PhotoUrl = $"https://developer.microsoft.com/en-us/advocates/{imgSrc}";
+
+                var twitterUserName = cda.Twitter.Substring(
+                    cda.Twitter.LastIndexOf("/", StringComparison.OrdinalIgnoreCase) + 1);
+
+                cda.TwitterHandle = $"@{twitterUserName}";
+            }
+
+            var json = JsonConvert.SerializeObject(allCDAs.ToArray());
+            MonkeyCache.FileStore.Barrel.Current.Add(cdaCacheKey, json, TimeSpan.FromHours(2));
+
+            return allCDAs;
         }
 
         public Task<Contact> GetAsync(string id)
@@ -41,41 +85,91 @@ namespace AwesomeContacts.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Contact>> GetNearbyAsync()
+        public async Task<IEnumerable<Contact>> GetNearbyAsync(double userLongitude, double userLatitude)
         {
-            throw new NotImplementedException();
+            var allCDAs = await GetAllAsync();
+
+            var userPoint = new Point(userLongitude, userLatitude);
+            var feedOptions = new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true };
+
+            // Find the CDAs with hometowns by the user
+            var hometownCDAQuery = DocClient.CreateDocumentQuery<Contact>(allCDACollectionLink, feedOptions)
+                .Where(cda => userPoint.Distance(cda.Hometown.Position) < maximumCDADistance)
+                .AsDocumentQuery();
+
+            List<Contact> hometownCDAs = new List<Contact>();
+            while (hometownCDAQuery.HasMoreResults)
+            {
+                hometownCDAs.AddRange(await hometownCDAQuery.ExecuteNextAsync<Contact>());
+            }
+
+            // Find the CDAs who checked in within the last 7Days
+            var daysAgo = DateTimeOffset.UtcNow.AddDays(-7).Date;
+
+            var latestClosestPositionsQuery = DocClient.CreateDocumentQuery<LocationUpdate>(locationCollectionLink, feedOptions)
+                                                       .Where(ll => ll.InsertTime > daysAgo)
+                                                       .Where(ll => userPoint.Distance(ll.Position) < maximumCDADistance)
+                                                       .AsDocumentQuery();
+
+            List<LocationUpdate> latestClosestPositions = new List<LocationUpdate>();
+            while (latestClosestPositionsQuery.HasMoreResults)
+            {
+                latestClosestPositions.AddRange(await latestClosestPositionsQuery.ExecuteNextAsync<LocationUpdate>());
+            }
+
+            // Make sure only one upate per person included
+            // todo: make sure it's the most recent update
+            latestClosestPositions = latestClosestPositions.Distinct(new LocationUpdateCompare()).ToList();
+
+            // Remove any hometownCDAs that are in the latest closest position
+            foreach (var closeCDA in latestClosestPositions)
+            {
+                hometownCDAs.RemoveAll(cda => closeCDA.UserPrincipalName == cda.UserPrincipalName);
+            }
+
+            List<Contact> allCDAsNearby = new List<Contact>();
+            // Add CDAs in the latest closest position
+            foreach (var closeCDA in latestClosestPositions)
+            {
+                var foundCDA = allCDAs.First(cda => cda.UserPrincipalName == closeCDA.UserPrincipalName);
+                foundCDA.CurrentLocation = closeCDA.Position;
+
+                allCDAsNearby.Add(foundCDA);
+            }
+            // Finally create a list of CDAs that are close by
+            hometownCDAs.ForEach(cda => cda.CurrentLocation = cda.Hometown.Position);
+            allCDAsNearby.AddRange(hometownCDAs);
+
+            foreach (var cda in allCDAsNearby)
+            {
+                if (cda.Image.TryGetValue("Src", out string imgSrc))
+                    cda.PhotoUrl = $"https://developer.microsoft.com/en-us/advocates/{imgSrc}";
+
+                var twitterUserName = cda.Twitter.Substring(
+                    cda.Twitter.LastIndexOf("/", StringComparison.OrdinalIgnoreCase) + 1);
+
+                cda.TwitterHandle = $"@{twitterUserName}";
+            }
+
+            return allCDAsNearby;
         }
 
-        public async Task<T> GetAsync<T>(string url, int hours = 2, bool forceRefresh = false)
+        public List<Contact> GetCache(string key, bool forceRefresh = false)
         {
             var json = string.Empty;
-
             //check if we are connected, else check to see if we have valid data
             if (!CrossConnectivity.Current.IsConnected)
-                json = Barrel.Current.Get(url);
-            else if (!forceRefresh && !Barrel.Current.IsExpired(url))
-                json = Barrel.Current.Get(url);
+                json = Barrel.Current.Get(key);
+            else if (!forceRefresh && !Barrel.Current.IsExpired(key))
+               json = Barrel.Current.Get(key);
 
-            try
-            {
-                //skip web request because we are using cached data
-                if (string.IsNullOrWhiteSpace(json))
-                {
-                    json = await httpClient.GetStringAsync(url);
-                    Barrel.Current.Add(url, json, TimeSpan.FromHours(hours));
-                }
-                return await Task.Run(() => JsonConvert.DeserializeObject<T>(json));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Unable to get information from server {ex}");
-                //probably re-throw here :)
-            }
+            if (!string.IsNullOrWhiteSpace(json))
+                return JsonConvert.DeserializeObject<Contact[]>(json).ToList();
 
-            return default(T);
+            return null;
         }
 
-        public async Task UpdateLocationAsync(Position position, Address address, string accessToken)
+        public async Task UpdateLocationAsync(Plugin.Geolocator.Abstractions.Position position, Address address, string accessToken)
         {
             //This should call an azure service
             try
@@ -86,14 +180,13 @@ namespace AwesomeContacts.Services
                 var location = new AwesomeContacts.SharedModels.LocationUpdate
                 {
                     Country = address.CountryCode,
-                    Latitude = position.Latitude,
-                    Longitude = position.Longitude,
+                    Position = new Point(position.Longitude, position.Latitude),
                     State = address.AdminArea,
                     Town = address.Locality
                 };
 
-                var json = Newtonsoft.Json.JsonConvert.SerializeObject(location);
-                var content = new System.Net.Http.StringContent(json);
+                var json = JsonConvert.SerializeObject(location);
+                var content = new StringContent(json);
                 var resp = await client.PostAsync(CommonConstants.FunctionUrl, content);
 
                 var respBody = await resp.Content.ReadAsStringAsync();

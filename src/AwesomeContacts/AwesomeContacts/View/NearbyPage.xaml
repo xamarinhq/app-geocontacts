@@ -2,32 +2,35 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:i18n="clr-namespace:AwesomeContacts.Helpers" 
-             x:Class="AwesomeContacts.View.NearbyPage" >
-  <ListView x:Name="MyListView"
-            CachingStrategy="RecycleElement">
+             x:Class="AwesomeContacts.View.NearbyPage" 
+             xmlns:cells="clr-namespace:AwesomeContacts.Cells"
+             xmlns:effects="clr-namespace:AwesomeContacts.Effects">
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ListView x:Name="MyListView"
+                ItemsSource="{Binding Contacts}"
+                  HasUnevenRows="True"
+                CachingStrategy="RecycleElement">
+            <ListView.Effects>
+                <effects:SelectionOnTopEffect/>
+            </ListView.Effects>
 
-            
-    <!--Built in Cells-->
-    <ListView.ItemTemplate>
-        <DataTemplate>
-            <TextCell Text="{Binding .}" />
-        </DataTemplate>
-    </ListView.ItemTemplate>
-    
-    <!--Custom View Cells-->
-    <!--
-    <ListView.ItemTemplate>
-      <DataTemplate>
-        <ViewCell>
-          <StackLayout>
-            <Label Text="{Binding Text}" 
-                   Style="{DynamicResource ListItemTextStyle}" />
-            <Label Text="{Binding Detail}" 
-                   Style="{DynamicResource ListItemDetailTextStyle}"/>
-          </StackLayout>
-        </ViewCell>
-      </DataTemplate>
-    </ListView.ItemTemplate>
-    -->
-  </ListView>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <cells:ContactCell/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button  Grid.Row="1" Command="{Binding ForceRefreshCommand}"
+                    Style="{StaticResource ButtonOutline}"
+                 IsEnabled="{Binding IsNotBusy}"
+                 Text="{i18n:Translate FindCloseCDAs}"/>
+
+        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" Grid.RowSpan="2"/>
+    </Grid>
 </ContentPage>

@@ -3,10 +3,9 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Host;
-using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
+using Microsoft.Azure.Documents.Spatial;
 using System.Net.Http.Headers;
 
 using AwesomeContacts.SharedModels;
@@ -18,7 +17,7 @@ namespace AwesomeContacts.Functions
 {
     public static class UpdateGeolocation
     {
-        static HttpClient client = new HttpClient();
+        static HttpClient httpClient = new HttpClient();
 
         static string cosmosEndpointUrl = Environment.GetEnvironmentVariable("CosmosEndpointUrl");
         static string cosmosAuthKey = Environment.GetEnvironmentVariable("CosmosAuthKey");
@@ -31,32 +30,16 @@ namespace AwesomeContacts.Functions
 
             GraphInfo cdaInfo = null;
 
-            try
+#if DEBUG
+            cdaInfo = new GraphInfo { UserPrincipalName = "testuser@microsoft.com" };
+#else
+            cdaInfo = await GetCDAGraphInfo(req, log);
+
+            if (cdaInfo == null)
             {
-                // Using the passed in token from the mobile app (which will authenticate against the MSFT corp AD) - call the MS Graph to get user info
-                if (!req.Headers.Authorization.Scheme.Equals("bearer", StringComparison.OrdinalIgnoreCase) && !string.IsNullOrWhiteSpace(req.Headers.Authorization.Parameter))
-                {
-                    return req.CreateErrorResponse(HttpStatusCode.PreconditionFailed, new Exception("MS Graph precondition falied"));
-                }
-
-                var token = req.Headers.Authorization.Parameter;
-
-                var graphReqMsg = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/me");
-                graphReqMsg.Headers.Authorization = new AuthenticationHeaderValue("bearer", token);
-
-                var graphResponse = await client.SendAsync(graphReqMsg);
-
-                cdaInfo = GraphInfo.FromJson(await graphResponse.Content.ReadAsStringAsync());
-                if (string.IsNullOrWhiteSpace(cdaInfo.UserPrincipalName))
-                    return req.CreateErrorResponse(HttpStatusCode.NoContent, "No CDAs!");
-
-                log.Info(cdaInfo.ToString());
+                return req.CreateErrorResponse(HttpStatusCode.InternalServerError, "Error using the Graph");
             }
-            catch (Exception ex)
-            {
-                log.Error("Graph HTTP call", ex);
-                return req.CreateErrorResponse(HttpStatusCode.InternalServerError, new Exception("Could not read MS Graph"));
-            }
+#endif
 
             string jsonContent = await req.Content.ReadAsStringAsync();
             LocationUpdate data = null;
@@ -67,8 +50,7 @@ namespace AwesomeContacts.Functions
             else
                 data = new LocationUpdate
                 {
-                    Latitude = 47.6451599,
-                    Longitude = -122.130602,
+                    Position = new Microsoft.Azure.Documents.Spatial.Point(-122.130602, 47.6451599)
                 };
 #endif
 
@@ -80,7 +62,7 @@ namespace AwesomeContacts.Functions
                 var reverse = await ServiceManager.GetResponseAsync(new ReverseGeocodeRequest()
                 {
                     BingMapsKey = key,
-                    Point = new Coordinate(data.Latitude, data.Longitude),
+                    Point = new Coordinate(data.Position.Position.Latitude, data.Position.Position.Longitude),
                     IncludeEntityTypes = new System.Collections.Generic.List<EntityType>
                     {
                         EntityType.CountryRegion,
@@ -111,14 +93,12 @@ namespace AwesomeContacts.Functions
             var point = result2?.GeocodePoints?.FirstOrDefault()?.GetCoordinate();
             if (point != null)
             {
-                data.Latitude = point.Latitude;
-                data.Longitude = point.Longitude;
+                data.Position = new Microsoft.Azure.Documents.Spatial.Point(point.Longitude, point.Latitude);
             }
             else
             {
                 //blank out lat/long
-                data.Latitude = 47.6451600;
-                data.Longitude = -122.1306030;
+                data.Position = new Microsoft.Azure.Documents.Spatial.Point(-122.1306030, 47.6451600);
             }
 
             //update cosmos DB here
@@ -132,6 +112,38 @@ namespace AwesomeContacts.Functions
                 greeting = $"Hello {data.UserPrincipalName}, you are in {data.Country} {data.Town}!"
             });
 
+        }
+
+        static async Task<GraphInfo> GetCDAGraphInfo(HttpRequestMessage req, TraceWriter log)
+        {
+            GraphInfo cdaInfo = null;
+
+            try
+            {
+                // Using the passed in token from the mobile app (which will authenticate against the MSFT corp AD) - call the MS Graph to get user info
+                if (!req.Headers.Authorization.Scheme.Equals("bearer", StringComparison.OrdinalIgnoreCase) && !string.IsNullOrWhiteSpace(req.Headers.Authorization.Parameter))
+                    return null;
+
+                var token = req.Headers.Authorization.Parameter;
+
+                var graphReqMsg = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/me");
+                graphReqMsg.Headers.Authorization = new AuthenticationHeaderValue("bearer", token);
+
+                var graphResponse = await httpClient.SendAsync(graphReqMsg);
+
+                cdaInfo = GraphInfo.FromJson(await graphResponse.Content.ReadAsStringAsync());
+                if (string.IsNullOrWhiteSpace(cdaInfo.UserPrincipalName))
+                    return null;
+
+                log.Info(cdaInfo.ToString());
+            }
+            catch (Exception ex)
+            {
+                log.Error("Graph HTTP call", ex);
+                return null;
+            }
+
+            return cdaInfo;
         }
     }
 }
