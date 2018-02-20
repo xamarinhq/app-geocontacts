@@ -49,6 +49,9 @@ namespace AwesomeContacts.Services
         {
             var cache = GetCache<List<Contact>>(cdaCacheKey);
 
+            if (cache != null && cache != default(List<Contact>))
+                return cache;
+
 
             var allCDAQuery = DocClient.CreateDocumentQuery<Contact>(allCDACollectionLink)
                                    .OrderBy(cda => cda.Name)
