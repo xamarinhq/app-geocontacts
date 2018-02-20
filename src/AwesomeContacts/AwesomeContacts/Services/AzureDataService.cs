@@ -19,11 +19,6 @@ namespace AwesomeContacts.Services
 {
     public class AzureDataService : IDataService
     {
-        const string accountURL = @"{account url}";
-        const string databaseId = @"{database name}";
-        const string collectionId = @"UserItems";
-        const string resourceTokenBrokerURL = @"{resource token broker base url, e.g. https://xamarin.azurewebsites.net}";
-
         const string cdaCacheKey = "allcdas";
         const int maximumCDADistance = 50000; //meters
 
@@ -55,6 +50,9 @@ namespace AwesomeContacts.Services
 
         public async Task<IEnumerable<Contact>> GetAllAsync()
         {
+            var cache = GetCache<List<Contact>>(cdaCacheKey);
+
+
             var allCDAQuery = DocClient.CreateDocumentQuery<Contact>(allCDACollectionLink)
                                    .OrderBy(cda => cda.Name)
                                    .AsDocumentQuery();
@@ -76,6 +74,8 @@ namespace AwesomeContacts.Services
 
                 cda.TwitterHandle = $"@{twitterUserName}";
             }
+
+            MonkeyCache.FileStore.Barrel.Current.Add<List<Contact>>(cdaCacheKey, allCDAs, TimeSpan.FromHours(2));
 
             return allCDAs;
         }
@@ -103,11 +103,11 @@ namespace AwesomeContacts.Services
                 hometownCDAs.AddRange(await hometownCDAQuery.ExecuteNextAsync<Contact>());
             }
 
-            // Find the CDAs who checked in within the last 24 hours
-            var midnightYesterday = DateTimeOffset.UtcNow.AddDays(-1).Date;
+            // Find the CDAs who checked in within the last 7Days
+            var daysAgo = DateTimeOffset.UtcNow.AddDays(-7).Date;
 
             var latestClosestPositionsQuery = DocClient.CreateDocumentQuery<LocationUpdate>(locationCollectionLink, feedOptions)
-                                                       .Where(ll => ll.InsertTime > midnightYesterday)
+                                                       .Where(ll => ll.InsertTime > daysAgo)
                                                        .Where(ll => userPoint.Distance(ll.Position) < maximumCDADistance)
                                                        .AsDocumentQuery();
 
@@ -143,31 +143,13 @@ namespace AwesomeContacts.Services
             return allCDAsNearby;
         }
 
-        public async Task<T> GetAsync<T>(string url, int hours = 2, bool forceRefresh = false)
+        public T GetCache<T>(string key, bool forceRefresh = false)
         {
-            var json = string.Empty;
-
             //check if we are connected, else check to see if we have valid data
             if (!CrossConnectivity.Current.IsConnected)
-                json = Barrel.Current.Get(url);
-            else if (!forceRefresh && !Barrel.Current.IsExpired(url))
-                json = Barrel.Current.Get(url);
-
-            try
-            {
-                //skip web request because we are using cached data
-                if (string.IsNullOrWhiteSpace(json))
-                {
-                    json = await httpClient.GetStringAsync(url);
-                    Barrel.Current.Add(url, json, TimeSpan.FromHours(hours));
-                }
-                return await Task.Run(() => JsonConvert.DeserializeObject<T>(json));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Unable to get information from server {ex}");
-                //probably re-throw here :)
-            }
+                return Barrel.Current.Get<T>(key);
+            else if (!forceRefresh && !Barrel.Current.IsExpired(key))
+               return Barrel.Current.Get<T>(key);
 
             return default(T);
         }
