@@ -126,6 +126,9 @@
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="FindCloseCDAs" xml:space="preserve">
+    <value>Find Neaby CDAs</value>
+  </data>
   <data name="LoginPageGuest" xml:space="preserve">
     <value>Continue as Guest</value>
   </data>

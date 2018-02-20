@@ -39,8 +39,6 @@ namespace AwesomeContacts.View
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
-            vm.GetNearby();
         }
 
     }

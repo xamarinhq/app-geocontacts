@@ -26,6 +26,11 @@ namespace AwesomeContacts.ViewModel
 
         async Task ExecuteRefreshCommand(bool forceRefresh)
         {
+            if (IsBusy)
+                return;
+
+            IsBusy = true;
+
             try
             {
                 var contacts = await DataService.GetAllAsync();
@@ -36,6 +41,10 @@ namespace AwesomeContacts.ViewModel
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"*** ERROR: {ex.Message}");
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
 
