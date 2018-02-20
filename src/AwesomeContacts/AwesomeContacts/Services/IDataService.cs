@@ -1,19 +1,18 @@
 ﻿using AwesomeContacts.Model;
 using Plugin.Geolocator.Abstractions;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace AwesomeContacts.Services
 {
     public interface IDataService
     {
-        IEnumerable<Contact> GetAll();
+        Task Initialize();
+        Task<IEnumerable<Contact>> GetAllAsync();
         Task<Contact> GetAsync(string id);
-        IEnumerable<Contact> GetNearbyAsync(double userLongitude, double userLatitude);
+        Task<IEnumerable<Contact>> GetNearbyAsync(double userLongitude, double userLatitude);
 
-        Task UpdateLocationAsync(Plugin.Geolocator.Abstractions.Position position, Address address, string accessToken);
+        Task UpdateLocationAsync(Position position, Address address, string accessToken);
 
     }
 }
