@@ -19,7 +19,7 @@ namespace AwesomeContacts.Services
 {
     public class AzureDataService : IDataService
     {
-        const string cdaCacheKey = "allcdas";
+        const string cdaCacheKey = "allcdas2";
         const int maximumCDADistance = 50000; //meters
 
         readonly Uri locationCollectionLink = UriFactory.CreateDocumentCollectionUri(
@@ -47,9 +47,9 @@ namespace AwesomeContacts.Services
 
         public async Task<IEnumerable<Contact>> GetAllAsync()
         {
-            var cache = GetCache<List<Contact>>(cdaCacheKey);
+            var cache = GetCache(cdaCacheKey);
 
-            if (cache != null && cache != default(List<Contact>))
+            if (cache != null)
                 return cache;
 
 
@@ -62,11 +62,10 @@ namespace AwesomeContacts.Services
             {
                 allCDAs.AddRange(await allCDAQuery.ExecuteNextAsync<Contact>());
             }
-
-            string imgSrc = "";
+            
             foreach (var cda in allCDAs)
             {
-                if (cda.Image.TryGetValue("Src", out imgSrc))
+                if (cda.Image.TryGetValue("Src", out string imgSrc))
                     cda.PhotoUrl = $"https://developer.microsoft.com/en-us/advocates/{imgSrc}";
 
                 var twitterUserName = cda.Twitter.Substring(
@@ -75,7 +74,8 @@ namespace AwesomeContacts.Services
                 cda.TwitterHandle = $"@{twitterUserName}";
             }
 
-            MonkeyCache.FileStore.Barrel.Current.Add<List<Contact>>(cdaCacheKey, allCDAs, TimeSpan.FromHours(2));
+            var json = JsonConvert.SerializeObject(allCDAs.ToArray());
+            MonkeyCache.FileStore.Barrel.Current.Add(cdaCacheKey, json, TimeSpan.FromHours(2));
 
             return allCDAs;
         }
@@ -140,18 +140,33 @@ namespace AwesomeContacts.Services
             hometownCDAs.ForEach(cda => cda.CurrentLocation = cda.Hometown.Position);
             allCDAsNearby.AddRange(hometownCDAs);
 
+            foreach (var cda in allCDAsNearby)
+            {
+                if (cda.Image.TryGetValue("Src", out string imgSrc))
+                    cda.PhotoUrl = $"https://developer.microsoft.com/en-us/advocates/{imgSrc}";
+
+                var twitterUserName = cda.Twitter.Substring(
+                    cda.Twitter.LastIndexOf("/", StringComparison.OrdinalIgnoreCase) + 1);
+
+                cda.TwitterHandle = $"@{twitterUserName}";
+            }
+
             return allCDAsNearby;
         }
 
-        public T GetCache<T>(string key, bool forceRefresh = false)
+        public List<Contact> GetCache(string key, bool forceRefresh = false)
         {
+            var json = string.Empty;
             //check if we are connected, else check to see if we have valid data
             if (!CrossConnectivity.Current.IsConnected)
-                return Barrel.Current.Get<T>(key);
+                json = Barrel.Current.Get(key);
             else if (!forceRefresh && !Barrel.Current.IsExpired(key))
-               return Barrel.Current.Get<T>(key);
+               json = Barrel.Current.Get(key);
 
-            return default(T);
+            if (!string.IsNullOrWhiteSpace(json))
+                return JsonConvert.DeserializeObject<Contact[]>(json).ToList();
+
+            return null;
         }
 
         public async Task UpdateLocationAsync(Plugin.Geolocator.Abstractions.Position position, Address address, string accessToken)

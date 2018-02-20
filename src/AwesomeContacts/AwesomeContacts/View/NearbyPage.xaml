@@ -12,8 +12,6 @@
         </Grid.RowDefinitions>
         <ListView x:Name="MyListView"
                 ItemsSource="{Binding Contacts}"
-                  IsPullToRefreshEnabled="True"
-                  IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                   HasUnevenRows="True"
                 CachingStrategy="RecycleElement">
             <ListView.Effects>
