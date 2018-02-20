@@ -31,5 +31,6 @@ namespace AwesomeContacts.Helpers
 
         public const string CosmosDbUrl = "CDC_URL";
         public const string CosmosAuthKey = "CDC_AUTH";
+        #endregion
     }
 }
