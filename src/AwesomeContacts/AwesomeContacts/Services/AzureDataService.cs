@@ -41,6 +41,9 @@ namespace AwesomeContacts.Services
 
         public AzureDataService()
         {
+            if (CommonConstants.CosmosDbUrl == "CDC_URL" || CommonConstants.CosmosAuthKey == "CDC_AUTH")
+                throw new Exception("CosmosDB not configured, please update Helpers/CommonConstants.cs");
+
             httpClient = new HttpClient();
             DocClient = new DocumentClient(new Uri(CommonConstants.CosmosDbUrl), CommonConstants.CosmosAuthKey);
         }
