@@ -7,20 +7,20 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AwesomeContacts.Android", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AwesomeContacts.iOS", "AwesomeContacts\AwesomeContacts.iOS\AwesomeContacts.iOS.csproj", "{C4CB2FEA-534A-463F-80BB-FA16C19E17FB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AwesomeContacts", "AwesomeContacts\AwesomeContacts\AwesomeContacts.csproj", "{08D65A14-52B5-447A-AF25-5CC56977EEF4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AwesomeContacts", "AwesomeContacts\AwesomeContacts\AwesomeContacts.csproj", "{08D65A14-52B5-447A-AF25-5CC56977EEF4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{249BE0CF-7A1B-4B62-9E71-4AA85501BC2A}"
 	ProjectSection(SolutionItems) = preProject
 		AwesomeContacts\AwesomeContacts.Android\mobile-center-post-clone.sh = AwesomeContacts\AwesomeContacts.Android\mobile-center-post-clone.sh
-		AwesomeContacts\AwesomeContacts.iOS\mobile-center-post-clone.sh = AwesomeContacts\AwesomeContacts.iOS\mobile-center-post-clone.sh
 		..\README.md = ..\README.md
+		mobile-center-post-clone.sh = mobile-center-post-clone.sh
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Functions", "Functions", "{39DEDF2C-E5B0-482C-96E4-2C1462933E5F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AwesomeContacts.Functions", "ContactzFunctions\AwesomeContacts.Functions.csproj", "{E626C11B-6534-4267-AA8A-BB20ACD37193}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AwesomeContacts.Functions", "ContactzFunctions\AwesomeContacts.Functions.csproj", "{E626C11B-6534-4267-AA8A-BB20ACD37193}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AwesomeContacts.SharedModels", "AwesomeContacts.SharedModels\AwesomeContacts.SharedModels.csproj", "{7C0A48E3-CA3A-42B2-9D78-DB7F9BF0BD59}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AwesomeContacts.SharedModels", "AwesomeContacts.SharedModels\AwesomeContacts.SharedModels.csproj", "{7C0A48E3-CA3A-42B2-9D78-DB7F9BF0BD59}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
