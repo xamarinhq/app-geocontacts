@@ -17,18 +17,4 @@ namespace AwesomeContacts.SharedModels
         public string UserPrincipalName { get; set; }
         public DateTimeOffset InsertTime { get; set; }
     }
-
-    public class LocationUpdateCompare : IEqualityComparer<LocationUpdate>
-    {
-        public bool Equals(LocationUpdate locationUpdate1, LocationUpdate locationUpdate2)
-        {
-            return locationUpdate1.UserPrincipalName.Equals(locationUpdate2.UserPrincipalName,
-                                                            StringComparison.OrdinalIgnoreCase);
-        }
-
-        public int GetHashCode(LocationUpdate obj)
-        {
-            return obj.UserPrincipalName.GetHashCode();
-        }
-    }
 }

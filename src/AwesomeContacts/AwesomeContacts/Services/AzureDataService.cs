@@ -62,11 +62,17 @@ namespace AwesomeContacts.Services
             {
                 allCDAs.AddRange(await allCDAQuery.ExecuteNextAsync<Contact>());
             }
-            
+
             foreach (var cda in allCDAs)
             {
                 if (cda.Image.TryGetValue("Src", out string imgSrc))
-                    cda.PhotoUrl = $"https://developer.microsoft.com/en-us/advocates/{imgSrc}";
+                {
+                    // The image source may be a full URL or a partial one
+                    if (imgSrc.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+                        cda.PhotoUrl = imgSrc;
+                    else
+                        cda.PhotoUrl = $"https://developer.microsoft.com/en-us/advocates/{imgSrc}";
+                }
 
                 var twitterUserName = cda.Twitter.Substring(
                     cda.Twitter.LastIndexOf("/", StringComparison.OrdinalIgnoreCase) + 1);
@@ -117,33 +123,46 @@ namespace AwesomeContacts.Services
                 latestClosestPositions.AddRange(await latestClosestPositionsQuery.ExecuteNextAsync<LocationUpdate>());
             }
 
-            // Make sure only one upate per person included
-            // todo: make sure it's the most recent update
-            latestClosestPositions = latestClosestPositions.Distinct(new LocationUpdateCompare()).ToList();
+            // Make sure only the most recent update per CDA is grabbed
+            var mostRecentCDACheckins = from lcp in latestClosestPositions
+                                        group lcp by lcp.UserPrincipalName into g
+                                        select g.OrderByDescending(t => t.InsertTime).FirstOrDefault();
 
             // Remove any hometownCDAs that are in the latest closest position
-            foreach (var closeCDA in latestClosestPositions)
+            foreach (var cdaCheckin in mostRecentCDACheckins)
             {
-                hometownCDAs.RemoveAll(cda => closeCDA.UserPrincipalName == cda.UserPrincipalName);
+                hometownCDAs.RemoveAll(cda => cdaCheckin.UserPrincipalName == cda.UserPrincipalName);
             }
 
+            // Create a list that will hold all the CDAs that are nearby
             List<Contact> allCDAsNearby = new List<Contact>();
+
             // Add CDAs in the latest closest position
-            foreach (var closeCDA in latestClosestPositions)
+            foreach (var cdaCheckin in mostRecentCDACheckins)
             {
-                var foundCDA = allCDAs.First(cda => cda.UserPrincipalName == closeCDA.UserPrincipalName);
-                foundCDA.CurrentLocation = closeCDA.Position;
+                // Use the Contact class - so match up a cda check-in location class to their corresponding contact
+                var foundCDA = allCDAs.First(cda => cda.UserPrincipalName == cdaCheckin.UserPrincipalName);
+
+                // Then mark their curent location
+                foundCDA.CurrentLocation = cdaCheckin.Position;
 
                 allCDAsNearby.Add(foundCDA);
             }
-            // Finally create a list of CDAs that are close by
+
+            // Make sure the current location of the CDAs whose hometowns are near also have the current location set properly
             hometownCDAs.ForEach(cda => cda.CurrentLocation = cda.Hometown.Position);
             allCDAsNearby.AddRange(hometownCDAs);
 
             foreach (var cda in allCDAsNearby)
             {
                 if (cda.Image.TryGetValue("Src", out string imgSrc))
-                    cda.PhotoUrl = $"https://developer.microsoft.com/en-us/advocates/{imgSrc}";
+                {
+                    // Image source could be a full url or a partial
+                    if (imgSrc.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+                        cda.PhotoUrl = imgSrc;
+                    else
+                        cda.PhotoUrl = $"https://developer.microsoft.com/en-us/advocates/{imgSrc}";
+                }
 
                 var twitterUserName = cda.Twitter.Substring(
                     cda.Twitter.LastIndexOf("/", StringComparison.OrdinalIgnoreCase) + 1);
@@ -161,7 +180,7 @@ namespace AwesomeContacts.Services
             if (!CrossConnectivity.Current.IsConnected)
                 json = Barrel.Current.Get(key);
             else if (!forceRefresh && !Barrel.Current.IsExpired(key))
-               json = Barrel.Current.Get(key);
+                json = Barrel.Current.Get(key);
 
             if (!string.IsNullOrWhiteSpace(json))
                 return JsonConvert.DeserializeObject<Contact[]>(json).ToList();
