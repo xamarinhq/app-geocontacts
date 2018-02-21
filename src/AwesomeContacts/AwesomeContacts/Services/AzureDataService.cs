@@ -62,11 +62,17 @@ namespace AwesomeContacts.Services
             {
                 allCDAs.AddRange(await allCDAQuery.ExecuteNextAsync<Contact>());
             }
-            
+
             foreach (var cda in allCDAs)
             {
                 if (cda.Image.TryGetValue("Src", out string imgSrc))
-                    cda.PhotoUrl = $"https://developer.microsoft.com/en-us/advocates/{imgSrc}";
+                {
+                    // The image source may be a full URL or a partial one
+                    if (imgSrc.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+                        cda.PhotoUrl = imgSrc;
+                    else
+                        cda.PhotoUrl = $"https://developer.microsoft.com/en-us/advocates/{imgSrc}";
+                }
 
                 var twitterUserName = cda.Twitter.Substring(
                     cda.Twitter.LastIndexOf("/", StringComparison.OrdinalIgnoreCase) + 1);
@@ -143,7 +149,13 @@ namespace AwesomeContacts.Services
             foreach (var cda in allCDAsNearby)
             {
                 if (cda.Image.TryGetValue("Src", out string imgSrc))
-                    cda.PhotoUrl = $"https://developer.microsoft.com/en-us/advocates/{imgSrc}";
+                {
+                    // The image source may be a full URL or a partial one
+                    if (imgSrc.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+                        cda.PhotoUrl = imgSrc;
+                    else
+                        cda.PhotoUrl = $"https://developer.microsoft.com/en-us/advocates/{imgSrc}";
+                }
 
                 var twitterUserName = cda.Twitter.Substring(
                     cda.Twitter.LastIndexOf("/", StringComparison.OrdinalIgnoreCase) + 1);
@@ -161,7 +173,7 @@ namespace AwesomeContacts.Services
             if (!CrossConnectivity.Current.IsConnected)
                 json = Barrel.Current.Get(key);
             else if (!forceRefresh && !Barrel.Current.IsExpired(key))
-               json = Barrel.Current.Get(key);
+                json = Barrel.Current.Get(key);
 
             if (!string.IsNullOrWhiteSpace(json))
                 return JsonConvert.DeserializeObject<Contact[]>(json).ToList();
