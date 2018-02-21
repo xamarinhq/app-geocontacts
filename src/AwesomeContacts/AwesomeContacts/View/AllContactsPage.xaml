@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AwesomeContacts.View.AllContactsPage"
@@ -6,8 +6,9 @@
              xmlns:cells="clr-namespace:AwesomeContacts.Cells"
              xmlns:effects="clr-namespace:AwesomeContacts.Effects">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="{i18n:Translate ToolbarSettings}" Icon="ic_settings"/>
+       <!-- <ToolbarItem Text="{i18n:Translate ToolbarSettings}" Icon="ic_settings"/>-->
     </ContentPage.ToolbarItems>
+    <Grid>
     <ListView x:Name="MyListView"
             ItemsSource="{Binding Contacts}"
               IsPullToRefreshEnabled="True"
@@ -26,4 +27,8 @@
         </ListView.ItemTemplate>
 
     </ListView>
+
+        <ActivityIndicator IsVisible="{Binding IsBusy}"
+                            IsRunning="{Binding IsBusy}"/>
+    </Grid>
 </ContentPage>
