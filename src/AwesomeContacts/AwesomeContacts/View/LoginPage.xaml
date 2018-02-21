@@ -27,15 +27,23 @@
             <Label Grid.Row="3" Grid.ColumnSpan="2" Text="{i18n:Translate LoginPageWelcome}" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
             <Button Grid.Row="4"
                     Command="{Binding LoginCommand}"
+                    IsEnabled="{Binding IsNotBusy}"
                     BorderRadius="15" Text="{i18n:Translate LoginPageLoginWithMicrosoft}"
                     HorizontalOptions="FillAndExpand"
                     Style="{StaticResource ButtonOutline}">
             </Button>
 
 
-            <Button Grid.Row="4" Grid.Column="1" BackgroundColor="{StaticResource PrimaryDark}" TextColor="White"
+            <Button Grid.Row="4" 
+                    IsEnabled="{Binding IsNotBusy}"
+                    Grid.Column="1" BackgroundColor="{StaticResource PrimaryDark}" TextColor="White"
                     BorderRadius="15" Text="{i18n:Translate LoginPageGuest}"
-                    HorizontalOptions="FillAndExpand" VerticalOptions="End" />
+                    HorizontalOptions="FillAndExpand" VerticalOptions="End"
+                    Command="{Binding GuestCommand}"/>
+
+            <ActivityIndicator IsVisible="{Binding IsBusy}"
+                                IsRunning="{Binding IsBusy}"
+                                Grid.RowSpan="5" Grid.ColumnSpan="2"/>
 
         </Grid>
     </ContentPage.Content>

@@ -4,42 +4,63 @@ using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Microsoft.Identity.Client;
+using System.Threading.Tasks;
 
 namespace AwesomeContacts.ViewModel
 {
     public class LoginViewModel : ViewModelBase
     {
         public ICommand LoginCommand { get; }
+        public ICommand GuestCommand { get; }
 
         AuthenticationResult authenticationResult;
 
         public LoginViewModel()
         {
-            LoginCommand = new Command(async () =>
+            LoginCommand = new Command(async () => await ExecuteLoginCommand());
+            GuestCommand = new Command(() => 
             {
-                if (IsBusy)
-                    return;
+                Settings.InGuestMode = true;
+                Settings.LoggedInMSFT = false;
+                App.GoHome();
+            });                
+        }
 
-                if (!await CheckConnectivityAsync())
-                    return;
+        async Task ExecuteLoginCommand()
+        {
+            if (IsBusy)
+                return;
 
-                try
+            if (!await CheckConnectivityAsync())
+                return;
+
+            try
+            {
+                IsBusy = true;
+
+                authenticationResult = await AuthenticationService.Login();
+
+
+                var displayName = authenticationResult?.User?.Name;
+                if (string.IsNullOrWhiteSpace(displayName))
                 {
-                    IsBusy = true;
-
-                    authenticationResult = await AuthenticationService.Login();
-
-
-                    // TODO: Obvs we'll want to get rid of this in the real app
-                    var displayName = authenticationResult?.User?.Name ?? "COULDN'T LOG IN";
-
-                    await Application.Current.MainPage.DisplayAlert("Result", $"Hey {displayName}, glad to see you!", "ok");
+                    //TODO: Unable to login
                 }
-                finally
+                else
                 {
-                    IsBusy = false;
+                    Settings.InGuestMode = false;
+                    Settings.LoggedInMSFT = true;
+                    App.GoHome();
                 }
-            });
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
     }
 }
