@@ -32,7 +32,7 @@
             <Button Grid.Row="3"
                     Command="{Binding LoginCommand}"
                     IsEnabled="{Binding IsNotBusy}"
-                    BorderRadius="15" Text="{i18n:Translate LoginPageLoginWithMicrosoft}"
+                    Text="{i18n:Translate LoginPageLoginWithMicrosoft}"
                     HorizontalOptions="FillAndExpand" 
                     Style="{StaticResource ButtonOutline}">
             </Button>
@@ -41,7 +41,7 @@
             <Button Grid.Row="3" 
                     IsEnabled="{Binding IsNotBusy}"
                     Grid.Column="1" BackgroundColor="{StaticResource PrimaryDark}" TextColor="White"
-                    BorderRadius="15" Text="{i18n:Translate LoginPageGuest}"
+                    Text="{i18n:Translate LoginPageGuest}"
                     HorizontalOptions="FillAndExpand"
                     Command="{Binding GuestCommand}"/>
 

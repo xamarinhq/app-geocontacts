@@ -41,7 +41,7 @@
                     Command="{Binding FollowCommand}"
                     HorizontalOptions="Center" WidthRequest="200" 
                     BackgroundColor="{StaticResource PrimaryDark}" TextColor="White"
-                    BorderRadius="15"/>
+                    Style="{StaticResource ButtonOutline}"/>
             <!--opens share sheet-->
             <BoxView HeightRequest="1" Color="#DDDDDD"/>
 

@@ -30,7 +30,7 @@
             <Label Grid.Row="5" Text="{Binding UpdateMessage}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"/>
 
             <Button Grid.Row="6" BackgroundColor="{StaticResource Primary}" TextColor="White"
-                    BorderRadius="15" Text="{i18n:Translate ButtonSyncLocation}"
+                    Text="{i18n:Translate ButtonSyncLocation}"
                     Command="{Binding UpdateLocationCommand}"
                     IsEnabled="{Binding IsNotBusy}"
                     HorizontalOptions="FillAndExpand" VerticalOptions="End" Margin="0,10,0,0"/>
