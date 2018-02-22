@@ -55,11 +55,22 @@ When adding smarts the application Cognitive Services enables the application to
 ### [Visual Studio App Center](https://appcenter.ms)
 
 ## Libraries Used
-* Xamarin.Forms
-* Settings Plugin
-* MVVM Helpers
-* Messaging Plugin
-* Geolocator Plugin
+* [Xamarin.Forms](http://xamarin.com/forms)
+* [Settings Plugin](https://github.com/jamesmontemagno/SettingsPlugin)
+* [MVVM Helpers](https://github.com/jamesmontemagno/mvvm-helpers)
+* [Messaging Plugin](https://github.com/cjlotz/Xamarin.Plugins)
+* [Geolocator Plugin](https://github.com/jamesmontemagno/GeolocatorPlugin)
+* [Share Plugin](https://github.com/jguertl/SharePlugin)
+* [Connectivity Plugin](https://github.com/jamesmontemagno/ConnectivityPlugin)
+* [Monkey Cache](https://github.com/jamesmontemagno/monkey-cache)
+* [App Center - Build, Distribute, Analytics, Crash](https://appcenter.ms)
+* [Multilingual Plugin](https://github.com/CrossGeeks/MultilingualPlugin)
+* [Markdig](https://github.com/lunet-io/markdig)
+* [Microsoft Identity Client](https://github.com/AzureAD/microsoft-authentication-library-for-dotnet)
+* [Azure DocumentDb Core](https://github.com/Azure/azure-documentdb-dotnet)
+
+## Art:
+
 
 ## License
 Under MIT (see license file)
