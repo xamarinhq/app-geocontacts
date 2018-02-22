@@ -70,6 +70,15 @@ namespace AwesomeContacts.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Follow.
+        /// </summary>
+        internal static string ButtonFollow {
+            get {
+                return ResourceManager.GetString("ButtonFollow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sync Current Location.
         /// </summary>
         internal static string ButtonSyncLocation {

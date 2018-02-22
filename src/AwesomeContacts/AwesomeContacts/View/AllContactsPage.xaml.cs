@@ -1,4 +1,5 @@
-﻿using AwesomeContacts.ViewModel;
+﻿using AwesomeContacts.Model;
+using AwesomeContacts.ViewModel;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -20,6 +21,16 @@ namespace AwesomeContacts.View
             InitializeComponent();
             BindingContext = vm = new AllContactsViewModel();
             MyListView.ItemTapped += (sender, args) => MyListView.SelectedItem = null;
+            MyListView.ItemSelected += MyListView_ItemSelected;
+        }
+
+        private async void MyListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            var contact = e.SelectedItem as Contact;
+            if (contact == null)
+                return;
+
+            await Navigation.PushAsync(new DetailsPage(contact));
         }
 
         protected override void OnAppearing()

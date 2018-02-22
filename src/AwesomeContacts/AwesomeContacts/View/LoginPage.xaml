@@ -9,10 +9,9 @@
     <ContentPage.Content>
         <Grid Padding="10" RowSpacing="20">
             <Grid.RowDefinitions>
-                <RowDefinition Height=".5*"/>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="150"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="50"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -24,26 +23,33 @@
                    VerticalOptions="FillAndExpand"
                    Aspect="AspectFit"/>
 
-            <Label Grid.Row="3" Grid.ColumnSpan="2" Text="{i18n:Translate LoginPageWelcome}" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
-            <Button Grid.Row="4"
+            <Label Grid.Row="2" Grid.ColumnSpan="2"  
+                   Text="{i18n:Translate LoginPageWelcome}" 
+                   VerticalOptions="FillAndExpand" 
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"/>
+            
+            <Button Grid.Row="3"
                     Command="{Binding LoginCommand}"
                     IsEnabled="{Binding IsNotBusy}"
                     BorderRadius="15" Text="{i18n:Translate LoginPageLoginWithMicrosoft}"
-                    HorizontalOptions="FillAndExpand"
+                    HorizontalOptions="FillAndExpand" 
                     Style="{StaticResource ButtonOutline}">
             </Button>
 
 
-            <Button Grid.Row="4" 
+            <Button Grid.Row="3" 
                     IsEnabled="{Binding IsNotBusy}"
                     Grid.Column="1" BackgroundColor="{StaticResource PrimaryDark}" TextColor="White"
                     BorderRadius="15" Text="{i18n:Translate LoginPageGuest}"
-                    HorizontalOptions="FillAndExpand" VerticalOptions="End"
+                    HorizontalOptions="FillAndExpand"
                     Command="{Binding GuestCommand}"/>
 
             <ActivityIndicator IsVisible="{Binding IsBusy}"
                                 IsRunning="{Binding IsBusy}"
-                                Grid.RowSpan="5" Grid.ColumnSpan="2"/>
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                                Grid.RowSpan="4" Grid.ColumnSpan="2"/>
 
         </Grid>
     </ContentPage.Content>

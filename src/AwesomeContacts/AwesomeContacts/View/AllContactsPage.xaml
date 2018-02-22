@@ -14,6 +14,7 @@
               IsPullToRefreshEnabled="True"
             RefreshCommand="{Binding ForceRefreshCommand}"
               IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+              
               HasUnevenRows="True"
             CachingStrategy="RecycleElement">
         <ListView.Effects>
@@ -28,7 +29,8 @@
 
     </ListView>
 
-        <ActivityIndicator IsVisible="{Binding IsBusy}"
-                            IsRunning="{Binding IsBusy}"/>
+        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"/>
     </Grid>
 </ContentPage>

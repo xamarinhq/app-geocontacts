@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AwesomeContacts.Model;
+using AwesomeContacts.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,5 +18,12 @@ namespace AwesomeContacts.View
 		{
 			InitializeComponent ();
 		}
-	}
+
+        DetailsViewModel vm;
+        public DetailsPage(Contact contact)
+        {
+            InitializeComponent();
+            BindingContext = vm = new DetailsViewModel(contact);
+        }
+    }
 }
