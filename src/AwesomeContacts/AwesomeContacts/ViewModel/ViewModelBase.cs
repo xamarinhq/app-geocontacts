@@ -7,6 +7,7 @@ using AwesomeContacts.Resources;
 using AwesomeContacts.Services;
 using MvvmHelpers;
 using Plugin.Connectivity;
+using Plugin.Share;
 using Xamarin.Forms;
 
 namespace AwesomeContacts.ViewModel
@@ -40,6 +41,39 @@ namespace AwesomeContacts.ViewModel
             }
 
             return true;
+        }
+
+        public static void ExecuteGoToSiteExtCommand(string site)
+        {
+            var color = Color.FromHex("#b2169c");
+            CrossShare.Current.OpenBrowser(site, new Plugin.Share.Abstractions.BrowserOptions
+            {
+                ChromeShowTitle = true,
+                ChromeToolbarColor = new Plugin.Share.Abstractions.ShareColor
+                {
+                    A = 255,
+                    R = (int)(color.R * 255),
+                    G = (int)(color.G * 255),
+                    B = (int)(color.B * 255)
+                },
+                SafariBarTintColor = new Plugin.Share.Abstractions.ShareColor
+                {
+                    A = 255,
+                    R = (int)(color.R * 255),
+                    G = (int)(color.G * 255),
+                    B = (int)(color.B * 255)
+                },
+                SafariControlTintColor = new Plugin.Share.Abstractions.ShareColor
+                {
+                    A = 255,
+                    R = 255,
+                    G = 255,
+                    B = 255
+                },
+                UseSafariReaderMode = false,
+                UseSafariWebViewController = true
+            });
+
         }
     }
 }

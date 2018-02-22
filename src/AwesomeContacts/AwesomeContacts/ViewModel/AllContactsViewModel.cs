@@ -1,5 +1,6 @@
 ﻿using AwesomeContacts.Model;
 using MvvmHelpers;
+using Plugin.Share;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,6 +48,8 @@ namespace AwesomeContacts.ViewModel
                 IsBusy = false;
             }
         }
+
+        
 
     }
 }

@@ -120,6 +120,9 @@
   <data name="AppName" xml:space="preserve">
     <value>Cloud Developer Advocates</value>
   </data>
+  <data name="ButtonFollow" xml:space="preserve">
+    <value>Follow</value>
+  </data>
   <data name="ButtonSyncLocation" xml:space="preserve">
     <value>Sync Current Location</value>
   </data>

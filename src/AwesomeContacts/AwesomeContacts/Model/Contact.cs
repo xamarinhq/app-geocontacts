@@ -43,16 +43,16 @@ namespace AwesomeContacts.Model
         public string LinkedIn { get; set; }
 
         [JsonProperty("Facebook")]
-        public object Facebook { get; set; }
+        public string Facebook { get; set; }
 
         [JsonProperty("Instagram")]
-        public object Instagram { get; set; }
+        public string Instagram { get; set; }
 
         [JsonProperty("Twitch")]
-        public object Twitch { get; set; }
+        public string Twitch { get; set; }
 
         [JsonProperty("Podcast")]
-        public object Podcast { get; set; }
+        public string Podcast { get; set; }
 
         [JsonProperty("Location")]
         public Location Hometown { get; set; }
@@ -84,6 +84,22 @@ namespace AwesomeContacts.Model
 
         [JsonIgnore]
         public Point CurrentLocation { get; set; }
+
+        [JsonIgnore]
+        public string MiniTagline
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(Tagline))
+                    return string.Empty;
+
+                var index = Tagline.IndexOf('/');
+                if (index <= 0)
+                    return Tagline;
+
+                return Tagline.Substring(0, index).Trim();
+            }
+        }
     }
 
     public partial class Location
@@ -93,6 +109,22 @@ namespace AwesomeContacts.Model
 
         [JsonProperty("Position")]
         public Point Position { get; set; }
+
+        [JsonIgnore]
+        public string City
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(Display))
+                    return string.Empty;
+
+                var index = Display.IndexOf(',');
+                if (index <= 0)
+                    return string.Empty;
+
+                return Display.Substring(0, index).Trim();
+            }
+        }
     }
 
     public partial class MetaData

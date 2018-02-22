@@ -49,6 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Markdig">
+      <Version>0.14.9</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.AppCenter">
       <Version>1.3.0</Version>
     </PackageReference>
@@ -108,6 +111,7 @@
     <Compile Include="Effects\ListViewSelectionOnTopEffect.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MainApplication.cs" />
+    <Compile Include="Renderers\MarkdownLabelRenderer.cs" />
     <Compile Include="Renderers\TabbedRenderer.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -276,6 +280,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_bitcity.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-nodpi\cda_background.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
