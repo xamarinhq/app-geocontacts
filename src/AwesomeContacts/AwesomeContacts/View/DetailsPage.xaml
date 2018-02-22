@@ -19,7 +19,7 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Image Source="cda_background" HorizontalOptions="FillAndExpand" Aspect="AspectFill"
+                    <Image Source="cda_background.jpg" HorizontalOptions="FillAndExpand" Aspect="AspectFill"
                            HeightRequest="200" Grid.ColumnSpan="3"/>
                     <StackLayout Grid.RowSpan="2" Grid.Column="1" Margin="0,125,0,0">
                         
