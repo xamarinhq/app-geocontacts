@@ -70,7 +70,8 @@ When adding smarts the application Cognitive Services enables the application to
 * [Azure DocumentDb Core](https://github.com/Azure/azure-documentdb-dotnet)
 
 ## Art:
-
+* [Bit by Ashley McNamara](https://github.com/ashleymcnamara/Developer-Advocate-Bit)
+* [Cloud Neon Sign by Bryan Liston](https://twitter.com/listonb) with permission
 
 ## License
 Under MIT (see license file)
