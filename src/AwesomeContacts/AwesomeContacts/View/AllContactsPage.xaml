@@ -12,6 +12,7 @@
         <ListView x:Name="MyListView"
             ItemsSource="{Binding Contacts}"
               IsPullToRefreshEnabled="True"
+              IsRefreshing="{Binding IsBusy, Mode=OneWay}"
               RefreshCommand="{Binding ForceRefreshCommand}"
               HasUnevenRows="True"
             CachingStrategy="RecycleElement">
