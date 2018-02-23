@@ -170,7 +170,7 @@ namespace AwesomeContacts.Services
                 cda.TwitterHandle = $"@{twitterUserName}";
             }
 
-            return allCDAsNearby;
+            return allCDAsNearby.OrderBy(cda => cda.Name);
         }
 
         public List<Contact> GetCache(string key, bool forceRefresh = false)
