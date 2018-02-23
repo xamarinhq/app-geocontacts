@@ -51,7 +51,8 @@
 			<string>com.microsoft.advocates</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>msal8f999c10-2a7f-403c-b20b-cbe07b319cf3</string>
+          <string>msal8f999c10-2a7f-403c-b20b-cbe07b319cf3</string>
+          <string>appcenter-APP_SECRET</string>
 			</array>
 		</dict>
 	</array>

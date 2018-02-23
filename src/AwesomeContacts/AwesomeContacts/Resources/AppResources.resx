@@ -132,6 +132,9 @@
   <data name="FindCloseCDAs" xml:space="preserve">
     <value>Find Neaby CDAs</value>
   </data>
+  <data name="Hometown" xml:space="preserve">
+    <value>Hometown</value>
+  </data>
   <data name="LoginPageGuest" xml:space="preserve">
     <value>Continue as Guest</value>
   </data>
@@ -141,11 +144,17 @@
   <data name="LoginPageWelcome" xml:space="preserve">
     <value>Welcome to the Microsoft Cloud Developer Advocate contacts application. This app enables you to browse and find CDAs near you.</value>
   </data>
+  <data name="NoCDAsNearby" xml:space="preserve">
+    <value>It appears that no CDAs are nearby :(</value>
+  </data>
   <data name="NoInternet" xml:space="preserve">
     <value>Un oh, looks like your device is offline. Check your connection and try again.</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
+  </data>
+  <data name="RecentCheckin" xml:space="preserve">
+    <value>Recently Checked-In</value>
   </data>
   <data name="TitleAllContacts" xml:space="preserve">
     <value>Contacts</value>

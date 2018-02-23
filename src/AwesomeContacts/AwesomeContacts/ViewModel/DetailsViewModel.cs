@@ -1,5 +1,6 @@
 ﻿using AwesomeContacts.Model;
 using AwesomeContacts.Resources;
+using Microsoft.AppCenter.Analytics;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,6 +18,11 @@ namespace AwesomeContacts.ViewModel
         {
             Contact = contact;
             FollowCommand = new Command(async () => await ExecuteFollowCommand());
+
+            Analytics.TrackEvent("Details", new Dictionary<string, string>
+            {
+                ["name"] = contact.Name
+            });
         }
 
         async Task ExecuteFollowCommand()

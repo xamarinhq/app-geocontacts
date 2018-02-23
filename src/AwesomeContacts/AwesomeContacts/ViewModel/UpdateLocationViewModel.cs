@@ -1,5 +1,6 @@
 ﻿using AwesomeContacts.Resources;
 using AwesomeContacts.Services;
+using Microsoft.AppCenter.Analytics;
 using Plugin.Connectivity;
 using System;
 using System.Collections.Generic;
@@ -65,6 +66,8 @@ namespace AwesomeContacts.ViewModel
                 await DataService.UpdateLocationAsync(position, address, authResult.AccessToken);
 
                 UpdateMessage = AppResources.UpdatingLocationUpdated;
+
+                Analytics.TrackEvent("LocationUpdates");
 
             }
             catch (Exception ex)

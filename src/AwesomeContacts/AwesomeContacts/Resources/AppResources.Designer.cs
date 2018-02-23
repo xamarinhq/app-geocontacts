@@ -106,6 +106,15 @@ namespace AwesomeContacts.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hometown.
+        /// </summary>
+        internal static string Hometown {
+            get {
+                return ResourceManager.GetString("Hometown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Continue as Guest.
         /// </summary>
         internal static string LoginPageGuest {
@@ -133,6 +142,15 @@ namespace AwesomeContacts.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to It appears that no CDAs are nearby :(.
+        /// </summary>
+        internal static string NoCDAsNearby {
+            get {
+                return ResourceManager.GetString("NoCDAsNearby", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Un oh, looks like your device is offline. Check your connection and try again..
         /// </summary>
         internal static string NoInternet {
@@ -147,6 +165,15 @@ namespace AwesomeContacts.Resources {
         internal static string OK {
             get {
                 return ResourceManager.GetString("OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recently Checked-In.
+        /// </summary>
+        internal static string RecentCheckin {
+            get {
+                return ResourceManager.GetString("RecentCheckin", resourceCulture);
             }
         }
         

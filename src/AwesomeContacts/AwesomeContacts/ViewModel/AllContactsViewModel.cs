@@ -30,6 +30,9 @@ namespace AwesomeContacts.ViewModel
             if (IsBusy)
                 return;
 
+            if (!await CheckConnectivityAsync())
+                return;
+
             IsBusy = true;
 
             try

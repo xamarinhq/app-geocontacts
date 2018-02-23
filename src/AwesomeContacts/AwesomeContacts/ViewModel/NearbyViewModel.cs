@@ -9,19 +9,20 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Linq;
 using Xamarin.Forms;
+using Microsoft.AppCenter.Analytics;
 
 namespace AwesomeContacts.ViewModel
 {
     public class NearbyViewModel : ViewModelBase
     {
-        public ObservableRangeCollection<Contact> Contacts { get; }
+        public ObservableRangeCollection<Grouping<string, Contact>> ContactsGrouped { get; }
 
         public ICommand RefreshCommand { get; }
         public ICommand ForceRefreshCommand { get; }
 
         public NearbyViewModel()
         {
-            Contacts = new ObservableRangeCollection<Contact>();
+            ContactsGrouped = new ObservableRangeCollection<Grouping<string, Contact>>();
             RefreshCommand = new Command(async () => await ExecuteRefreshCommand(false));
             ForceRefreshCommand = new Command(async () => await ExecuteRefreshCommand(true));
         }
@@ -31,20 +32,27 @@ namespace AwesomeContacts.ViewModel
             if (IsBusy)
                 return;
 
+            if (!await CheckConnectivityAsync())
+                return;
+
             IsBusy = true;
 
             try
             {
+                Analytics.TrackEvent("SerchedForNearby");
                 var position = await Geolocation.GetCurrentPositionAsync();
 
                 if (position == null)
                     throw new Exception("Unable to get location.");
 
-                Contacts.Clear();
+                ContactsGrouped.Clear();
                 var contacts = await DataService.GetNearbyAsync(position.Longitude, position.Latitude);
+                if (contacts.Count() > 0)
+                    ContactsGrouped.AddRange(contacts);
+                else
+                    await Dialogs.AlertAsync(null, AppResources.NoCDAsNearby, AppResources.OK);
 
-                if (contacts != null && contacts.Count() > 0)
-                    Contacts.ReplaceRange(contacts);
+
             }
             catch (Exception ex)
             {

@@ -5,6 +5,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using Microsoft.Identity.Client;
 using System.Threading.Tasks;
+using Microsoft.AppCenter.Analytics;
 
 namespace AwesomeContacts.ViewModel
 {
@@ -37,7 +38,7 @@ namespace AwesomeContacts.ViewModel
             try
             {
                 IsBusy = true;
-
+                Analytics.TrackEvent("CDA-Login");
                 authenticationResult = await AuthenticationService.Login();
 
 

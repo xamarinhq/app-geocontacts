@@ -6,28 +6,28 @@
              xmlns:cells="clr-namespace:AwesomeContacts.Cells"
              xmlns:effects="clr-namespace:AwesomeContacts.Effects">
     <ContentPage.ToolbarItems>
-       <!-- <ToolbarItem Text="{i18n:Translate ToolbarSettings}" Icon="ic_settings"/>-->
+        <!-- <ToolbarItem Text="{i18n:Translate ToolbarSettings}" Icon="ic_settings"/>-->
     </ContentPage.ToolbarItems>
     <Grid>
-    <ListView x:Name="MyListView"
+        <ListView x:Name="MyListView"
             ItemsSource="{Binding Contacts}"
               IsPullToRefreshEnabled="True"
-            RefreshCommand="{Binding ForceRefreshCommand}"
-              IsRefreshing="{Binding IsBusy, Mode=OneWay}"
-              
+              RefreshCommand="{Binding ForceRefreshCommand}"
               HasUnevenRows="True"
             CachingStrategy="RecycleElement">
-        <ListView.Effects>
-            <effects:SelectionOnTopEffect/>
-        </ListView.Effects>
+            <ListView.Effects>
+                <effects:SelectionOnTopEffect/>
+            </ListView.Effects>
+            <ListView.SeparatorColor>
+                <OnPlatform x:TypeArguments="Color" Android="Transparent"/>
+            </ListView.SeparatorColor>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <cells:ContactCell/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
 
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <cells:ContactCell/>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-
-    </ListView>
+        </ListView>
 
         <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"
                            HorizontalOptions="Center"

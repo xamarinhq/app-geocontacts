@@ -14,6 +14,8 @@ using System.Linq;
 using AwesomeContacts.SharedModels;
 using Microsoft.Azure.Documents.Linq;
 using Microsoft.Azure.Documents.Spatial;
+using MvvmHelpers;
+using AwesomeContacts.Resources;
 
 namespace AwesomeContacts.Services
 {
@@ -91,8 +93,9 @@ namespace AwesomeContacts.Services
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<Contact>> GetNearbyAsync(double userLongitude, double userLatitude)
+        public async Task<IEnumerable<Grouping<string, Contact>>> GetNearbyAsync(double userLongitude, double userLatitude)
         {
+            var groupedNearby = new List<Grouping<string, Contact>>();
             var allCDAs = await GetAllAsync();
 
             var userPoint = new Point(userLongitude, userLatitude);
@@ -103,7 +106,7 @@ namespace AwesomeContacts.Services
                 .Where(cda => userPoint.Distance(cda.Hometown.Position) < maximumCDADistance)
                 .AsDocumentQuery();
 
-            List<Contact> hometownCDAs = new List<Contact>();
+            var hometownCDAs = new List<Contact>();
             while (hometownCDAQuery.HasMoreResults)
             {
                 hometownCDAs.AddRange(await hometownCDAQuery.ExecuteNextAsync<Contact>());
@@ -117,7 +120,7 @@ namespace AwesomeContacts.Services
                                                        .Where(ll => userPoint.Distance(ll.Position) < maximumCDADistance)
                                                        .AsDocumentQuery();
 
-            List<LocationUpdate> latestClosestPositions = new List<LocationUpdate>();
+            var latestClosestPositions = new List<LocationUpdate>();
             while (latestClosestPositionsQuery.HasMoreResults)
             {
                 latestClosestPositions.AddRange(await latestClosestPositionsQuery.ExecuteNextAsync<LocationUpdate>());
@@ -135,7 +138,7 @@ namespace AwesomeContacts.Services
             }
 
             // Create a list that will hold all the CDAs that are nearby
-            List<Contact> allCDAsNearby = new List<Contact>();
+            var allCDAsNearby = new List<Contact>();
 
             // Add CDAs in the latest closest position
             foreach (var cdaCheckin in mostRecentCDACheckins)
@@ -149,28 +152,37 @@ namespace AwesomeContacts.Services
                 allCDAsNearby.Add(foundCDA);
             }
 
+
+
             // Make sure the current location of the CDAs whose hometowns are near also have the current location set properly
             hometownCDAs.ForEach(cda => cda.CurrentLocation = cda.Hometown.Position);
-            allCDAsNearby.AddRange(hometownCDAs);
 
-            foreach (var cda in allCDAsNearby)
+            if(allCDAsNearby.Count > 0)
+                groupedNearby.Add(new Grouping<string, Contact>(AppResources.RecentCheckin, allCDAsNearby));
+            if(hometownCDAs.Count > 0)
+                groupedNearby.Add(new Grouping<string, Contact>(AppResources.Hometown, hometownCDAs));
+
+            foreach (var grouped in groupedNearby)
             {
-                if (cda.Image.TryGetValue("Src", out string imgSrc))
+                foreach (var cda in grouped.Items)
                 {
-                    // Image source could be a full url or a partial
-                    if (imgSrc.StartsWith("http", StringComparison.OrdinalIgnoreCase))
-                        cda.PhotoUrl = imgSrc;
-                    else
-                        cda.PhotoUrl = $"https://developer.microsoft.com/en-us/advocates/{imgSrc}";
+                    if (cda.Image.TryGetValue("Src", out string imgSrc))
+                    {
+                        // Image source could be a full url or a partial
+                        if (imgSrc.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+                            cda.PhotoUrl = imgSrc;
+                        else
+                            cda.PhotoUrl = $"https://developer.microsoft.com/en-us/advocates/{imgSrc}";
+                    }
+
+                    var twitterUserName = cda.Twitter.Substring(
+                        cda.Twitter.LastIndexOf("/", StringComparison.OrdinalIgnoreCase) + 1);
+
+                    cda.TwitterHandle = $"@{twitterUserName}";
                 }
-
-                var twitterUserName = cda.Twitter.Substring(
-                    cda.Twitter.LastIndexOf("/", StringComparison.OrdinalIgnoreCase) + 1);
-
-                cda.TwitterHandle = $"@{twitterUserName}";
             }
 
-            return allCDAsNearby;
+            return groupedNearby;
         }
 
         public List<Contact> GetCache(string key, bool forceRefresh = false)
