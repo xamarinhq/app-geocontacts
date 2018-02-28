@@ -24,7 +24,7 @@
             </ListView.SeparatorColor>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <cells:ContactCell/>
+                    <cells:ContactCell StyleId="disclosure"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
 

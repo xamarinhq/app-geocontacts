@@ -27,6 +27,7 @@ namespace AwesomeContacts.iOS
             UITabBar.Appearance.SelectedImageTintColor = UIColor.FromRGB(178, 22, 9);
             global::Xamarin.Forms.Forms.Init();
             ImageCircleRenderer.Init();
+            FormsToolkit.iOS.Toolkit.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
