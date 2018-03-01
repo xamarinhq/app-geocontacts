@@ -31,6 +31,8 @@ namespace AwesomeContacts.Droid
             global::Xamarin.Forms.Forms.Init(this, bundle);
             ImageCircleRenderer.Init();
 
+            FormsToolkit.Droid.Toolkit.Init();
+
             LoadApplication(new AwesomeContacts.App());
 
             AuthenticationService.UIParent = new UIParent(CrossCurrentActivity.Current.Activity);
