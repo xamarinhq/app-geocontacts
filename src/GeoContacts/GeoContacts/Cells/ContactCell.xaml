@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:imagecircle="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+             x:Class="GeoContacts.Cells.ContactCellView">
+    <ContentView.Content>
+        <Frame Padding="0">
+            <Frame.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="Android" Value="8"/>
+                </OnPlatform>
+            </Frame.Margin>
+            <Frame.HasShadow>
+                <OnPlatform x:TypeArguments="x:Boolean">
+                    <On Platform="Android" Value="true"/>
+                    <On Platform="iOS" Value="false"/>
+                    <On Platform="UWP" Value="true"/>
+                </OnPlatform>
+            </Frame.HasShadow>
+            <Frame.OutlineColor>
+                <OnPlatform x:TypeArguments="Color">
+                    <On Platform="iOS" Value="Transparent"/>
+                </OnPlatform>
+            </Frame.OutlineColor>
+            <Frame.BackgroundColor>
+                <OnPlatform x:TypeArguments="Color">
+                    <On Platform="iOS" Value="Transparent"/>
+                </OnPlatform>
+            </Frame.BackgroundColor>
+            <Grid Padding="16,5" ColumnSpacing="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <imagecircle:CircleImage FillColor="{StaticResource Primary}" 
+                                         BorderColor="{StaticResource PrimaryDark}"
+                                         BorderThickness="2"
+                                           Source="{Binding PhotoUrl}"
+                                           VerticalOptions="Center"
+                                         HeightRequest="66"
+                                         WidthRequest="66"
+                                           Aspect="AspectFill">
+                </imagecircle:CircleImage>
+                <StackLayout Grid.Column="1" 
+                               VerticalOptions="Center"
+                               Spacing="0">
+                    <Label Style="{DynamicResource ListItemTextStyle}" 
+                          Text="{Binding Name}"/>
+                    <Label Style="{DynamicResource ListItemDetailTextStyle}"
+                           Text="{Binding Tagline}"/>
+                    <Label Style="{DynamicResource ListItemDetailTextStyle}"
+                           Text="{Binding TwitterHandle}"/>
+                </StackLayout>
+
+            </Grid>
+        </Frame>
+    </ContentView.Content>
+</ContentView>

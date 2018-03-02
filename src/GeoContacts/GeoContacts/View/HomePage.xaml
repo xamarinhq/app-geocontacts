@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:view="clr-namespace:GeoContacts.View"
+             xmlns:i18n="clr-namespace:GeoContacts.Helpers" 
+             x:Class="GeoContacts.View.HomePage">
+    <TabbedPage.Children>
+        <view:AllContactsPage Icon="ic_contacts" />
+        <view:NearbyPage Icon="ic_nearby" />
+    </TabbedPage.Children>
+</TabbedPage>

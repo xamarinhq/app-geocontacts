@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:i18n="clr-namespace:GeoContacts.Helpers" 
+             x:Class="GeoContacts.View.NearbyPage" 
+             xmlns:cells="clr-namespace:GeoContacts.Cells"
+             xmlns:effects="clr-namespace:GeoContacts.Effects">
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ListView x:Name="MyListView"
+                    ItemsSource="{Binding ContactsGrouped}"
+                    GroupDisplayBinding="{Binding Key}"
+                    IsGroupingEnabled="True"
+                    HasUnevenRows="True"
+                    IsVisible="{Binding IsNotBusy}"
+                    CachingStrategy="RecycleElement">
+            <ListView.SeparatorColor>
+                <OnPlatform x:TypeArguments="Color" Android="Transparent"/>
+            </ListView.SeparatorColor>
+            <ListView.Effects>
+                <effects:SelectionOnTopEffect/>
+            </ListView.Effects>
+            <ListView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.Height>
+                            <OnPlatform x:TypeArguments="x:Double" iOS="28"/>
+                        </ViewCell.Height>
+                        <cells:ContactsGroupHeaderView/>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.GroupHeaderTemplate>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <cells:ContactCell StyleId="disclosure"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button 
+                Margin="10"
+                Grid.Row="1" Command="{Binding ForceRefreshCommand}"
+                 Style="{StaticResource ButtonOutline}"
+                 IsEnabled="{Binding IsNotBusy}"
+                 Text="{i18n:Translate FindCloseCDAs}"/>
+
+        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" Grid.RowSpan="2"/>
+    </Grid>
+</ContentPage>
