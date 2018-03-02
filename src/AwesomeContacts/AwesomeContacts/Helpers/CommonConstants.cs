@@ -10,6 +10,7 @@ namespace AwesomeContacts.Helpers
         public const string AppCenteriOS = "AC_IOS";
         public const string AppCenterAndroid = "AC_ANDROID";
         public const string AppCenterUWP = "AC_UWP";
+        public const string ShowLogin = "AC_SHOWLOGIN";
         #endregion
 
         #region AD

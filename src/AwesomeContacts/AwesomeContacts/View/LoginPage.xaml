@@ -34,7 +34,8 @@
                     IsEnabled="{Binding IsNotBusy}"
                     Text="{i18n:Translate LoginPageLoginWithMicrosoft}"
                     HorizontalOptions="FillAndExpand" 
-                    Style="{StaticResource ButtonOutline}">
+                    Style="{StaticResource ButtonOutline}"
+                    x:Name="ButtonLogin">
             </Button>
 
 

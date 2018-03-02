@@ -60,10 +60,21 @@ namespace AwesomeContacts
                 (Device.RuntimePlatform == Device.iOS && CommonConstants.AppCenteriOS != "AC_IOS") ||
                 (Device.RuntimePlatform == Device.UWP && CommonConstants.AppCenterUWP != "AC_UWP"))
             {
-                AppCenter.Start($"android={CommonConstants.AppCenterAndroid};" +
-                   $"uwp={CommonConstants.AppCenterUWP};" +
-                   $"ios={CommonConstants.AppCenteriOS}",
-                   typeof(Analytics), typeof(Crashes), typeof(Distribute));
+                if (CommonConstants.ShowLogin == "AC_SHOWLOGIN")
+                {
+
+                    AppCenter.Start($"android={CommonConstants.AppCenterAndroid};" +
+                           $"uwp={CommonConstants.AppCenterUWP};" +
+                           $"ios={CommonConstants.AppCenteriOS}",
+                           typeof(Analytics), typeof(Crashes), typeof(Distribute));
+                }
+                else
+                {
+                    AppCenter.Start($"android={CommonConstants.AppCenterAndroid};" +
+                           $"uwp={CommonConstants.AppCenterUWP};" +
+                           $"ios={CommonConstants.AppCenteriOS}",
+                           typeof(Analytics), typeof(Crashes));
+                }
             }
         }
 
