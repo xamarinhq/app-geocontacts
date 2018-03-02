@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using AwesomeContacts.ViewModel;
+using AwesomeContacts.Helpers;
 
 namespace AwesomeContacts.View
 {
@@ -19,6 +20,11 @@ namespace AwesomeContacts.View
             InitializeComponent();
 
             BindingContext = vm = new LoginViewModel();
+
+            if(CommonConstants.ShowLogin != "AC_SHOWLOGIN")
+            {
+                ButtonLogin.IsVisible = false;
+            }
         }
     }
 }
