@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GeoContacts.TestPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Button Text="Home Page" x:Name="ButtonHomePage"/>
+            <Button Text="All Contacts" x:Name="ButtonAllContacts"/>
+            <Button Text="Face Auth" x:Name="ButtonFaceAuth"/>
+            <Button Text="Login Page" x:Name="ButtonLogin"/>
+            <Button Text="Nearby" x:Name="ButtonNearby"/>
+            <Button Text="Update Location" x:Name="ButtonUpdateLocation"/>
+            <Button Text="Details Page" x:Name="ButtonDetails"/>
+            <Button Text="Logout" x:Name="ButtonLogout" />
+            <Label Text="Guest Mode"/>
+            <Switch IsToggled="{Binding Settings.InGuestMode}"/>
+            <Label Text="MSFT Signed In"/>
+            <Switch IsToggled="{Binding Settings.LoggedInMSFT}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
