@@ -1,6 +1,6 @@
-# app-awesome-contactz
+# app-geocontacts
 
-Awesome Contactz is a cross-platform mobile contact application sample for iOS, Android, and Windows built with Xamarin.Forms and leverages several services inside of Azure including Azure AD B2C, Functions, and Cosmos DB.
+Geo Contacts is a cross-platform mobile contact application sample for iOS, Android, and Windows built with Xamarin.Forms and leverages several services inside of Azure including Azure AD B2C, Functions, and Cosmos DB.
 
 <img src="art/apppromo.png" width="500"/>
 
