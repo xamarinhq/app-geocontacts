@@ -1,8 +1,8 @@
 # app-geocontacts
 
-GeoContacts is a cross-platform mobile contact application sample for iOS, Android, and Windows built with Xamarin.Forms and leverages several services inside of Azure including Azure AD B2C, Functions, and Cosmos DB.
+Geo Contacts is a cross-platform mobile contact application sample for iOS, Android, and Windows built with Xamarin.Forms and leverages several services inside of Azure including Azure AD B2C, Functions, and Cosmos DB.
 
-<img src="https://raw.githubusercontent.com/jamesmontemagno/app-geocontacts/master/art/apppromo.png?token=ABmUITHm_wPA4X0hZ6_lb7rbHps3aaKCks5anvnmwA%3D%3D" width="500"/>
+<img src="art/apppromo.png" width="500"/>
 
 ## Mobile App Build Status
 
