@@ -12,6 +12,7 @@ using GeoContacts.SharedModels;
 using BingMapsRESTToolkit;
 using System;
 using System.Linq;
+using Microsoft.Azure.Documents.Linq;
 
 namespace GeoContacts.Functions
 {
@@ -22,9 +23,12 @@ namespace GeoContacts.Functions
         static string cosmosEndpointUrl = Environment.GetEnvironmentVariable("CosmosEndpointUrl");
         static string cosmosAuthKey = Environment.GetEnvironmentVariable("CosmosAuthKey");
         static DocumentClient docClient = new DocumentClient(new Uri(cosmosEndpointUrl), cosmosAuthKey);
+        static Uri locationCollectionUri = UriFactory.CreateDocumentCollectionUri(
+            Environment.GetEnvironmentVariable("LocationsDB"),
+            Environment.GetEnvironmentVariable("LocationsCollection"));
 
         [FunctionName("UpdateGeolocation")]
-        public static async Task<object> Run([HttpTrigger(WebHookType = "genericJson")]HttpRequestMessage req, TraceWriter log)
+        public static async Task<object> RunUpdateGeolocation([HttpTrigger(WebHookType = "genericJson")]HttpRequestMessage req, TraceWriter log)
         {
             log.Info($"Webhook was triggered!");
 
@@ -104,8 +108,8 @@ namespace GeoContacts.Functions
             //update cosmos DB here
             data.UserPrincipalName = cdaInfo.UserPrincipalName;
             data.InsertTime = DateTimeOffset.UtcNow;
-            var collectionUri = UriFactory.CreateDocumentCollectionUri("CDALocations", "Location");
-            var doc = await docClient.CreateDocumentAsync(collectionUri, data);
+
+            var doc = await docClient.CreateDocumentAsync(locationCollectionUri, data);
 
             return req.CreateResponse(HttpStatusCode.OK, new
             {
@@ -145,5 +149,46 @@ namespace GeoContacts.Functions
 
             return cdaInfo;
         }
+
+        [FunctionName("DeleteGeolocationTimer")]
+        public async static Task RunDeleteTimer([TimerTrigger("0 0 0 * * *")]TimerInfo myTimer, TraceWriter log)
+        {
+            var deleteOlderThan = DateTimeOffset.UtcNow.AddDays(-7);
+
+            log.Info($"Starting the delete operation at { DateTime.Now } and will delete locations older than {deleteOlderThan}");
+
+            var feedOptions = new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true };
+            var oldQuery = docClient.CreateDocumentQuery<LocationUpdate>(locationCollectionUri, feedOptions)
+                .Where(lu => lu.InsertTime < deleteOlderThan)
+                .OrderByDescending(lu => lu.InsertTime)
+                .AsDocumentQuery();
+
+            while (oldQuery.HasMoreResults)
+            {
+                var locationsToDelete = await oldQuery.ExecuteNextAsync<LocationUpdate>();
+
+                foreach (var loc in locationsToDelete)
+                {
+                    var locationUri = UriFactory.CreateDocumentUri(
+                        Environment.GetEnvironmentVariable("LocationsDB"),
+                        Environment.GetEnvironmentVariable("LocationsCollection"),
+                        loc.Id);
+
+
+                    try
+                    {
+                        var requestOptions = new RequestOptions { PartitionKey = new Microsoft.Azure.Documents.PartitionKey(loc.UserPrincipalName) };
+                        await docClient.DeleteDocumentAsync(locationUri, requestOptions);
+                    } catch (Exception ex)
+                    {
+                        log.Error($"Error while deleting location for {loc.UserPrincipalName} on {loc.InsertTime} with id {loc.Id}: {ex.Message}");
+                    }
+                }
+
+                log.Info($"Deleted {locationsToDelete.Count} locations");
+            }
+
+        }
+
     }
 }
