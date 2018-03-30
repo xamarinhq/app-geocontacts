@@ -4,13 +4,6 @@ Geo Contacts is a cross-platform mobile contact application sample for iOS, Andr
 
 <img src="art/apppromo.png" width="500"/>
 
-## Mobile App Build Status
-
-|Platform|master|
-| ------------------- | :------------------: |
-|iOS|[![Build status](https://build.appcenter.ms/v0.1/apps/a1388de8-47b2-4dd7-b5a2-d45b6cf5552a/branches/master/badge)](https://appcenter.ms)|
-|Android|[![Build status](https://build.appcenter.ms/v0.1/apps/178483a9-b1ef-4410-8397-783d4f14dc05/branches/master/badge)](https://appcenter.ms)|
-
 
 ### Data
 Sample data for this application was imported from the [Microsoft Cloud Developer Advocates](https://developer.microsoft.com/en-us/advocates/) (CDAs). When a CDA logs in (who is part of Azure Active Directory) they are able to update their location anywhere in the world. All users have the ability to skip login and browse our beautiful contact list of CDA and find CDAs that are nearby.
