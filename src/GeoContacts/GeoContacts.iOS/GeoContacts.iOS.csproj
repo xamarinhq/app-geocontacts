@@ -128,15 +128,15 @@
     <BundleResource Include="Resources\ic_settings.png" />
     <BundleResource Include="Resources\ic_settings%402x.png" />
     <BundleResource Include="Resources\ic_settings%403x.png" />
-    <BundleResource Include="Resources\ic_bitmicrosoft%403x.png" />
     <BundleResource Include="Resources\ic_bitcity%403x.png" />
-    <BundleResource Include="Resources\ic_bitmicrosoft%402x.png" />
     <BundleResource Include="Resources\ic_bitcity%402x.png" />
-    <BundleResource Include="Resources\ic_bitmicrosoft.png" />
     <BundleResource Include="Resources\ic_bitcity.png" />
     <BundleResource Include="Resources\ic_henrybit%403x.png" />
     <BundleResource Include="Resources\ic_henrybit%402x.png" />
     <BundleResource Include="Resources\ic_henrybit.png" />
+    <BundleResource Include="Resources\ic_bitbot.png" />
+    <BundleResource Include="Resources\ic_bitbot%402x.png" />
+    <BundleResource Include="Resources\ic_bitbot%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

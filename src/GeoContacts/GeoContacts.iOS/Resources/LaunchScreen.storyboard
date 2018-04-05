@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_bitmicrosoft.png" translatesAutoresizingMaskIntoConstraints="NO" id="243">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_bitbot.png" translatesAutoresizingMaskIntoConstraints="NO" id="243">
                                 <rect key="frame" x="70" y="295" width="274" height="146"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="146" id="246"/>
@@ -49,6 +49,7 @@
         <image name="ic_bitcity.png" width="300" height="300"/>
         <image name="cda_background.jpg" width="1000" height="333"/>
         <image name="ic_henrybit.png" width="400" height="400"/>
+        <image name="ic_bitbot.png" width="400" height="233"/>
     </resources>
     <color key="tintColor" red="0.62745098039215685" green="0.0" blue="0.54117647058823526" alpha="1" colorSpace="calibratedRGB"/>
 </document>

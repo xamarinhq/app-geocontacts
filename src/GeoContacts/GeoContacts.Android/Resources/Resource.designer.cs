@@ -3709,10 +3709,10 @@ namespace GeoContacts.Droid
 			public const int ic_audiotrack_light = 2130837598;
 			
 			// aapt resource value: 0x7f02005f
-			public const int ic_bitcity = 2130837599;
+			public const int ic_bitbot = 2130837599;
 			
 			// aapt resource value: 0x7f020060
-			public const int ic_bitmicrosoft = 2130837600;
+			public const int ic_bitcity = 2130837600;
 			
 			// aapt resource value: 0x7f020061
 			public const int ic_contacts = 2130837601;
