@@ -134,6 +134,9 @@
     <BundleResource Include="Resources\ic_bitcity%402x.png" />
     <BundleResource Include="Resources\ic_bitmicrosoft.png" />
     <BundleResource Include="Resources\ic_bitcity.png" />
+    <BundleResource Include="Resources\ic_henrybit%403x.png" />
+    <BundleResource Include="Resources\ic_henrybit%402x.png" />
+    <BundleResource Include="Resources\ic_henrybit.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
