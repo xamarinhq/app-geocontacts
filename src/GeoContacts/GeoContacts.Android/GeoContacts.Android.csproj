@@ -131,6 +131,16 @@
     <AndroidResource Include="Resources\drawable-hdpi\icon.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\icon.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\icon.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_henrybit.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_henrybit.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_henrybit.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_henrybit.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_henrybit.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_bitbot.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_bitbot.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_bitbot.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_bitbot.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_bitbot.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
@@ -150,21 +160,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\xml\file_paths.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\ic_bitmicrosoft.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\ic_bitmicrosoft.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_bitmicrosoft.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\ic_bitmicrosoft.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\ic_bitmicrosoft.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\mipmap-hdpi\ic_launcher.png" />

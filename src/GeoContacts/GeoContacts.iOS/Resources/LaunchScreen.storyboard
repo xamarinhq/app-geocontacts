@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="X5k-f2-b5h">
-    <device id="retina5_5" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="X5k-f2-b5h">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,19 +17,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="243" translatesAutoresizingMaskIntoConstraints="NO" image="ic_bitmicrosoft.png">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_bitbot.png" translatesAutoresizingMaskIntoConstraints="NO" id="243">
                                 <rect key="frame" x="70" y="295" width="274" height="146"/>
                                 <constraints>
-                                    <constraint id="246" firstItem="243" firstAttribute="height" constant="146"/>
-                                    <constraint id="247" firstItem="243" firstAttribute="width" constant="274"/>
+                                    <constraint firstAttribute="height" constant="146" id="246"/>
+                                    <constraint firstAttribute="width" constant="274" id="247"/>
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" customColorSpace="sRGB" colorSpace="calibratedRGB" red="0.62745098039215685" green="0" blue="0.54117647058823526" alpha="1"/>
-                        <color key="tintColor" colorSpace="calibratedRGB" red="0.62745098039215685" green="0" blue="0.54117647058823526" alpha="1"/>
+                        <color key="backgroundColor" red="0.62745098039215685" green="0.0" blue="0.54117647058823526" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.62745098039215685" green="0.0" blue="0.54117647058823526" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint id="244" firstItem="243" firstAttribute="centerX" secondItem="yd7-JS-zBw" secondAttribute="centerX"/>
-                            <constraint id="245" firstItem="243" firstAttribute="centerY" secondItem="yd7-JS-zBw" secondAttribute="centerY"/>
+                            <constraint firstItem="243" firstAttribute="centerX" secondItem="yd7-JS-zBw" secondAttribute="centerX" id="244"/>
+                            <constraint firstItem="243" firstAttribute="centerY" secondItem="yd7-JS-zBw" secondAttribute="centerY" id="245"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -42,21 +39,17 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Icon-60.png" width="60" height="60"/>
-        <image name="Default-568h.png" width="320" height="568"/>
-        <image name="Default-Portrait.png" width="768" height="1004"/>
-        <image name="Default.png" width="320" height="480"/>
-        <image name="Icon-76.png" width="76" height="76"/>
-        <image name="Icon-Small-40.png" width="40" height="40"/>
-        <image name="Icon-Small.png" width="29" height="29"/>
+        <image name="ic_bitmicrosoft.png" width="400" height="240"/>
         <image name="ic_contacts_selected.png" width="28" height="20"/>
         <image name="ic_contacts.png" width="28" height="20"/>
         <image name="ic_nearby.png" width="28" height="24"/>
         <image name="ic_nearby_selected.png" width="28" height="24"/>
         <image name="ic_location.png" width="22" height="22"/>
         <image name="ic_settings.png" width="22" height="22"/>
-        <image name="ic_bitmicrosoft.png" width="400" height="240"/>
         <image name="ic_bitcity.png" width="300" height="300"/>
+        <image name="cda_background.jpg" width="1000" height="333"/>
+        <image name="ic_henrybit.png" width="400" height="400"/>
+        <image name="ic_bitbot.png" width="400" height="233"/>
     </resources>
-    <color key="tintColor" colorSpace="calibratedRGB" red="0.62745098039215685" green="0" blue="0.54117647058823526" alpha="1"/>
+    <color key="tintColor" red="0.62745098039215685" green="0.0" blue="0.54117647058823526" alpha="1" colorSpace="calibratedRGB"/>
 </document>
