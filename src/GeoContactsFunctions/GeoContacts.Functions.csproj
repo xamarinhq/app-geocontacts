@@ -3,9 +3,9 @@
     <TargetFramework>net461</TargetFramework>
   </PropertyGroup>
   <ItemGroup>    
-    <PackageReference Include="BingMapsRESTToolkit" Version="1.1.1" />    
-    <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="1.8.1" />    
-    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.8" />    
+    <PackageReference Include="BingMapsRESTToolkit" Version="1.1.4" />    
+    <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="1.10.0" />    
+    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.13" />    
     <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>
