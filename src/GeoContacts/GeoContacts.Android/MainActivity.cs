@@ -10,6 +10,7 @@ using ImageCircle.Forms.Plugin.Droid;
 using Android.Content;
 using Microsoft.Identity.Client;
 using Plugin.CurrentActivity;
+using Plugin.Permissions;
 
 namespace GeoContacts.Droid
 {
@@ -43,6 +44,12 @@ namespace GeoContacts.Droid
             base.OnActivityResult(requestCode, resultCode, data);
 
             AuthenticationContinuationHelper.SetAuthenticationContinuationEventArgs(requestCode, resultCode, data);
+        }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
+        {
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 }
