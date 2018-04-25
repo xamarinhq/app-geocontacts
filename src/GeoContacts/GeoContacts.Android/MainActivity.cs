@@ -1,15 +1,11 @@
-﻿using System;
-
+﻿
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
 using ImageCircle.Forms.Plugin.Droid;
 using Android.Content;
 using Microsoft.Identity.Client;
-using Plugin.CurrentActivity;
 
 namespace GeoContacts.Droid
 {
@@ -33,9 +29,11 @@ namespace GeoContacts.Droid
 
             FormsToolkit.Droid.Toolkit.Init();
 
+            Xamarin.Essentials.Platform.Init(this, bundle);
+
             LoadApplication(new GeoContacts.App());
 
-            AuthenticationService.UIParent = new UIParent(CrossCurrentActivity.Current.Activity);
+            AuthenticationService.UIParent = new UIParent(this);
         }
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
@@ -43,6 +41,13 @@ namespace GeoContacts.Droid
             base.OnActivityResult(requestCode, resultCode, data);
 
             AuthenticationContinuationHelper.SetAuthenticationContinuationEventArgs(requestCode, resultCode, data);
+        }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
+        {
+            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 }

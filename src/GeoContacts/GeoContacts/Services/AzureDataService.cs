@@ -2,12 +2,9 @@
 using Microsoft.Azure.Documents.Client;
 using MonkeyCache.FileStore;
 using Newtonsoft.Json;
-using Plugin.Connectivity;
-using Plugin.Geolocator.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using GeoContacts.Helpers;
 using System.Linq;
@@ -16,6 +13,7 @@ using Microsoft.Azure.Documents.Linq;
 using Microsoft.Azure.Documents.Spatial;
 using MvvmHelpers;
 using GeoContacts.Resources;
+using Xamarin.Essentials;
 
 namespace GeoContacts.Services
 {
@@ -189,7 +187,7 @@ namespace GeoContacts.Services
         {
             var json = string.Empty;
             //check if we are connected, else check to see if we have valid data
-            if (!CrossConnectivity.Current.IsConnected)
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
                 json = Barrel.Current.Get(key);
             else if (!forceRefresh && !Barrel.Current.IsExpired(key))
                 json = Barrel.Current.Get(key);
@@ -200,15 +198,15 @@ namespace GeoContacts.Services
             return null;
         }
 
-        public async Task UpdateLocationAsync(Plugin.Geolocator.Abstractions.Position position, Address address, string accessToken)
+        public async Task UpdateLocationAsync(Xamarin.Essentials.Location position, Placemark address, string accessToken)
         {
             //This should call an azure service
             try
             {
-                var client = new System.Net.Http.HttpClient();
+                var client = new HttpClient();
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
 
-                var location = new GeoContacts.SharedModels.LocationUpdate
+                var location = new LocationUpdate
                 {
                     Country = address.CountryCode,
                     Position = new Point(position.Longitude, position.Latitude),

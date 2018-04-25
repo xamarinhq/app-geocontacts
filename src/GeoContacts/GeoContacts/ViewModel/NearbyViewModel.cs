@@ -40,7 +40,7 @@ namespace GeoContacts.ViewModel
             try
             {
                 Analytics.TrackEvent("SerchedForNearby");
-                var position = await Geolocation.GetCurrentPositionAsync();
+                var position = await GeolocationService.GetCurrentPositionAsync();
 
                 if (position == null)
                     throw new Exception("Unable to get location.");

@@ -1,10 +1,7 @@
 ﻿using GeoContacts.Resources;
 using GeoContacts.Services;
 using Microsoft.AppCenter.Analytics;
-using Plugin.Connectivity;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -46,7 +43,7 @@ namespace GeoContacts.ViewModel
 
                 UpdateMessage = AppResources.UpdatingLocation;
 
-                var position = await Geolocation.GetCurrentPositionAsync();
+                var position = await GeolocationService.GetCurrentPositionAsync();
 
                 if (position == null)
                     throw new Exception("Unable to get location.");
@@ -55,7 +52,7 @@ namespace GeoContacts.ViewModel
 
                 UpdateMessage = AppResources.UpdateLocationGeocoding;
 
-                var address = await Geolocation.GetAddressAsync(position);
+                var address = await GeolocationService.GetAddressAsync(position);
 
                 if (address != null)
                     CurrentLocation = $"{address.Locality}, {address.AdminArea ?? string.Empty} {address.CountryCode}";
