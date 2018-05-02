@@ -100,6 +100,9 @@ namespace GeoContacts.Model
                 return Tagline.Substring(0, index).Trim();
             }
         }
+
+        [JsonIgnore]
+        public string Mood { get; set; } = string.Empty;
     }
 
     public partial class Location

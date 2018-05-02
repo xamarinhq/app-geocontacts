@@ -19,5 +19,6 @@ namespace GeoContacts.SharedModels
         [JsonProperty("userPrincipalName")]
         public string UserPrincipalName { get; set; }
         public DateTimeOffset InsertTime { get; set; }
+        public string Mood { get; set; }
     }
 }

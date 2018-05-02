@@ -61,7 +61,7 @@ namespace GeoContacts.Services
             return Task.FromResult(contactsGrouped as IEnumerable<Grouping<string, Contact>>);
         }
 
-        public async Task UpdateLocationAsync(Xamarin.Essentials.Location position, Placemark address, string accessToken)
+        public async Task UpdateLocationAsync(Xamarin.Essentials.Location position, Placemark address, string mood, string accessToken)
         {
             try
             {
@@ -73,7 +73,8 @@ namespace GeoContacts.Services
                     Country = address.CountryCode,
                     Position = new Microsoft.Azure.Documents.Spatial.Point(position.Longitude, position.Latitude),
                     State = address.AdminArea,
-                    Town = address.Locality
+                    Town = address.Locality,
+                    Mood = mood
                 };
 
                 var json = Newtonsoft.Json.JsonConvert.SerializeObject(location);

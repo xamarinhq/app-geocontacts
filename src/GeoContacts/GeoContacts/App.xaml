@@ -17,23 +17,23 @@
             </Style>
 
             <OnPlatform x:Key="ButtonOutlineBackgroundColor" x:TypeArguments="Color">
-                <On Platform="Android" Value="{StaticResource Primary}"/>
+                <On Platform="Android" Value="Transparent"/>
                 <On Platform="iOS" Value="Transparent"/>
             </OnPlatform>
 
             <OnPlatform x:Key="ButtonOutlineTextColor" x:TypeArguments="Color">
-                <On Platform="Android" Value="White"/>
+                <On Platform="Android" Value="{StaticResource Primary}"/>
                 <On Platform="iOS" Value="{StaticResource Primary}"/>
             </OnPlatform>
 
             <OnPlatform x:Key="ButtonOutlineBorderColor" x:TypeArguments="Color">
                 <On Platform="iOS" Value="{StaticResource Primary}"/>
-                <On Platform="Android" Value="Transparent"/>
+                <On Platform="Android" Value="{StaticResource Primary}"/>
             </OnPlatform>
 
             <OnPlatform x:Key="ButtonOutlineBorderWidth" x:TypeArguments="x:Double">
                 <On Platform="iOS" Value="1"/>
-                <On Platform="Android" Value="0"/>
+                <On Platform="Android" Value="1"/>
             </OnPlatform>
 
 

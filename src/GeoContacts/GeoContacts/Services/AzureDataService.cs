@@ -146,7 +146,7 @@ namespace GeoContacts.Services
 
                 // Then mark their curent location
                 foundCDA.CurrentLocation = cdaCheckin.Position;
-
+                foundCDA.Mood = cdaCheckin.Mood ?? string.Empty;
                 allCDAsNearby.Add(foundCDA);
             }
 
@@ -198,7 +198,7 @@ namespace GeoContacts.Services
             return null;
         }
 
-        public async Task UpdateLocationAsync(Xamarin.Essentials.Location position, Placemark address, string accessToken)
+        public async Task UpdateLocationAsync(Xamarin.Essentials.Location position, Placemark address, string mood, string accessToken)
         {
             //This should call an azure service
             try
@@ -211,7 +211,8 @@ namespace GeoContacts.Services
                     Country = address.CountryCode,
                     Position = new Point(position.Longitude, position.Latitude),
                     State = address.AdminArea,
-                    Town = address.Locality
+                    Town = address.Locality,
+                    Mood = mood
                 };
 
                 var json = JsonConvert.SerializeObject(location);

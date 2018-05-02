@@ -13,7 +13,7 @@ namespace GeoContacts.Services
         Task<Contact> GetAsync(string id);
         Task<IEnumerable<Grouping<string, Contact>>> GetNearbyAsync(double userLongitude, double userLatitude);
 
-        Task UpdateLocationAsync(Xamarin.Essentials.Location position, Placemark address, string accessToken);
+        Task UpdateLocationAsync(Xamarin.Essentials.Location position, Placemark address, string mood, string accessToken);
 
     }
 }

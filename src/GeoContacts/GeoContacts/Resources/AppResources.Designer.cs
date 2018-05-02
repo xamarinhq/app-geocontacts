@@ -79,7 +79,25 @@ namespace GeoContacts.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sync Current Location.
+        ///   Looks up a localized string similar to Add Mood.
+        /// </summary>
+        internal static string ButtonMood {
+            get {
+                return ResourceManager.GetString("ButtonMood", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sync with Cloud.
+        /// </summary>
+        internal static string ButtonSync {
+            get {
+                return ResourceManager.GetString("ButtonSync", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get Location.
         /// </summary>
         internal static string ButtonSyncLocation {
             get {

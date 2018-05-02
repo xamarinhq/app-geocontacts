@@ -51,7 +51,9 @@
                     <Label Style="{DynamicResource ListItemDetailTextStyle}"
                            Text="{Binding TwitterHandle}"/>
                 </StackLayout>
-
+                <Label Text="{Binding Mood}"
+                       HorizontalOptions="End"
+                       VerticalOptions="Start"/>
             </Grid>
         </Frame>
     </ContentView.Content>

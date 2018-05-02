@@ -29,6 +29,8 @@ namespace GeoContacts.Droid
 
             FormsToolkit.Droid.Toolkit.Init();
 
+            Plugin.CurrentActivity.CrossCurrentActivity.Current.Activity = this;
+
             Xamarin.Essentials.Platform.Init(this, bundle);
 
             LoadApplication(new GeoContacts.App());
@@ -46,7 +48,7 @@ namespace GeoContacts.Droid
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-
+            Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
