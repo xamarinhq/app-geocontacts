@@ -115,6 +115,15 @@ namespace GeoContacts.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please add your current location before syncing..
+        /// </summary>
+        internal static string ErrorNeedLocation {
+            get {
+                return ResourceManager.GetString("ErrorNeedLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Find Neaby CDAs.
         /// </summary>
         internal static string FindCloseCDAs {

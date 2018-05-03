@@ -7,6 +7,7 @@ using GeoContacts.Helpers;
 using MvvmHelpers;
 using GeoContacts.Resources;
 using Xamarin.Essentials;
+using Microsoft.AppCenter.Crashes;
 
 namespace GeoContacts.Services
 {
@@ -85,6 +86,7 @@ namespace GeoContacts.Services
             }
             catch (Exception ex)
             {
+                Crashes.TrackError(ex);
                 System.Diagnostics.Debug.WriteLine($"ERROR: {ex.Message}");
             }
         }

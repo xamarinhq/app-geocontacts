@@ -1,4 +1,5 @@
 ﻿using GeoContacts.Model;
+using Microsoft.AppCenter.Crashes;
 using MvvmHelpers;
 using System;
 using System.Linq;
@@ -41,6 +42,7 @@ namespace GeoContacts.ViewModel
             }
             catch (Exception ex)
             {
+                Crashes.TrackError(ex);
                 System.Diagnostics.Debug.WriteLine($"*** ERROR: {ex.Message}");
             }
             finally

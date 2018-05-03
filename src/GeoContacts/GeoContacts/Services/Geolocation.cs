@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AppCenter.Crashes;
+using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -33,6 +34,7 @@ namespace GeoContacts.Services
             }
             catch (Exception ex)
             {
+                Crashes.TrackError(ex);
                 Debug.WriteLine("Unable to get location: " + ex);
             }
 
@@ -61,6 +63,7 @@ namespace GeoContacts.Services
             }
             catch (Exception ex)
             {
+                Crashes.TrackError(ex);
                 Debug.WriteLine("Unable to get address: " + ex);
             }
 

@@ -135,6 +135,9 @@
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="ErrorNeedLocation" xml:space="preserve">
+    <value>Please add your current location before syncing.</value>
+  </data>
   <data name="FindCloseCDAs" xml:space="preserve">
     <value>Find Neaby CDAs</value>
   </data>

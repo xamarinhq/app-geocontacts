@@ -2,6 +2,7 @@
 using GeoContacts.Resources;
 using GeoContacts.Services;
 using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using System;
@@ -18,10 +19,12 @@ namespace GeoContacts.ViewModel
         public UpdateLocationViewModel()
         {
             UpdateLocationCommand = new Command(async () => await ExecuteUpdateLocationCommand());
-            SyncCommand = new Command(async () => await ExecuteSyncCommand());
+            SyncCommand = new Command(async () => await ExecuteSyncCommand(), () =>
+            location != null && IsNotBusy);
             AddMoodCommand = new Command(async () => await ExecuteAddMoodCommand());
         }
 
+       
         string currentLocation;
         public string CurrentLocation
         {
@@ -29,7 +32,7 @@ namespace GeoContacts.ViewModel
             set => SetProperty(ref currentLocation, value);
         }
 
-        public ICommand SyncCommand { get; }
+        public Command SyncCommand { get; }
 
         async Task ExecuteSyncCommand()
         {
@@ -37,7 +40,11 @@ namespace GeoContacts.ViewModel
                 return;
 
             if (location == null)
+            {
+
+                await Dialogs.AlertAsync(null, AppResources.ErrorNeedLocation, AppResources.OK);
                 return;
+            }
 
             if (!await CheckConnectivityAsync())
                 return;
@@ -49,6 +56,7 @@ namespace GeoContacts.ViewModel
             try
             {
                 IsBusy = true;
+                SyncCommand.ChangeCanExecute();
 
                 UpdateMessage = AppResources.UpdateLocationBackend;
 
@@ -61,12 +69,14 @@ namespace GeoContacts.ViewModel
             }
             catch (Exception ex)
             {
+                Crashes.TrackError(ex);
                 UpdateMessage = string.Empty;
                 await Dialogs.AlertAsync(null, AppResources.UpdateLocationError, AppResources.OK);
             }
             finally
             {
                 IsBusy = false;
+                SyncCommand.ChangeCanExecute();
             }
         }
 
@@ -82,6 +92,7 @@ namespace GeoContacts.ViewModel
             try
             {
                 IsBusy = true;
+                SyncCommand.ChangeCanExecute();
                 await CrossMedia.Current.Initialize();
 
                 if (CrossMedia.Current.IsTakePhotoSupported)
@@ -111,11 +122,13 @@ namespace GeoContacts.ViewModel
             }
             catch (Exception ex)
             {
+                Crashes.TrackError(ex);
                 result = ex.Message;
             }
             finally
             {
                 IsBusy = false;
+                SyncCommand.ChangeCanExecute();
             }
 
             await Dialogs.AlertAsync(null, result, AppResources.OK);
@@ -134,19 +147,20 @@ namespace GeoContacts.ViewModel
             try
             {
                 IsBusy = true;
+                SyncCommand.ChangeCanExecute();
 
                 UpdateMessage = AppResources.UpdatingLocation;
 
-                var position = await GeolocationService.GetCurrentPositionAsync();
+                location = await GeolocationService.GetCurrentPositionAsync();
 
-                if (position == null)
+                if (location == null)
                     throw new Exception("Unable to get location.");
 
-                CurrentLocation = $"{position.Latitude}, {position.Longitude}";
+                CurrentLocation = $"{location.Latitude}, {location.Longitude}";
 
                 UpdateMessage = AppResources.UpdateLocationGeocoding;
 
-                var address = await GeolocationService.GetAddressAsync(position);
+                var address = await GeolocationService.GetAddressAsync(location);
 
                 if (address != null)
                     CurrentLocation = $"{address.Locality}, {address.AdminArea ?? string.Empty} {address.CountryCode}";
@@ -155,6 +169,7 @@ namespace GeoContacts.ViewModel
             }
             catch (Exception ex)
             {
+                Crashes.TrackError(ex);
                 Console.WriteLine("Unable to get location: " + ex);
                 UpdateMessage = string.Empty;
                 await Dialogs.AlertAsync(null, AppResources.UpdateLocationError, AppResources.OK);
@@ -162,6 +177,7 @@ namespace GeoContacts.ViewModel
             finally
             {
                 IsBusy = false;
+                SyncCommand.ChangeCanExecute();
             }
         }
 

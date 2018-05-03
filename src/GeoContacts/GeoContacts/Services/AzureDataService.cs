@@ -14,6 +14,7 @@ using Microsoft.Azure.Documents.Spatial;
 using MvvmHelpers;
 using GeoContacts.Resources;
 using Xamarin.Essentials;
+using Microsoft.AppCenter.Crashes;
 
 namespace GeoContacts.Services
 {
@@ -208,11 +209,11 @@ namespace GeoContacts.Services
 
                 var location = new LocationUpdate
                 {
-                    Country = address.CountryCode,
+                    Country = address?.CountryCode ?? string.Empty,
                     Position = new Point(position.Longitude, position.Latitude),
-                    State = address.AdminArea,
-                    Town = address.Locality,
-                    Mood = mood
+                    State = address?.AdminArea ?? string.Empty,
+                    Town = address?.Locality ?? string.Empty,
+                    Mood = mood ?? string.Empty
                 };
 
                 var json = JsonConvert.SerializeObject(location);
@@ -223,7 +224,9 @@ namespace GeoContacts.Services
             }
             catch (Exception ex)
             {
+                Crashes.TrackError(ex);
                 System.Diagnostics.Debug.WriteLine($"ERROR: {ex.Message}");
+                throw;
             }
         }
     }

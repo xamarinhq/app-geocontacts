@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Linq;
 using Xamarin.Forms;
 using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 
 namespace GeoContacts.ViewModel
 {
@@ -56,6 +57,7 @@ namespace GeoContacts.ViewModel
             }
             catch (Exception ex)
             {
+                Crashes.TrackError(ex);
                 System.Diagnostics.Debug.WriteLine($"*** ERROR: {ex.Message}");
             }
             finally

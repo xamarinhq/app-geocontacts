@@ -4,6 +4,7 @@ using GeoContacts.Helpers;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Linq;
+using Microsoft.AppCenter.Crashes;
 
 namespace GeoContacts
 {
@@ -41,10 +42,12 @@ namespace GeoContacts
             }
             catch (MsalServiceException ex)
             {
+                Crashes.TrackError(ex);
                 Debug.WriteLine($"Error occurred during the webview displayed - most likely a cancel. {ex.Message}");
             }
             catch (Exception ex)
             {
+                Crashes.TrackError(ex);
                 Debug.WriteLine($"*** UNIDENTIFIED ERROR: {ex.Message}");
             }
 

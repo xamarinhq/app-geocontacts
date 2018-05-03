@@ -52,7 +52,6 @@
                     Style="{StaticResource ButtonOutline}"
                     Text="{i18n:Translate ButtonSync}"
                     Command="{Binding SyncCommand}"
-                    IsEnabled="{Binding IsNotBusy}"
                     HorizontalOptions="FillAndExpand" VerticalOptions="End"/>
 
 
