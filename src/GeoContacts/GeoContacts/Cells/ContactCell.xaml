@@ -52,6 +52,8 @@
                            Text="{Binding TwitterHandle}"/>
                 </StackLayout>
                 <Label Text="{Binding Mood}"
+                       FontSize="Medium"
+                       Grid.ColumnSpan="2"
                        HorizontalOptions="End"
                        VerticalOptions="Start"/>
             </Grid>
