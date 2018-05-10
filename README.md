@@ -21,6 +21,8 @@ Used directly for all authentication in the app. CDAs can log in and we use this
 ### [Cosmos DB](https://azure.microsoft.com/en-us/services/cosmos-db/)
 Our CDAs are located all through the world. We leverage CosmosDB for it's geo-replication to ensure optimal performance in the mobile applications. We also leverage Cosmo sDB advanced queries to get specific data based on the user's geolocation.
 
+### [Azure Cognitive Service: Face API](https://azure.microsoft.com/en-us/services/cognitive-services/face/)
+When checking in our CDAs can add their current mood by taking a photo of their face and then the Cognitiver Services API will analyze their emotion and return an emoji to be synced.
 
 ### [Azure Functions](https://azure.microsoft.com/en-us/services/functions/)
 We use serverless architecture for several features of the application including:
@@ -33,12 +35,10 @@ Used extensively for Continuous Integration and Deployment, while providing powe
 
 ## Libraries Used
 * [Xamarin.Forms](http://xamarin.com/forms)
-* [Settings Plugin](https://github.com/jamesmontemagno/SettingsPlugin)
+* [Xamarin.Essentials)(https://github.com/xamarin/essentials)
+* [Azure Cognitive Service: Face API](https://azure.microsoft.com/en-us/services/cognitive-services/face/)
+* [Media Plugin](http://github.com/jamesmontemagno/mediaplugin)
 * [MVVM Helpers](https://github.com/jamesmontemagno/mvvm-helpers)
-* [Messaging Plugin](https://github.com/cjlotz/Xamarin.Plugins)
-* [Geolocator Plugin](https://github.com/jamesmontemagno/GeolocatorPlugin)
-* [Share Plugin](https://github.com/jguertl/SharePlugin)
-* [Connectivity Plugin](https://github.com/jamesmontemagno/ConnectivityPlugin)
 * [Monkey Cache](https://github.com/jamesmontemagno/monkey-cache)
 * [App Center - Build, Distribute, Analytics, Crash](https://appcenter.ms)
 * [Multilingual Plugin](https://github.com/CrossGeeks/MultilingualPlugin)
