@@ -101,7 +101,8 @@ namespace GeoContacts.Services
             var feedOptions = new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true };
 
             // Find the CDAs with hometowns by the user
-            var hometownCDAQuery = DocClient.CreateDocumentQuery<Contact>(allCDACollectionLink, feedOptions)
+            var hometownCDAQuery = DocClient.CreateDocumentQuery<Contact>(allCDACollectionLink,
+                feedOptions)
                 .Where(cda => userPoint.Distance(cda.Hometown.Position) < maximumCDADistance)
                 .AsDocumentQuery();
 

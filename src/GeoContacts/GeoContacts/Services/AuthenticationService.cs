@@ -19,7 +19,8 @@ namespace GeoContacts
             if (authClient != null)
                 return;
 
-            authClient = new PublicClientApplication(CommonConstants.ADApplicationID, CommonConstants.ADAuthority);
+            authClient = new PublicClientApplication(CommonConstants.ADApplicationID,
+                CommonConstants.ADAuthority);
             authClient.ValidateAuthority = false;
             authClient.RedirectUri = CommonConstants.ADRedirectID;
         }
