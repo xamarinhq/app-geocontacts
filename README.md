@@ -2,6 +2,8 @@
 
 Geo Contacts is a cross-platform mobile contact application sample for iOS, Android, and Windows built with Xamarin.Forms and leverages several services inside of Azure including Azure AD B2C, Functions, and Cosmos DB.
 
+See the full session from Build 2018 here: https://channel9.msdn.com/Events/Build/2018/BRK2429
+
 <img src="art/apppromo.png" width="500"/>
 
 
