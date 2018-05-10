@@ -19,20 +19,19 @@ namespace GeoContacts.View
 			InitializeComponent ();
             BindingContext = vm = new UpdateLocationViewModel();
 
-            if (Device.RuntimePlatform == Device.iOS)
+           
+            ToolbarItems.Add(new ToolbarItem
             {
-                ToolbarItems.Add(new ToolbarItem
+                Text = "Done",
+                Command = new Command(async (obj) =>
                 {
-                    Text = "Done",
-                    Command = new Command(async (obj) =>
-                    {
-                        if (vm.IsBusy)
-                            return;
+                    if (vm.IsBusy)
+                        return;
 
-                        await Navigation.PopModalAsync();
-                    })
-                });
-            }
+                    await Navigation.PopModalAsync();
+                })
+            });
+            
 		}
 	}
 }

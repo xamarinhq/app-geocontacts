@@ -34,9 +34,7 @@ namespace GeoContacts
                 else
                     Navigation.PushModalAsync(new NavigationPage(new HomePage()));
             };
-
-            ButtonFaceAuth.Clicked += (sender, args) => Navigation.PushAsync(new FaceAuthPage());
-
+            
             ButtonLogin.Clicked += async (sender, args) =>
             {
                 if (!await vm.AuthenticationService.IsLoggedIn())

@@ -1,4 +1,4 @@
-using System.Net;
+﻿using System.Net;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -54,7 +54,8 @@ namespace GeoContacts.Functions
             else
                 data = new LocationUpdate
                 {
-                    Position = new Microsoft.Azure.Documents.Spatial.Point(-122.130602, 47.6451599)
+                    Position = new Microsoft.Azure.Documents.Spatial.Point(-122.130602, 47.6451599),
+                    Mood = "🐒"
                 };
 #endif
 

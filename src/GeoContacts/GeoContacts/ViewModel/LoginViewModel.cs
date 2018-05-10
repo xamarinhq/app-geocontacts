@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using Microsoft.Identity.Client;
 using System.Threading.Tasks;
 using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 
 namespace GeoContacts.ViewModel
 {
@@ -56,7 +57,7 @@ namespace GeoContacts.ViewModel
             }
             catch (Exception ex)
             {
-
+                Crashes.TrackError(ex);
             }
             finally
             {

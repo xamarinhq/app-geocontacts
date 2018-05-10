@@ -6,9 +6,12 @@ printenv
 echo "Arguments for updating:"
 echo " - ACID: $AC_ANDROID"
 echo " - ACLogin: $AC_SHOWLOGIN"
+echo " - ACFace: $AC_FACE"
 
 # Updating manifest
 sed -i '' "s/AC_ANDROID/$AC_ANDROID/g" $BUILD_REPOSITORY_LOCALPATH/src/GeoContacts/GeoContacts/Helpers/CommonConstants.cs
+
+sed -i '' "s/AC_FACE/$AC_FACE/g" $BUILD_REPOSITORY_LOCALPATH/src/GeoContacts/GeoContacts/Helpers/CommonConstants.cs
 
 
 if [ "$APPCENTER_BRANCH" == "appstore" ]; then

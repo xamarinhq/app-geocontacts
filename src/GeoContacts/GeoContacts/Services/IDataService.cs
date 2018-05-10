@@ -1,8 +1,8 @@
 ﻿using GeoContacts.Model;
 using MvvmHelpers;
-using Plugin.Geolocator.Abstractions;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace GeoContacts.Services
 {
@@ -13,7 +13,7 @@ namespace GeoContacts.Services
         Task<Contact> GetAsync(string id);
         Task<IEnumerable<Grouping<string, Contact>>> GetNearbyAsync(double userLongitude, double userLatitude);
 
-        Task UpdateLocationAsync(Position position, Address address, string accessToken);
+        Task UpdateLocationAsync(Xamarin.Essentials.Location position, Placemark address, string mood, string accessToken);
 
     }
 }

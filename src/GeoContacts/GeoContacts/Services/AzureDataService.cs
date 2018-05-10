@@ -2,12 +2,9 @@
 using Microsoft.Azure.Documents.Client;
 using MonkeyCache.FileStore;
 using Newtonsoft.Json;
-using Plugin.Connectivity;
-using Plugin.Geolocator.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using GeoContacts.Helpers;
 using System.Linq;
@@ -16,6 +13,8 @@ using Microsoft.Azure.Documents.Linq;
 using Microsoft.Azure.Documents.Spatial;
 using MvvmHelpers;
 using GeoContacts.Resources;
+using Xamarin.Essentials;
+using Microsoft.AppCenter.Crashes;
 
 namespace GeoContacts.Services
 {
@@ -102,7 +101,8 @@ namespace GeoContacts.Services
             var feedOptions = new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true };
 
             // Find the CDAs with hometowns by the user
-            var hometownCDAQuery = DocClient.CreateDocumentQuery<Contact>(allCDACollectionLink, feedOptions)
+            var hometownCDAQuery = DocClient.CreateDocumentQuery<Contact>(allCDACollectionLink,
+                feedOptions)
                 .Where(cda => userPoint.Distance(cda.Hometown.Position) < maximumCDADistance)
                 .AsDocumentQuery();
 
@@ -148,7 +148,7 @@ namespace GeoContacts.Services
 
                 // Then mark their curent location
                 foundCDA.CurrentLocation = cdaCheckin.Position;
-
+                foundCDA.Mood = cdaCheckin.Mood ?? string.Empty;
                 allCDAsNearby.Add(foundCDA);
             }
 
@@ -189,7 +189,7 @@ namespace GeoContacts.Services
         {
             var json = string.Empty;
             //check if we are connected, else check to see if we have valid data
-            if (!CrossConnectivity.Current.IsConnected)
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
                 json = Barrel.Current.Get(key);
             else if (!forceRefresh && !Barrel.Current.IsExpired(key))
                 json = Barrel.Current.Get(key);
@@ -200,20 +200,21 @@ namespace GeoContacts.Services
             return null;
         }
 
-        public async Task UpdateLocationAsync(Plugin.Geolocator.Abstractions.Position position, Address address, string accessToken)
+        public async Task UpdateLocationAsync(Xamarin.Essentials.Location position, Placemark address, string mood, string accessToken)
         {
             //This should call an azure service
             try
             {
-                var client = new System.Net.Http.HttpClient();
+                var client = new HttpClient();
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
 
-                var location = new GeoContacts.SharedModels.LocationUpdate
+                var location = new LocationUpdate
                 {
-                    Country = address.CountryCode,
+                    Country = address?.CountryCode ?? string.Empty,
                     Position = new Point(position.Longitude, position.Latitude),
-                    State = address.AdminArea,
-                    Town = address.Locality
+                    State = address?.AdminArea ?? string.Empty,
+                    Town = address?.Locality ?? string.Empty,
+                    Mood = mood ?? string.Empty
                 };
 
                 var json = JsonConvert.SerializeObject(location);
@@ -224,7 +225,9 @@ namespace GeoContacts.Services
             }
             catch (Exception ex)
             {
+                Crashes.TrackError(ex);
                 System.Diagnostics.Debug.WriteLine($"ERROR: {ex.Message}");
+                throw;
             }
         }
     }

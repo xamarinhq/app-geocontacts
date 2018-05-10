@@ -11,6 +11,7 @@ namespace GeoContacts.Helpers
         public const string AppCenterAndroid = "AC_ANDROID";
         public const string AppCenterUWP = "AC_UWP";
         public const string ShowLogin = "AC_SHOWLOGIN";
+        public const string FaceApiKey = "AC_FACE";
         #endregion
 
         #region AD
