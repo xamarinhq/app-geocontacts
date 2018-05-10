@@ -1,4 +1,5 @@
-﻿using GeoContacts.Model;
+﻿using GeoContacts.Helpers;
+using GeoContacts.Model;
 using GeoContacts.Resources;
 using GeoContacts.Services;
 using Microsoft.AppCenter.Analytics;
@@ -85,6 +86,12 @@ namespace GeoContacts.ViewModel
         {
             if (IsBusy)
                 return;
+
+            if(CommonConstants.FaceApiKey == "AC_FACE")
+            {
+                await Dialogs.AlertAsync(null, "Please set the Face API key from Azure Cognitive Services in CommonConstants.cs", AppResources.OK);
+                return;
+            }
 
             string result = "Error";
             MediaFile file = null;
