@@ -37,7 +37,7 @@ Used extensively for Continuous Integration and Deployment, while providing powe
 
 ## Libraries Used
 * [Xamarin.Forms](http://xamarin.com/forms)
-* [Xamarin.Essentials)(https://github.com/xamarin/essentials)
+* [Xamarin.Essentials](https://github.com/xamarin/essentials)
 * [Azure Cognitive Service: Face API](https://azure.microsoft.com/en-us/services/cognitive-services/face/)
 * [Media Plugin](http://github.com/jamesmontemagno/mediaplugin)
 * [MVVM Helpers](https://github.com/jamesmontemagno/mvvm-helpers)
