@@ -29,11 +29,11 @@ namespace GeoContacts.Droid
 
             FormsToolkit.Droid.Toolkit.Init();
 
-            Plugin.CurrentActivity.CrossCurrentActivity.Current.Activity = this;
+            Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, bundle);
 
             Xamarin.Essentials.Platform.Init(this, bundle);
 
-            LoadApplication(new GeoContacts.App());
+            LoadApplication(new App());
 
             AuthenticationService.UIParent = new UIParent(this);
         }
