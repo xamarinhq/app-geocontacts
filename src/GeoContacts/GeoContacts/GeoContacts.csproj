@@ -12,16 +12,16 @@
     <PackageReference Include="MonkeyCache" Version="0.1.0.9-beta" />
     <PackageReference Include="MonkeyCache.FileStore" Version="0.1.0.9-beta" />
     <PackageReference Include="Refractored.MvvmHelpers" Version="1.3.0" />
-    <PackageReference Include="Xam.Plugin.Media" Version="3.2.1.251-beta" />
-    <PackageReference Include="Xam.Plugins.Forms.ImageCircle" Version="3.0.0.3-beta" />
+    <PackageReference Include="Xam.Plugin.Media" Version="4.0.0.9" />
+    <PackageReference Include="Xam.Plugins.Forms.ImageCircle" Version="3.0.0.5" />
     <PackageReference Include="Plugin.Multilingual" Version="1.0.2" />
     <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="1.8.1" />
     <PackageReference Include="Xamarin.Essentials" Version="0.6.0-preview" />
-    <PackageReference Include="Xamarin.Forms" Version="3.0.0.446417" />
-    <PackageReference Include="Microsoft.AppCenter" Version="1.6.0" />
-    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.6.0" />
-    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.6.0" />
-    <PackageReference Include="Microsoft.AppCenter.Distribute" Version="1.6.0" />
+    <PackageReference Include="Xamarin.Forms" Version="3.1.0.583944" />
+    <PackageReference Include="Microsoft.AppCenter" Version="1.7.0" />
+    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.7.0" />
+    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.7.0" />
+    <PackageReference Include="Microsoft.AppCenter.Distribute" Version="1.7.0" />
     <PackageReference Include="FormsToolkit" Version="2.0.1" />
   </ItemGroup>
 
