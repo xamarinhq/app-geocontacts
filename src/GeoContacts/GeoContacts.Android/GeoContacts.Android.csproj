@@ -62,10 +62,10 @@
       <Version>1.1.2-preview0008</Version>
     </PackageReference>
     <PackageReference Include="MonkeyCache">
-      <Version>0.1.0.9-beta</Version>
+      <Version>0.1.0.10-beta</Version>
     </PackageReference>
     <PackageReference Include="MonkeyCache.FileStore">
-      <Version>0.1.0.9-beta</Version>
+      <Version>0.1.0.10-beta</Version>
     </PackageReference>
     <PackageReference Include="Refractored.MvvmHelpers">
       <Version>1.3.0</Version>
