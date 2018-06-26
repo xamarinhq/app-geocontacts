@@ -46,10 +46,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.microsoft.advocates</string>
+			<string>com.microsoft.cloudadvocates</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>msal8f999c10-2a7f-403c-b20b-cbe07b319cf3</string>
+				<string>msal8aea67fd-38da-49a1-8f68-ca0c9e9e2501</string>
 				<string>appcenter-APP_SECRET</string>
 			</array>
 		</dict>
