@@ -15,10 +15,23 @@ namespace GeoContacts.Helpers
         #endregion
 
         #region AD
+        public const bool USE_MSFT = false;
+
         public const string ADApplicationID = "8f999c10-2a7f-403c-b20b-cbe07b319cf3";
         public const string ADRedirectID = "msal" + ADApplicationID + "://auth";
         public static readonly string[] ADScopes = new string[] { "user.read" };
         public const string ADAuthority = "https://login.microsoftonline.com/organizations/";
+
+        public const string B2CTenant = "geocontacts.onmicrosoft.com";
+        public const string B2CClientID = "8aea67fd-38da-49a1-8f68-ca0c9e9e2501";
+        public const string B2CPolicy = "B2C_1_SignInUp";
+
+        public const string B2CAuthorityBase = "https://login.microsoftonline.com/tfp/" + B2CTenant + "/";
+        public const string B2CAuthority = B2CAuthorityBase + B2CPolicy;
+
+        public const string B2CRedirectUrl = "msal" + B2CClientID + "://auth";
+        public static readonly string[] B2CScopes = new string[] { "https://geocontacts.onmicrosoft.com/geocontacts/login" };
+
         #endregion
 
         #region LocationFunction

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
+    <!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,143 +59,143 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+        <xsd:element name="root" msdata:IsDataSet="true">
             <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+                <xsd:choice maxOccurs="unbounded">
+                    <xsd:element name="metadata">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                            </xsd:sequence>
+                            <xsd:attribute name="name" use="required" type="xsd:string" />
+                            <xsd:attribute name="type" type="xsd:string" />
+                            <xsd:attribute name="mimetype" type="xsd:string" />
+                            <xsd:attribute ref="xml:space" />
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="assembly">
+                        <xsd:complexType>
+                            <xsd:attribute name="alias" type="xsd:string" />
+                            <xsd:attribute name="name" type="xsd:string" />
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="data">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+                            <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+                            <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+                            <xsd:attribute ref="xml:space" />
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="resheader">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required" />
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:choice>
             </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
-  <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
-  </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <data name="AppName" xml:space="preserve">
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="AppName" xml:space="preserve">
     <value>Cloud Developer Advocates</value>
   </data>
-  <data name="ButtonFollow" xml:space="preserve">
+    <data name="ButtonFollow" xml:space="preserve">
     <value>Follow</value>
   </data>
-  <data name="ButtonMood" xml:space="preserve">
+    <data name="ButtonMood" xml:space="preserve">
     <value>Add Mood</value>
   </data>
-  <data name="ButtonSync" xml:space="preserve">
+    <data name="ButtonSync" xml:space="preserve">
     <value>Sync with Cloud</value>
   </data>
-  <data name="ButtonSyncLocation" xml:space="preserve">
+    <data name="ButtonSyncLocation" xml:space="preserve">
     <value>Get Location</value>
   </data>
-  <data name="Cancel" xml:space="preserve">
+    <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name="ErrorNeedLocation" xml:space="preserve">
+    <data name="ErrorNeedLocation" xml:space="preserve">
     <value>Please add your current location before syncing.</value>
   </data>
-  <data name="FindCloseCDAs" xml:space="preserve">
-    <value>Find Neaby CDAs</value>
+    <data name="FindCloseCDAs" xml:space="preserve">
+    <value>Find Nearby CDAs</value>
   </data>
-  <data name="Hometown" xml:space="preserve">
+    <data name="Hometown" xml:space="preserve">
     <value>Hometown</value>
   </data>
-  <data name="LoginPageGuest" xml:space="preserve">
+    <data name="LoginPageGuest" xml:space="preserve">
     <value>Continue as Guest</value>
   </data>
-  <data name="LoginPageLoginWithMicrosoft" xml:space="preserve">
+    <data name="LoginPageLoginWithMicrosoft" xml:space="preserve">
     <value>CDA Login</value>
   </data>
-  <data name="LoginPageWelcome" xml:space="preserve">
+    <data name="LoginPageWelcome" xml:space="preserve">
     <value>Welcome to the Microsoft Cloud Developer Advocate contacts application. This app enables you to browse and find CDAs near you.</value>
   </data>
-  <data name="NoCDAsNearby" xml:space="preserve">
+    <data name="NoCDAsNearby" xml:space="preserve">
     <value>It appears that no CDAs are nearby :(</value>
   </data>
-  <data name="NoInternet" xml:space="preserve">
+    <data name="NoInternet" xml:space="preserve">
     <value>Un oh, looks like your device is offline. Check your connection and try again.</value>
   </data>
-  <data name="OK" xml:space="preserve">
+    <data name="OK" xml:space="preserve">
     <value>OK</value>
   </data>
-  <data name="RecentCheckin" xml:space="preserve">
+    <data name="RecentCheckin" xml:space="preserve">
     <value>Recently Checked-In</value>
   </data>
-  <data name="TitleAllContacts" xml:space="preserve">
+    <data name="TitleAllContacts" xml:space="preserve">
     <value>Contacts</value>
   </data>
-  <data name="TitleNearby" xml:space="preserve">
+    <data name="TitleNearby" xml:space="preserve">
     <value>Nearby</value>
   </data>
-  <data name="TitleUpdateLocation" xml:space="preserve">
+    <data name="TitleUpdateLocation" xml:space="preserve">
     <value>Update Current Town</value>
   </data>
-  <data name="ToolbarSettings" xml:space="preserve">
+    <data name="ToolbarSettings" xml:space="preserve">
     <value>Settings</value>
   </data>
-  <data name="ToolbarUpdateLocation" xml:space="preserve">
+    <data name="ToolbarUpdateLocation" xml:space="preserve">
     <value>Update Location</value>
   </data>
-  <data name="UpdateLocationBackend" xml:space="preserve">
+    <data name="UpdateLocationBackend" xml:space="preserve">
     <value>Syncing with the cloud...</value>
   </data>
-  <data name="UpdateLocationError" xml:space="preserve">
+    <data name="UpdateLocationError" xml:space="preserve">
     <value>Uh oh, looks like we weren't able to update your location.</value>
   </data>
-  <data name="UpdateLocationGeocoding" xml:space="preserve">
+    <data name="UpdateLocationGeocoding" xml:space="preserve">
     <value>Being smart and doing some geocoding...</value>
   </data>
-  <data name="UpdateLocationMessage" xml:space="preserve">
+    <data name="UpdateLocationMessage" xml:space="preserve">
     <value>When updating your current location the town that you are currently in will be updated for everyone to see and to help find CDAs nearby.</value>
   </data>
-  <data name="UpdatingLocation" xml:space="preserve">
+    <data name="UpdatingLocation" xml:space="preserve">
     <value>Getting your location...</value>
   </data>
-  <data name="UpdatingLocationUpdated" xml:space="preserve">
+    <data name="UpdatingLocationUpdated" xml:space="preserve">
     <value>Location has been updated and synced!</value>
   </data>
 </root>

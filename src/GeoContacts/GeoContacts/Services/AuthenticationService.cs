@@ -5,6 +5,8 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.AppCenter.Crashes;
+using System.Collections.Generic;
+using System.Text;
 
 namespace GeoContacts
 {
@@ -13,16 +15,31 @@ namespace GeoContacts
         public static UIParent UIParent = null;
 
         PublicClientApplication authClient;
+        string[] scopes;
 
         void Init()
         {
             if (authClient != null)
                 return;
 
-            authClient = new PublicClientApplication(CommonConstants.ADApplicationID,
-                CommonConstants.ADAuthority);
-            authClient.ValidateAuthority = false;
-            authClient.RedirectUri = CommonConstants.ADRedirectID;
+            if (CommonConstants.USE_MSFT)
+            {
+                authClient = new PublicClientApplication(CommonConstants.ADApplicationID,
+                    CommonConstants.ADAuthority);
+                authClient.ValidateAuthority = false;
+                authClient.RedirectUri = CommonConstants.ADRedirectID;
+
+                scopes = CommonConstants.ADScopes;
+            }
+            else
+            {
+                authClient = new PublicClientApplication(CommonConstants.B2CClientID);
+
+                authClient.ValidateAuthority = false;
+                authClient.RedirectUri = CommonConstants.B2CRedirectUrl;
+
+                scopes = CommonConstants.B2CScopes;
+            }
         }
 
         public async Task<AuthenticationResult> Login()
@@ -38,8 +55,22 @@ namespace GeoContacts
                 if (result != null)
                     return result;
 
-                result = await authClient.AcquireTokenAsync(CommonConstants.ADScopes, UIParent);
-                var scope = result.Scopes.FirstOrDefault();
+                if (CommonConstants.USE_MSFT)
+                {
+                    result = await authClient.AcquireTokenAsync(scopes, UIParent);
+                }
+                else
+                {
+                    result = await authClient.AcquireTokenAsync(scopes,
+                                                                GetUserByPolicy(authClient.Users,
+                                                                                CommonConstants.B2CPolicy),
+                                                                UIBehavior.ForceLogin,
+                                                                null,
+                                                                null,
+                                                                CommonConstants.B2CAuthority,
+                                                                UIParent);
+
+                }
             }
             catch (MsalServiceException ex)
             {
@@ -63,7 +94,17 @@ namespace GeoContacts
 
             try
             {
-                result = await authClient.AcquireTokenSilentAsync(CommonConstants.ADScopes, authClient.Users.FirstOrDefault());
+                if (CommonConstants.USE_MSFT)
+                {
+                    result = await authClient.AcquireTokenSilentAsync(scopes, authClient.Users.FirstOrDefault());
+                }
+                else
+                {
+                    result = await authClient.AcquireTokenSilentAsync(scopes,
+                                                                      GetUserByPolicy(authClient.Users, CommonConstants.B2CPolicy),
+                                                                        CommonConstants.B2CAuthority,
+                                                                      false);
+                }
             }
             catch (Exception ex)
             {
@@ -92,5 +133,27 @@ namespace GeoContacts
                 authClient.Remove(user);
             }
         }
+
+        IUser GetUserByPolicy(IEnumerable<IUser> users, string policy)
+        {
+            foreach (var user in users)
+            {
+                string userIdentifier = Base64UrlDecode(user.Identifier.Split('.')[0]);
+
+                if (userIdentifier.EndsWith(policy.ToLower(), StringComparison.OrdinalIgnoreCase)) return user;
+            }
+
+            return null;
+        }
+
+        string Base64UrlDecode(string s)
+        {
+            s = s.Replace('-', '+').Replace('_', '/');
+            s = s.PadRight(s.Length + (4 - s.Length % 4) % 4, '=');
+            var byteArray = Convert.FromBase64String(s);
+            var decoded = Encoding.UTF8.GetString(byteArray, 0, byteArray.Count());
+            return decoded;
+        }
+
     }
 }

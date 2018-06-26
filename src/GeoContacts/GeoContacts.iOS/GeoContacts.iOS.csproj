@@ -31,6 +31,8 @@
     <DeviceSpecificBuild>false</DeviceSpecificBuild>
     <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
     <MtouchFloat32>true</MtouchFloat32>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -151,9 +153,6 @@
     <PackageReference Include="Microsoft.Azure.CognitiveServices.Vision.Face">
       <Version>1.0.2-preview</Version>
     </PackageReference>
-    <PackageReference Include="Microsoft.Identity.Client">
-      <Version>1.1.2-preview0008</Version>
-    </PackageReference>
     <PackageReference Include="MonkeyCache">
       <Version>0.1.0.10-beta</Version>
     </PackageReference>
@@ -192,6 +191,9 @@
     </PackageReference>
     <PackageReference Include="FormsToolkit">
       <Version>2.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Identity.Client">
+      <Version>1.1.4-preview0002</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
