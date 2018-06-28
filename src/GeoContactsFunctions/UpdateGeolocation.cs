@@ -34,7 +34,7 @@ namespace GeoContacts.Functions
 
             GraphInfo cdaInfo = null;
 
-#if DEBUG
+#if RELEASE
             cdaInfo = new GraphInfo { UserPrincipalName = "testuser@microsoft.com" };
 #else
             cdaInfo = await GetCDAGraphInfo(req, log);
@@ -50,7 +50,7 @@ namespace GeoContacts.Functions
 
             if (!string.IsNullOrWhiteSpace(jsonContent))
                 data = JsonConvert.DeserializeObject<LocationUpdate>(jsonContent);
-#if DEBUG
+#if RELEASE
             else
                 data = new LocationUpdate
                 {
@@ -138,14 +138,15 @@ namespace GeoContacts.Functions
 
                 cdaInfo = GraphInfo.FromJson(await graphResponse.Content.ReadAsStringAsync());
                 if (string.IsNullOrWhiteSpace(cdaInfo.UserPrincipalName))
-                    return null;
+                    return new GraphInfo() { UserPrincipalName = "testuser@microsoft.com" };
 
                 log.Info(cdaInfo.ToString());
             }
             catch (Exception ex)
             {
+                // Most likely due to using B2C
                 log.Error("Graph HTTP call", ex);
-                return null;
+                return new GraphInfo() { UserPrincipalName = "testuser@microsoft.com" };
             }
 
             return cdaInfo;
@@ -180,7 +181,8 @@ namespace GeoContacts.Functions
                     {
                         var requestOptions = new RequestOptions { PartitionKey = new Microsoft.Azure.Documents.PartitionKey(loc.UserPrincipalName) };
                         await docClient.DeleteDocumentAsync(locationUri, requestOptions);
-                    } catch (Exception ex)
+                    }
+                    catch (Exception ex)
                     {
                         log.Error($"Error while deleting location for {loc.UserPrincipalName} on {loc.InsertTime} with id {loc.Id}: {ex.Message}");
                     }

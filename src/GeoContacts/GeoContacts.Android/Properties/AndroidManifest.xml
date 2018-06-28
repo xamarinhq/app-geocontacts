@@ -11,6 +11,14 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="msal8aea67fd-38da-49a1-8f68-ca0c9e9e2501" android:host="auth" />
+            </intent-filter>
+        </activity>
+        <activity android:name="microsoft.identity.client.BrowserTabActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="msal8f999c10-2a7f-403c-b20b-cbe07b319cf3" android:host="auth" />
             </intent-filter>
         </activity>

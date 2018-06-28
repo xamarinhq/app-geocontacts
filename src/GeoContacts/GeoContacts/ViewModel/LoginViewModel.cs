@@ -20,12 +20,12 @@ namespace GeoContacts.ViewModel
         public LoginViewModel()
         {
             LoginCommand = new Command(async () => await ExecuteLoginCommand());
-            GuestCommand = new Command(() => 
+            GuestCommand = new Command(() =>
             {
                 Settings.InGuestMode = true;
                 Settings.LoggedInMSFT = false;
                 App.GoHome();
-            });                
+            });
         }
 
         async Task ExecuteLoginCommand()
@@ -40,6 +40,10 @@ namespace GeoContacts.ViewModel
             {
                 IsBusy = true;
                 Analytics.TrackEvent("CDA-Login");
+
+                // Force a logout first - just to be sure the silent login fails during this portion
+                AuthenticationService.Logout();
+
                 authenticationResult = await AuthenticationService.Login();
 
 
