@@ -46,7 +46,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.microsoft.cloudadvocates</string>
+			<string>com.microsoft.advocates</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>msal8aea67fd-38da-49a1-8f68-ca0c9e9e2501</string>
