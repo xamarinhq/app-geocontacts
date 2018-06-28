@@ -12,10 +12,11 @@ namespace GeoContacts.Helpers
         public const string AppCenterUWP = "AC_UWP";
         public const string ShowLogin = "AC_SHOWLOGIN";
         public const string FaceApiKey = "AC_FACE";
+        public const string AppCenterUseMsft = "AC_USEMSFT_NO";
         #endregion
 
         #region AD
-        public const bool USE_MSFT = true;
+        public const bool USE_MSFT = "AC_USE_MSFT" == AppCenterUseMsft;
 
         public const string ADApplicationID = "8f999c10-2a7f-403c-b20b-cbe07b319cf3";
         public const string ADRedirectID = "msal" + ADApplicationID + "://auth";
