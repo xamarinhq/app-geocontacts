@@ -15,7 +15,7 @@ namespace GeoContacts.Helpers
         #endregion
 
         #region AD
-        public const bool USE_MSFT = true;
+        public const bool USE_MSFT = false;
 
         public const string ADApplicationID = "8f999c10-2a7f-403c-b20b-cbe07b319cf3";
         public const string ADRedirectID = "msal" + ADApplicationID + "://auth";
