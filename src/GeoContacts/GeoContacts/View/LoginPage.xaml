@@ -13,6 +13,8 @@
                 <RowDefinition Height="225"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -28,7 +30,7 @@
                    VerticalOptions="FillAndExpand" 
                    HorizontalTextAlignment="Center"
                    VerticalTextAlignment="Center"/>
-            
+
             <Button Grid.Row="3"
                     Command="{Binding LoginCommand}"
                     IsEnabled="{Binding IsNotBusy}"
@@ -52,6 +54,8 @@
                                VerticalOptions="Center"
                                 Grid.RowSpan="4" Grid.ColumnSpan="2"/>
 
+            <Label Text="Hello"/>
+            <Label Text="Hello"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
