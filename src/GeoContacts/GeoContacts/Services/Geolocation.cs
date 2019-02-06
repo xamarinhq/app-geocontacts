@@ -41,7 +41,7 @@ namespace GeoContacts.Services
             if (position == null)
                 return null;
             
-            Debug.WriteLine($"Location = {position.Latitude}, {position.Longitude} | Time: {position.TimestampUtc} | Accuracty {position.Accuracy}");
+            Debug.WriteLine($"Location = {position.Latitude}, {position.Longitude} | Time: {position.Timestamp} | Accuracty {position.Accuracy}");
 
             return position;
         }

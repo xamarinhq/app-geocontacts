@@ -102,7 +102,7 @@ namespace GeoContacts.ViewModel
                 SyncCommand.ChangeCanExecute();
                 await CrossMedia.Current.Initialize();
 
-                if (CrossMedia.Current.IsTakePhotoSupported)
+                if (CrossMedia.Current.IsTakePhotoSupported && DeviceInfo.DeviceType == DeviceType.Physical)
                 {
                     file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
                     {

@@ -40,7 +40,7 @@ namespace GeoContacts.ViewModel
         }
 
         public static Task ExecuteGoToSiteExtCommand(string site) =>
-            Browser.OpenAsync(site, BrowserLaunchType.SystemPreferred);
+            Browser.OpenAsync(site, BrowserLaunchMode.SystemPreferred);
         
     }
 }
