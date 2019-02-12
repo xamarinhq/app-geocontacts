@@ -54,31 +54,31 @@ namespace GeoContacts.ViewModel
             switch(pick)
             {
                 case nameof(Contact.Blog):
-                    ExecuteGoToSiteExtCommand(Contact.Blog);
+                    await ExecuteGoToSiteExtCommand(Contact.Blog);
                     break;
                 case nameof(Contact.Facebook):
-                    ExecuteGoToSiteExtCommand(Contact.Facebook);
+                    await ExecuteGoToSiteExtCommand(Contact.Facebook);
                     break;
                 case nameof(Contact.GitHub):
-                    ExecuteGoToSiteExtCommand(Contact.GitHub);
+                    await ExecuteGoToSiteExtCommand(Contact.GitHub);
                     break;
                 case nameof(Contact.Instagram):
-                    ExecuteGoToSiteExtCommand(Contact.Instagram);
+                    await ExecuteGoToSiteExtCommand(Contact.Instagram);
                     break;
                 case nameof(Contact.LinkedIn):
-                    ExecuteGoToSiteExtCommand(Contact.LinkedIn);
+                    await ExecuteGoToSiteExtCommand(Contact.LinkedIn);
                     break;
                 case nameof(Contact.Podcast):
-                    ExecuteGoToSiteExtCommand(Contact.Podcast);
+                    await ExecuteGoToSiteExtCommand(Contact.Podcast);
                     break;
                 case nameof(Contact.StackOverflow):
-                    ExecuteGoToSiteExtCommand(Contact.StackOverflow);
+                    await ExecuteGoToSiteExtCommand(Contact.StackOverflow);
                     break;
                 case nameof(Contact.Twitch):
-                    ExecuteGoToSiteExtCommand(Contact.Twitch);
+                    await ExecuteGoToSiteExtCommand(Contact.Twitch);
                     break;
                 case nameof(Contact.Twitter):
-                    ExecuteGoToSiteExtCommand(Contact.Twitter);
+                    await ExecuteGoToSiteExtCommand(Contact.Twitter);
                     break;
             }
 

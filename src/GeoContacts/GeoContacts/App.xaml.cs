@@ -14,6 +14,9 @@ using System.Text;
 using Xamarin.Forms;
 using Device = Xamarin.Forms.Device;
 using GeoContacts.View;
+using Xamarin.Forms.Xaml;
+
+[assembly:XamlCompilation(XamlCompilationOptions.Compile)]
 
 namespace GeoContacts
 {
@@ -43,15 +46,9 @@ namespace GeoContacts
 
         public static void GoHome()
         {
-            if(Device.RuntimePlatform == Device.iOS)
-            {
-                Current.MainPage = new HomePageiOS();
-            }
-            else
-            {
-                Current.MainPage = new NavigationPage(new HomePage());
-            }
+            Current.MainPage = new HomePage();
         }
+            
 
         protected override void OnStart()
         {

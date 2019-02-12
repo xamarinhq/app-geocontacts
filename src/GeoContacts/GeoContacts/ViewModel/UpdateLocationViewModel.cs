@@ -1,5 +1,4 @@
 ﻿using GeoContacts.Helpers;
-using GeoContacts.Model;
 using GeoContacts.Resources;
 using GeoContacts.Services;
 using Microsoft.AppCenter.Analytics;
@@ -93,7 +92,7 @@ namespace GeoContacts.ViewModel
                 return;
             }
 
-            string result = "Error";
+            var result = "Error";
             MediaFile file = null;
 
             try
@@ -143,7 +142,7 @@ namespace GeoContacts.ViewModel
         public ICommand UpdateLocationCommand { get; }
 
         Xamarin.Essentials.Location location = null;
-        Placemark placemark = null;
+        readonly Placemark placemark = null;
         string mood = string.Empty;
 
         async Task ExecuteUpdateLocationCommand()

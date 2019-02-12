@@ -10,6 +10,7 @@ using Android.Support.V4.View;
 using Android.Support.Design.Widget;
 using Android.Content.Res;
 using Android.Content;
+using Android.Widget;
 
 [assembly: ExportRenderer(typeof(TabbedPage), typeof(MyTabsRenderer))]
 namespace GeoContacts.Droid
@@ -30,48 +31,19 @@ namespace GeoContacts.Droid
         }
 #pragma warning restore CS0618 // Type or member is obsolete
 
-        bool setup;
-        ViewPager pager;
-        TabLayout layout;
-        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+        protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.TabbedPage> e)
         {
-            base.OnElementPropertyChanged(sender, e);
+            base.OnElementChanged(e);
+            var layout = (ViewGroup)this.GetChildAt(0);
+            var bottomNavigationView = (BottomNavigationView)layout.GetChildAt(1);
+            var topShadow = LayoutInflater.From(Context).Inflate(Resource.Layout.top_shadow, null);
 
-            if (setup)
-                return;
+            var layoutParams =
+                new Android.Widget.RelativeLayout.LayoutParams(LayoutParams.MatchParent, 15);
+            layoutParams.AddRule(LayoutRules.Above, bottomNavigationView.Id);
 
-            if (e.PropertyName == "Renderer")
-            {
-                pager = (ViewPager)ViewGroup.GetChildAt(0);
-                layout = (TabLayout)ViewGroup.GetChildAt(1);
-                setup = true;
+            layout.AddView(topShadow, 2, layoutParams);
 
-                ColorStateList colors = null;
-                if ((int)Build.VERSION.SdkInt >= 23)
-                {
-#pragma warning disable CS0618 // Type or member is obsolete
-                    colors = Resources.GetColorStateList(Resource.Color.icon_tab, Forms.Context.Theme);
-#pragma warning restore CS0618 // Type or member is obsolete
-                }
-                else
-                {
-#pragma warning disable CS0618 // Type or member is obsolete
-                    colors = Resources.GetColorStateList(Resource.Color.icon_tab);
-#pragma warning restore CS0618 // Type or member is obsolete
-                }
-
-                for (int i = 0; i < layout.TabCount; i++)
-                {
-                    var tab = layout.GetTabAt(i);
-                    var icon = tab.Icon;
-                    if (icon != null)
-                    {
-                        icon = Android.Support.V4.Graphics.Drawable.DrawableCompat.Wrap(icon);
-                        Android.Support.V4.Graphics.Drawable.DrawableCompat.SetTintList(icon, colors);
-                    }
-                }
-
-            }
         }
     }
 }

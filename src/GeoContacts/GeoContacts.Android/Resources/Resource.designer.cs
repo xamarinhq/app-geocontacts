@@ -4367,26 +4367,26 @@ namespace GeoContacts.Droid
 			// aapt resource value: 0x7f020053
 			public const int avd_hide_password = 2130837587;
 			
-			// aapt resource value: 0x7f020139
-			public const int avd_hide_password_1 = 2130837817;
-			
 			// aapt resource value: 0x7f02013a
-			public const int avd_hide_password_2 = 2130837818;
+			public const int avd_hide_password_1 = 2130837818;
 			
 			// aapt resource value: 0x7f02013b
-			public const int avd_hide_password_3 = 2130837819;
+			public const int avd_hide_password_2 = 2130837819;
+			
+			// aapt resource value: 0x7f02013c
+			public const int avd_hide_password_3 = 2130837820;
 			
 			// aapt resource value: 0x7f020054
 			public const int avd_show_password = 2130837588;
 			
-			// aapt resource value: 0x7f02013c
-			public const int avd_show_password_1 = 2130837820;
-			
 			// aapt resource value: 0x7f02013d
-			public const int avd_show_password_2 = 2130837821;
+			public const int avd_show_password_1 = 2130837821;
 			
 			// aapt resource value: 0x7f02013e
-			public const int avd_show_password_3 = 2130837822;
+			public const int avd_show_password_2 = 2130837822;
+			
+			// aapt resource value: 0x7f02013f
+			public const int avd_show_password_3 = 2130837823;
 			
 			// aapt resource value: 0x7f020055
 			public const int background_splash = 2130837589;
@@ -5054,11 +5054,11 @@ namespace GeoContacts.Droid
 			// aapt resource value: 0x7f020132
 			public const int notification_icon_background = 2130837810;
 			
-			// aapt resource value: 0x7f020137
-			public const int notification_template_icon_bg = 2130837815;
-			
 			// aapt resource value: 0x7f020138
-			public const int notification_template_icon_low_bg = 2130837816;
+			public const int notification_template_icon_bg = 2130837816;
+			
+			// aapt resource value: 0x7f020139
+			public const int notification_template_icon_low_bg = 2130837817;
 			
 			// aapt resource value: 0x7f020133
 			public const int notification_tile_bg = 2130837811;
@@ -5067,10 +5067,13 @@ namespace GeoContacts.Droid
 			public const int notify_panel_notification_icon_bg = 2130837812;
 			
 			// aapt resource value: 0x7f020135
-			public const int tooltip_frame_dark = 2130837813;
+			public const int shadow = 2130837813;
 			
 			// aapt resource value: 0x7f020136
-			public const int tooltip_frame_light = 2130837814;
+			public const int tooltip_frame_dark = 2130837814;
+			
+			// aapt resource value: 0x7f020137
+			public const int tooltip_frame_light = 2130837815;
 			
 			static Drawable()
 			{
@@ -5165,9 +5168,6 @@ namespace GeoContacts.Droid
 			
 			// aapt resource value: 0x7f0a0027
 			public const int add = 2131361831;
-			
-			// aapt resource value: 0x7f0a00d4
-			public const int agentWebView = 2131362004;
 			
 			// aapt resource value: 0x7f0a0070
 			public const int alertTitle = 2131361904;
@@ -5373,8 +5373,8 @@ namespace GeoContacts.Droid
 			// aapt resource value: 0x7f0a00cb
 			public const int main_toolbar = 2131361995;
 			
-			// aapt resource value: 0x7f0a00d6
-			public const int masked = 2131362006;
+			// aapt resource value: 0x7f0a00d5
+			public const int masked = 2131362005;
 			
 			// aapt resource value: 0x7f0a00bd
 			public const int media_actions = 2131361981;
@@ -5718,8 +5718,8 @@ namespace GeoContacts.Droid
 			// aapt resource value: 0x7f0a0016
 			public const int view_offset_helper = 2131361814;
 			
-			// aapt resource value: 0x7f0a00d5
-			public const int visible = 2131362005;
+			// aapt resource value: 0x7f0a00d4
+			public const int visible = 2131362004;
 			
 			// aapt resource value: 0x7f0a00af
 			public const int volume_item_container = 2131361967;
@@ -6031,7 +6031,7 @@ namespace GeoContacts.Droid
 			public const int tooltip = 2130968647;
 			
 			// aapt resource value: 0x7f040048
-			public const int WebAuthenticationBroker = 2130968648;
+			public const int top_shadow = 2130968648;
 			
 			static Layout()
 			{
@@ -6064,9 +6064,6 @@ namespace GeoContacts.Droid
 		
 		public partial class String
 		{
-			
-			// aapt resource value: 0x7f0b003c
-			public const int ApplicationName = 2131427388;
 			
 			// aapt resource value: 0x7f0b0015
 			public const int abc_action_bar_home_description = 2131427349;
@@ -6158,62 +6155,62 @@ namespace GeoContacts.Droid
 			// aapt resource value: 0x7f0b0033
 			public const int appbar_scrolling_view_behavior = 2131427379;
 			
+			// aapt resource value: 0x7f0b003c
+			public const int appcenter_distribute_dialog_actioned_on_disabled_toast = 2131427388;
+			
 			// aapt resource value: 0x7f0b003d
-			public const int appcenter_distribute_dialog_actioned_on_disabled_toast = 2131427389;
+			public const int appcenter_distribute_download_progress_number_format = 2131427389;
 			
 			// aapt resource value: 0x7f0b003e
-			public const int appcenter_distribute_download_progress_number_format = 2131427390;
+			public const int appcenter_distribute_downloading_mandatory_update = 2131427390;
 			
 			// aapt resource value: 0x7f0b003f
-			public const int appcenter_distribute_downloading_mandatory_update = 2131427391;
+			public const int appcenter_distribute_install = 2131427391;
 			
 			// aapt resource value: 0x7f0b0040
-			public const int appcenter_distribute_install = 2131427392;
+			public const int appcenter_distribute_install_ready_message = 2131427392;
 			
 			// aapt resource value: 0x7f0b0041
-			public const int appcenter_distribute_install_ready_message = 2131427393;
+			public const int appcenter_distribute_install_ready_title = 2131427393;
 			
 			// aapt resource value: 0x7f0b0042
-			public const int appcenter_distribute_install_ready_title = 2131427394;
+			public const int appcenter_distribute_notification_category = 2131427394;
 			
 			// aapt resource value: 0x7f0b0043
-			public const int appcenter_distribute_notification_category = 2131427395;
+			public const int appcenter_distribute_unknown_sources_dialog_message = 2131427395;
 			
 			// aapt resource value: 0x7f0b0044
-			public const int appcenter_distribute_unknown_sources_dialog_message = 2131427396;
+			public const int appcenter_distribute_unknown_sources_dialog_settings = 2131427396;
 			
 			// aapt resource value: 0x7f0b0045
-			public const int appcenter_distribute_unknown_sources_dialog_settings = 2131427397;
+			public const int appcenter_distribute_update_dialog_download = 2131427397;
 			
 			// aapt resource value: 0x7f0b0046
-			public const int appcenter_distribute_update_dialog_download = 2131427398;
+			public const int appcenter_distribute_update_dialog_message_mandatory = 2131427398;
 			
 			// aapt resource value: 0x7f0b0047
-			public const int appcenter_distribute_update_dialog_message_mandatory = 2131427399;
+			public const int appcenter_distribute_update_dialog_message_optional = 2131427399;
 			
 			// aapt resource value: 0x7f0b0048
-			public const int appcenter_distribute_update_dialog_message_optional = 2131427400;
+			public const int appcenter_distribute_update_dialog_postpone = 2131427400;
 			
 			// aapt resource value: 0x7f0b0049
-			public const int appcenter_distribute_update_dialog_postpone = 2131427401;
+			public const int appcenter_distribute_update_dialog_title = 2131427401;
 			
 			// aapt resource value: 0x7f0b004a
-			public const int appcenter_distribute_update_dialog_title = 2131427402;
+			public const int appcenter_distribute_update_dialog_view_release_notes = 2131427402;
 			
 			// aapt resource value: 0x7f0b004b
-			public const int appcenter_distribute_update_dialog_view_release_notes = 2131427403;
+			public const int appcenter_distribute_update_failed_dialog_ignore = 2131427403;
 			
 			// aapt resource value: 0x7f0b004c
-			public const int appcenter_distribute_update_failed_dialog_ignore = 2131427404;
+			public const int appcenter_distribute_update_failed_dialog_message = 2131427404;
 			
 			// aapt resource value: 0x7f0b004d
-			public const int appcenter_distribute_update_failed_dialog_message = 2131427405;
+			public const int appcenter_distribute_update_failed_dialog_reinstall = 2131427405;
 			
 			// aapt resource value: 0x7f0b004e
-			public const int appcenter_distribute_update_failed_dialog_reinstall = 2131427406;
-			
-			// aapt resource value: 0x7f0b004f
-			public const int appcenter_distribute_update_failed_dialog_title = 2131427407;
+			public const int appcenter_distribute_update_failed_dialog_title = 2131427406;
 			
 			// aapt resource value: 0x7f0b0034
 			public const int bottom_sheet_behavior = 2131427380;

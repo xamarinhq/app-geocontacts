@@ -33,7 +33,7 @@ namespace GeoContacts.Droid
 
             Xamarin.Essentials.Platform.Init(this, bundle);
 
-            LoadApplication(new GeoContacts.App());
+            LoadApplication(new App());
 
             AuthenticationService.UIParent = new UIParent(this);
         }

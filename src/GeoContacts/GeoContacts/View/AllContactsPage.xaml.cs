@@ -1,17 +1,10 @@
 ﻿using GeoContacts.Model;
 using GeoContacts.ViewModel;
-using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace GeoContacts.View
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AllContactsPage : ContentPage
     {
         AllContactsViewModel vm;
@@ -24,10 +17,9 @@ namespace GeoContacts.View
             MyListView.ItemSelected += MyListView_ItemSelected;
         }
 
-        private async void MyListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        async void MyListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            var contact = e.SelectedItem as Contact;
-            if (contact == null)
+            if (!(e.SelectedItem is Contact contact))
                 return;
 
             await Navigation.PushAsync(new DetailsPage(contact));
