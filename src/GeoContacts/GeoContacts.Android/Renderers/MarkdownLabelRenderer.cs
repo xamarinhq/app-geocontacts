@@ -1,19 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
+﻿using System.ComponentModel;
 using Android.Text;
-using Android.Views;
-using Android.Widget;
 using GeoContacts.Controls;
 using GeoContacts.Droid.Renderers;
-using Java.Lang;
 using Markdig;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;

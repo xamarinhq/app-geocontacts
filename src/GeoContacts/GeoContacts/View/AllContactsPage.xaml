@@ -10,7 +10,6 @@
     </ContentPage.ToolbarItems>
     <Grid>
         <ListView x:Name="MyListView"
-            ItemsSource="{Binding Contacts}"
               IsPullToRefreshEnabled="True"
               IsRefreshing="{Binding IsBusy, Mode=OneWay}"
               RefreshCommand="{Binding ForceRefreshCommand}"

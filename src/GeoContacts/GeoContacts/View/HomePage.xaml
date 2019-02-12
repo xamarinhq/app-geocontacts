@@ -4,7 +4,8 @@
              xmlns:view="clr-namespace:GeoContacts.View"
              xmlns:i18n="clr-namespace:GeoContacts.Helpers" 
              xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
-             android:TabbedPage.ToolbarPlacement="Bottom"            
+             android:TabbedPage.ToolbarPlacement="Bottom" 
+             BarBackgroundColor="{OnPlatform Android=White}"
              x:Class="GeoContacts.View.HomePage">
     <NavigationPage Title="{i18n:Translate TitleAllContacts}" Icon="ic_contacts">
         <x:Arguments>
