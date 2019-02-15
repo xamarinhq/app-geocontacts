@@ -20,9 +20,11 @@ namespace GeoContacts
                 return;
 
             authClient = new PublicClientApplication(CommonConstants.ADApplicationID,
-                CommonConstants.ADAuthority);
-            authClient.ValidateAuthority = false;
-            authClient.RedirectUri = CommonConstants.ADRedirectID;
+                CommonConstants.ADAuthority)
+            {
+                ValidateAuthority = false,
+                RedirectUri = CommonConstants.ADRedirectID
+            };
         }
 
         public async Task<AuthenticationResult> Login()
@@ -63,7 +65,8 @@ namespace GeoContacts
 
             try
             {
-                result = await authClient.AcquireTokenSilentAsync(CommonConstants.ADScopes, authClient.Users.FirstOrDefault());
+                var accounts = await authClient.GetAccountsAsync();
+                result = await authClient.AcquireTokenSilentAsync(CommonConstants.ADScopes, accounts.FirstOrDefault());
             }
             catch (Exception ex)
             {
@@ -83,13 +86,14 @@ namespace GeoContacts
             return result != null;
         }
 
-        public void Logout()
+        public async Task Logout()
         {
             Init();
 
-            foreach (var user in authClient.Users)
+            var accounts = await authClient.GetAccountsAsync();
+            foreach (var account in accounts)
             {
-                authClient.Remove(user);
+                await authClient.RemoveAsync(account);
             }
         }
     }

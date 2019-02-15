@@ -8,6 +8,6 @@ namespace GeoContacts
         Task<AuthenticationResult> Login();
         Task<AuthenticationResult> SilentLogin();
         Task<bool> IsLoggedIn();
-        void Logout();
+        Task Logout();
     }
 }

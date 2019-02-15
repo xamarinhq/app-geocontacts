@@ -7,6 +7,7 @@
              ios:Page.UseSafeArea="true" 
              Title="{i18n:Translate AppName}">
     <ContentPage.Content>
+        <ScrollView>
         <Grid Padding="10" RowSpacing="20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
@@ -52,6 +53,7 @@
                                VerticalOptions="Center"
                                 Grid.RowSpan="4" Grid.ColumnSpan="2"/>
 
-        </Grid>
+            </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

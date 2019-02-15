@@ -11,6 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeoContacts", "GeoContacts\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{249BE0CF-7A1B-4B62-9E71-4AA85501BC2A}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		GeoContacts\GeoContacts.Android\mobile-center-post-clone.sh = GeoContacts\GeoContacts.Android\mobile-center-post-clone.sh
 		mobile-center-post-clone.sh = mobile-center-post-clone.sh
 		NuGet.Config = NuGet.Config

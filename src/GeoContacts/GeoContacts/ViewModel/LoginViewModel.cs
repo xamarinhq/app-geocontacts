@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Microsoft.Identity.Client;
@@ -43,7 +41,7 @@ namespace GeoContacts.ViewModel
                 authenticationResult = await AuthenticationService.Login();
 
 
-                var displayName = authenticationResult?.User?.Name;
+                var displayName = authenticationResult?.Account?.Username;
                 if (string.IsNullOrWhiteSpace(displayName))
                 {
                     //TODO: Unable to login

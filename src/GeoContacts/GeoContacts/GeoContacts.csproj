@@ -6,22 +6,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Markdig" Version="0.15.0" />
-    <PackageReference Include="Microsoft.Azure.CognitiveServices.Vision.Face" Version="1.0.2-preview" />
-    <PackageReference Include="Microsoft.Identity.Client" Version="1.1.2-preview0008" />
-    <PackageReference Include="MonkeyCache" Version="0.1.0.10-beta" />
-    <PackageReference Include="MonkeyCache.FileStore" Version="0.1.0.10-beta" />
+    <PackageReference Include="Markdig" Version="0.15.7" />
+    <PackageReference Include="Microsoft.Azure.CognitiveServices.Vision.Face" Version="2.3.0-preview" />
+    <PackageReference Include="Microsoft.Identity.Client" Version="2.7.0" />
+    <PackageReference Include="MonkeyCache" Version="1.2.0-beta" />
+    <PackageReference Include="MonkeyCache.FileStore" Version="1.2.0-beta" />
     <PackageReference Include="Refractored.MvvmHelpers" Version="1.3.0" />
-    <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.1" />
-    <PackageReference Include="Xam.Plugins.Forms.ImageCircle" Version="3.0.0.5" />
+    <PackageReference Include="Xam.Plugin.Media" Version="4.1.2-beta" />
+    <PackageReference Include="Xam.Plugins.Forms.ImageCircle" Version="3.1.1.1-beta" />
     <PackageReference Include="Plugin.Multilingual" Version="1.0.2" />
     <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="1.8.1" />
-    <PackageReference Include="Xamarin.Essentials" Version="0.8.0-preview" />
-    <PackageReference Include="Xamarin.Forms" Version="3.1.0.583944" />
-    <PackageReference Include="Microsoft.AppCenter" Version="1.7.0" />
-    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.7.0" />
-    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.7.0" />
-    <PackageReference Include="Microsoft.AppCenter.Distribute" Version="1.7.0" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.0.1" />
+    <PackageReference Include="Xamarin.Forms" Version="3.5.0.129452" />
+    <PackageReference Include="Microsoft.AppCenter" Version="1.13.0" />
+    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.13.0" />
+    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.13.0" />
+    <PackageReference Include="Microsoft.AppCenter.Distribute" Version="1.13.0" />
     <PackageReference Include="FormsToolkit" Version="2.0.1" />
   </ItemGroup>
 
@@ -37,6 +37,9 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="View\HomePage.xaml.cs">
+      <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -61,9 +64,6 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="View\HomePage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="View\HomePageiOS.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="View\LoginPage.xaml">

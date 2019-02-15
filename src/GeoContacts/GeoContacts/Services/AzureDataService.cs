@@ -58,7 +58,7 @@ namespace GeoContacts.Services
                                    .OrderBy(cda => cda.Name)
                                    .AsDocumentQuery();
 
-            List<Contact> allCDAs = new List<Contact>();
+            var allCDAs = new List<Contact>();
             while (allCDAQuery.HasMoreResults)
             {
                 allCDAs.AddRange(await allCDAQuery.ExecuteNextAsync<Contact>());
@@ -66,25 +66,30 @@ namespace GeoContacts.Services
 
             foreach (var cda in allCDAs)
             {
-                if (cda.Image.TryGetValue("Src", out string imgSrc))
-                {
-                    // The image source may be a full URL or a partial one
-                    if (imgSrc.StartsWith("http", StringComparison.OrdinalIgnoreCase))
-                        cda.PhotoUrl = imgSrc;
-                    else
-                        cda.PhotoUrl = $"https://developer.microsoft.com/en-us/advocates/{imgSrc}";
-                }
-
-                var twitterUserName = cda.Twitter.Substring(
-                    cda.Twitter.LastIndexOf("/", StringComparison.OrdinalIgnoreCase) + 1);
-
-                cda.TwitterHandle = $"@{twitterUserName}";
+                CleanImage(cda);
             }
 
             var json = JsonConvert.SerializeObject(allCDAs.ToArray());
-            MonkeyCache.FileStore.Barrel.Current.Add(cdaCacheKey, json, TimeSpan.FromHours(2));
+            Barrel.Current.Add(cdaCacheKey, json, TimeSpan.FromHours(2));
 
             return allCDAs;
+        }
+
+        static void CleanImage(Contact cda)
+        {
+            if (cda.Image.TryGetValue("Src", out var imgSrc))
+            {
+                // The image source may be a full URL or a partial one
+                if (imgSrc.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+                    cda.PhotoUrl = imgSrc;
+                else
+                    cda.PhotoUrl = $"https://developer.microsoft.com/en-us/advocates/{imgSrc}";
+            }
+
+            var twitterUserName = cda.Twitter.Substring(
+                cda.Twitter.LastIndexOf("/", StringComparison.OrdinalIgnoreCase) + 1);
+
+            cda.TwitterHandle = $"@{twitterUserName}";
         }
 
         public Task<Contact> GetAsync(string id)
@@ -166,19 +171,7 @@ namespace GeoContacts.Services
             {
                 foreach (var cda in grouped.Items)
                 {
-                    if (cda.Image.TryGetValue("Src", out string imgSrc))
-                    {
-                        // Image source could be a full url or a partial
-                        if (imgSrc.StartsWith("http", StringComparison.OrdinalIgnoreCase))
-                            cda.PhotoUrl = imgSrc;
-                        else
-                            cda.PhotoUrl = $"https://developer.microsoft.com/en-us/advocates/{imgSrc}";
-                    }
-
-                    var twitterUserName = cda.Twitter.Substring(
-                        cda.Twitter.LastIndexOf("/", StringComparison.OrdinalIgnoreCase) + 1);
-
-                    cda.TwitterHandle = $"@{twitterUserName}";
+                    CleanImage(cda);
                 }
             }
 
@@ -190,9 +183,9 @@ namespace GeoContacts.Services
             var json = string.Empty;
             //check if we are connected, else check to see if we have valid data
             if (Connectivity.NetworkAccess != NetworkAccess.Internet)
-                json = Barrel.Current.Get(key);
+                json = Barrel.Current.Get<string>(key);
             else if (!forceRefresh && !Barrel.Current.IsExpired(key))
-                json = Barrel.Current.Get(key);
+                json = Barrel.Current.Get<string>(key);
 
             if (!string.IsNullOrWhiteSpace(json))
                 return JsonConvert.DeserializeObject<Contact[]>(json).ToList();

@@ -1,9 +1,7 @@
 ﻿using Plugin.Multilingual;
 using System;
-using System.Collections.Generic;
 using System.Reflection;
 using System.Resources;
-using System.Text;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,9 +10,9 @@ namespace GeoContacts.Helpers
     [ContentProperty("Text")]
     public class TranslateExtension : IMarkupExtension
     {
-        const string ResourceId = "GeoContacts.Resources.AppResources";
+        const string resourceId = "GeoContacts.Resources.AppResources";
 
-        static readonly Lazy<ResourceManager> resmgr = new Lazy<ResourceManager>(() => new ResourceManager(ResourceId, typeof(TranslateExtension).GetTypeInfo().Assembly));
+        static readonly Lazy<ResourceManager> resmgr = new Lazy<ResourceManager>(() => new ResourceManager(resourceId, typeof(TranslateExtension).GetTypeInfo().Assembly));
 
         public string Text { get; set; }
 
@@ -32,7 +30,7 @@ namespace GeoContacts.Helpers
 
 #if DEBUG
                 throw new ArgumentException(
-                    String.Format("Key '{0}' was not found in resources '{1}' for culture '{2}'.", Text, ResourceId, ci.Name),
+                    $"Key '{Text}' was not found in resources '{resourceId}' for culture '{ci.Name}'.",
                     "Text");
 #else
                 translation = Text; // returns the key, which GETS DISPLAYED TO THE USER

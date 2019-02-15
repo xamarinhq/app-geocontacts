@@ -1,13 +1,7 @@
 ﻿using GeoContacts.View;
 using GeoContacts.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace GeoContacts
 {
@@ -15,7 +9,7 @@ namespace GeoContacts
     {
 
     }
-    [XamlCompilation(XamlCompilationOptions.Compile)]
+
     public partial class TestPage : ContentPage
     {
         TestViewModel vm;
@@ -29,10 +23,7 @@ namespace GeoContacts
 
             ButtonHomePage.Clicked += (sender, args) =>
             {
-                if (Device.RuntimePlatform == Device.iOS)
-                    Navigation.PushModalAsync(new HomePageiOS());
-                else
-                    Navigation.PushModalAsync(new NavigationPage(new HomePage()));
+                Navigation.PushModalAsync(new HomePage());
             };
             
             ButtonLogin.Clicked += async (sender, args) =>
