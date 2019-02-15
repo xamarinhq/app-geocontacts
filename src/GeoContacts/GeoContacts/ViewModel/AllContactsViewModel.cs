@@ -35,7 +35,8 @@ namespace GeoContacts.ViewModel
 
             try
             {
-                var contacts = await DataService.GetAllAsync();
+                
+                var contacts = await DataService.GetAllAsync(forceRefresh);
 
                 if (contacts != null && contacts.Count() > 0)
                     Contacts.ReplaceRange(contacts);

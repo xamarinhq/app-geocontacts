@@ -54,8 +54,12 @@
     <MtouchArch>ARM64</MtouchArch>
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
-    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CodesignEntitlements>
+    </CodesignEntitlements>
     <MtouchExtraArgs>--linkskip=ImageCircle.Forms.Plugin.iOS --linkskip=ImageCircle.Forms.Plugin.Abstractions</MtouchExtraArgs>
+    <CodesignProvision />
+    <CodesignExtraArgs />
+    <CodesignResourceRules />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>

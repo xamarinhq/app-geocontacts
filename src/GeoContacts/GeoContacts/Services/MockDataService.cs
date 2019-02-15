@@ -47,7 +47,7 @@ namespace GeoContacts.Services
             return Task.CompletedTask;
         }
 
-        public Task<IEnumerable<Contact>> GetAllAsync()
+        public Task<IEnumerable<Contact>> GetAllAsync(bool forceRerfresh)
         {
             return Task.FromResult(contacts as IEnumerable<Contact>);
         }

@@ -52,6 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="glidex">
+      <Version>1.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="glidex.forms">
+      <Version>1.0.3</Version>
+    </PackageReference>
     <PackageReference Include="Markdig">
       <Version>0.15.7</Version>
     </PackageReference>
