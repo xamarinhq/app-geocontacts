@@ -45,7 +45,7 @@ namespace GeoContacts.Functions
             }
 #endif
 
-            string jsonContent = await req.Content.ReadAsStringAsync();
+            var jsonContent = await req.Content.ReadAsStringAsync();
             LocationUpdate data = null;
 
             if (!string.IsNullOrWhiteSpace(jsonContent))
@@ -110,8 +110,9 @@ namespace GeoContacts.Functions
             data.UserPrincipalName = cdaInfo.UserPrincipalName;
             data.InsertTime = DateTimeOffset.UtcNow;
 
+#if !DEBUG
             var doc = await docClient.CreateDocumentAsync(locationCollectionUri, data);
-
+#endif
             return req.CreateResponse(HttpStatusCode.OK, new
             {
                 greeting = $"Hello {data.UserPrincipalName}, you are in {data.Country} {data.Town}!"
