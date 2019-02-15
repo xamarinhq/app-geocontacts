@@ -9,7 +9,7 @@ namespace GeoContacts.Services
     public interface IDataService
     {
         Task Initialize();
-        Task<IEnumerable<Contact>> GetAllAsync();
+        Task<IEnumerable<Contact>> GetAllAsync(bool forceRefresh);
         Task<Contact> GetAsync(string id);
         Task<IEnumerable<Grouping<string, Contact>>> GetNearbyAsync(double userLongitude, double userLatitude);
 

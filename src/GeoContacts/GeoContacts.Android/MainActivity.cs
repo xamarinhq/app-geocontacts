@@ -26,7 +26,7 @@ namespace GeoContacts.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             ImageCircleRenderer.Init();
-
+            Android.Glide.Forms.Init();
             FormsToolkit.Droid.Toolkit.Init();
 
             Plugin.CurrentActivity.CrossCurrentActivity.Current.Activity = this;

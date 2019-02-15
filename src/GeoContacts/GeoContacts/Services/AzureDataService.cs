@@ -46,9 +46,9 @@ namespace GeoContacts.Services
             await DocClient.OpenAsync();
         }
 
-        public async Task<IEnumerable<Contact>> GetAllAsync()
+        public async Task<IEnumerable<Contact>> GetAllAsync(bool forceRerfresh)
         {
-            var cache = GetCache(cdaCacheKey);
+            var cache = GetCache(cdaCacheKey, forceRerfresh);
 
             if (cache != null)
                 return cache;
@@ -100,7 +100,7 @@ namespace GeoContacts.Services
         public async Task<IEnumerable<Grouping<string, Contact>>> GetNearbyAsync(double userLongitude, double userLatitude)
         {
             var groupedNearby = new List<Grouping<string, Contact>>();
-            var allCDAs = await GetAllAsync();
+            var allCDAs = await GetAllAsync(false);
 
             var userPoint = new Point(userLongitude, userLatitude);
             var feedOptions = new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true };
