@@ -139,7 +139,7 @@
     <value>Please add your current location before syncing.</value>
   </data>
   <data name="FindCloseCDAs" xml:space="preserve">
-    <value>Find Neaby CDAs</value>
+    <value>Find Nearby CDAs</value>
   </data>
   <data name="Hometown" xml:space="preserve">
     <value>Hometown</value>
