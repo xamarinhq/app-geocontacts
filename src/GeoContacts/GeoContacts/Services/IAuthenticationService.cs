@@ -9,5 +9,7 @@ namespace GeoContacts
         Task<AuthenticationResult> SilentLogin();
         Task<bool> IsLoggedIn();
         Task Logout();
+        void Init();
+        PublicClientApplication AuthClient { get; }
     }
 }

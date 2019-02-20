@@ -14,16 +14,16 @@ namespace GeoContacts.Services
             Location position = null;
             try
             {
-                
+
                 position = await Geolocation.GetLastKnownLocationAsync();
 
-                if (position != null)
+                if (position != null && position.Timestamp > DateTime.UtcNow.AddMinutes(-1))
                 {
                     //got a cahched position, so let's use it.
                     return position;
                 }
 
-                
+
 
                 position = await Geolocation.GetLocationAsync(new GeolocationRequest
                 {
@@ -40,7 +40,7 @@ namespace GeoContacts.Services
 
             if (position == null)
                 return null;
-            
+
             Debug.WriteLine($"Location = {position.Latitude}, {position.Longitude} | Time: {position.Timestamp} | Accuracty {position.Accuracy}");
 
             return position;

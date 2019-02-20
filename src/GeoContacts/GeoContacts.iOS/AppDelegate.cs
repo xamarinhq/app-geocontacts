@@ -6,6 +6,7 @@ using Foundation;
 using ImageCircle.Forms.Plugin.iOS;
 using UIKit;
 using Microsoft.Identity.Client;
+using Xamarin.Forms;
 
 namespace GeoContacts.iOS
 {
@@ -29,6 +30,11 @@ namespace GeoContacts.iOS
             ImageCircleRenderer.Init();
             FormsToolkit.iOS.Toolkit.Init();
             LoadApplication(new App());
+
+            var auth = DependencyService.Get<IAuthenticationService>();
+
+            auth.Init();
+            auth.AuthClient.iOSKeychainSecurityGroup = "com.microsoft.cloudadvocates";
 
             return base.FinishedLaunching(app, options);
         }
