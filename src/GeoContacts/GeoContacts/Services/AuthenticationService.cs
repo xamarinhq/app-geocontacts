@@ -12,18 +12,20 @@ namespace GeoContacts
     {
         public static UIParent UIParent = null;
 
-        PublicClientApplication authClient;
+        public PublicClientApplication AuthClient { get; private set; }
 
-        void Init()
+        public void Init()
         {
-            if (authClient != null)
+            if (AuthClient != null)
                 return;
 
-            authClient = new PublicClientApplication(CommonConstants.ADApplicationID,
+
+
+            AuthClient = new PublicClientApplication(CommonConstants.ADApplicationID,
                 CommonConstants.ADAuthority)
             {
                 ValidateAuthority = false,
-                RedirectUri = CommonConstants.ADRedirectID
+                RedirectUri = CommonConstants.ADRedirectID,
             };
         }
 
@@ -40,7 +42,7 @@ namespace GeoContacts
                 if (result != null)
                     return result;
 
-                result = await authClient.AcquireTokenAsync(CommonConstants.ADScopes, UIParent);
+                result = await AuthClient.AcquireTokenAsync(CommonConstants.ADScopes, UIParent);
                 var scope = result.Scopes.FirstOrDefault();
             }
             catch (MsalServiceException ex)
@@ -65,8 +67,8 @@ namespace GeoContacts
 
             try
             {
-                var accounts = await authClient.GetAccountsAsync();
-                result = await authClient.AcquireTokenSilentAsync(CommonConstants.ADScopes, accounts.FirstOrDefault());
+                var accounts = await AuthClient.GetAccountsAsync();
+                result = await AuthClient.AcquireTokenSilentAsync(CommonConstants.ADScopes, accounts.FirstOrDefault());
             }
             catch (Exception ex)
             {
@@ -90,10 +92,10 @@ namespace GeoContacts
         {
             Init();
 
-            var accounts = await authClient.GetAccountsAsync();
+            var accounts = await AuthClient.GetAccountsAsync();
             foreach (var account in accounts)
             {
-                await authClient.RemoveAsync(account);
+                await AuthClient.RemoveAsync(account);
             }
         }
     }

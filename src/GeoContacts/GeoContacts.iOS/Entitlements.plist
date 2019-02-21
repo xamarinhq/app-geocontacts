@@ -4,7 +4,7 @@
 <dict>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>com.microsoft.cloudadvocates</string>
+		<string>$(AppIdentifierPrefix)com.microsoft.cloudadvocates</string>
 	</array>
 </dict>
 </plist>
