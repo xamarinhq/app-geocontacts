@@ -3,8 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:i18n="clr-namespace:GeoContacts.Helpers" 
              x:Class="GeoContacts.View.NearbyPage" 
+             xmlns:models="clr-namespace:GeoContacts.Model"
              xmlns:cells="clr-namespace:GeoContacts.Cells"
-             xmlns:effects="clr-namespace:GeoContacts.Effects">
+             xmlns:effects="clr-namespace:GeoContacts.Effects"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d">
     <Grid RowSpacing="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -14,9 +18,20 @@
                     ItemsSource="{Binding ContactsGrouped}"
                     GroupDisplayBinding="{Binding Key}"
                     IsGroupingEnabled="True"
+                    d:IsGroupingEnabled="False"
                     HasUnevenRows="True"
                     IsVisible="{Binding IsNotBusy}"
                     CachingStrategy="RecycleElement">
+            <d:ListView.ItemsSource>
+                <x:Array Type="{x:Type models:Contact}">
+                    <models:Contact
+                            Hometown="Seattle, WA"
+                            Name="James Montemagno"
+                            Image="icon.png"
+                            Mood="😍"
+                            Tagline="Program Manager"/>
+                </x:Array>
+            </d:ListView.ItemsSource>
             <ListView.SeparatorColor>
                 <OnPlatform x:TypeArguments="Color" Android="Transparent"/>
             </ListView.SeparatorColor>
@@ -46,8 +61,9 @@
                  IsEnabled="{Binding IsNotBusy}"
                  Text="{i18n:Translate FindCloseCDAs}"/>
 
-        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center" Grid.RowSpan="2"/>
+        <ActivityIndicator IsRunning="{Binding IsBusy}" 
+                           IsVisible="{Binding IsBusy}"
+                           Style="{StaticResource MaterialIndicator}"
+                           Grid.RowSpan="2"/>
     </Grid>
 </ContentPage>

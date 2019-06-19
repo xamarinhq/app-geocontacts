@@ -12,8 +12,7 @@ namespace GeoContacts.Droid
     [Activity(Label = "CDA Contacts", Icon = "@mipmap/ic_launcher", 
               Theme = "@style/MainTheme", 
               MainLauncher = false, 
-
-                LaunchMode = LaunchMode.SingleTask,
+              LaunchMode = LaunchMode.SingleTask,
               ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
@@ -25,6 +24,7 @@ namespace GeoContacts.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
+            global::Xamarin.Forms.FormsMaterial.Init(this, bundle);
             ImageCircleRenderer.Init();
             Android.Glide.Forms.Init();
             FormsToolkit.Droid.Toolkit.Init();

@@ -4,7 +4,11 @@
              x:Class="GeoContacts.View.AllContactsPage"
              xmlns:i18n="clr-namespace:GeoContacts.Helpers" 
              xmlns:cells="clr-namespace:GeoContacts.Cells"
-             xmlns:effects="clr-namespace:GeoContacts.Effects">
+             xmlns:effects="clr-namespace:GeoContacts.Effects"
+             xmlns:models="clr-namespace:GeoContacts.Model"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d">
     <ContentPage.ToolbarItems>
         <!-- <ToolbarItem Text="{i18n:Translate ToolbarSettings}" Icon="ic_settings"/>-->
     </ContentPage.ToolbarItems>
@@ -16,6 +20,16 @@
               RefreshCommand="{Binding ForceRefreshCommand}"
               HasUnevenRows="True"
             CachingStrategy="RecycleElement">
+            <d:ListView.ItemsSource>
+                <x:Array Type="{x:Type models:Contact}">
+                    <models:Contact
+                            Hometown="Seattle, WA"
+                            Name="James Montemagno"
+                            Image="icon.png"
+                            Mood="😍"
+                            Tagline="Program Manager"/>
+                </x:Array>
+            </d:ListView.ItemsSource>
             <ListView.Effects>
                 <effects:SelectionOnTopEffect/>
             </ListView.Effects>

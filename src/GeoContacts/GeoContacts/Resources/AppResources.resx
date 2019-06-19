@@ -145,7 +145,7 @@
     <value>Hometown</value>
   </data>
   <data name="LoginPageGuest" xml:space="preserve">
-    <value>Continue as Guest</value>
+    <value>Guest</value>
   </data>
   <data name="LoginPageLoginWithMicrosoft" xml:space="preserve">
     <value>CDA Login</value>

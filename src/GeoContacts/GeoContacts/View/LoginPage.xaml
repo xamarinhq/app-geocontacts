@@ -5,6 +5,9 @@
              x:Class="GeoContacts.View.LoginPage"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
              ios:Page.UseSafeArea="true" 
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
              Title="{i18n:Translate AppName}">
     <ContentPage.Content>
         <ScrollView>
@@ -42,16 +45,18 @@
 
             <Button Grid.Row="3" 
                     IsEnabled="{Binding IsNotBusy}"
-                    Grid.Column="1" BackgroundColor="{StaticResource PrimaryDark}" TextColor="White"
+                    Grid.Column="1" 
                     Text="{i18n:Translate LoginPageGuest}"
                     HorizontalOptions="FillAndExpand"
-                    Command="{Binding GuestCommand}"/>
+                    Command="{Binding GuestCommand}"
+                    Style="{StaticResource ButtonFilled}"   
+                    />
 
             <ActivityIndicator IsVisible="{Binding IsBusy}"
                                 IsRunning="{Binding IsBusy}"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center"
-                                Grid.RowSpan="4" Grid.ColumnSpan="2"/>
+                               d:IsRunning="True"
+                               Style="{StaticResource MaterialIndicator}"
+                               Grid.RowSpan="4" Grid.ColumnSpan="2"/>
 
             </Grid>
         </ScrollView>

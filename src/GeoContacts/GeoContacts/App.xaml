@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="GeoContacts.App">
+             x:Class="GeoContacts.App"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d">
 	<Application.Resources>
         <ResourceDictionary>
             <!-- Application resource dictionary -->
@@ -17,8 +20,8 @@
             </Style>
 
             <OnPlatform x:Key="ButtonOutlineBackgroundColor" x:TypeArguments="Color">
-                <On Platform="Android" Value="Transparent"/>
-                <On Platform="iOS" Value="Transparent"/>
+                <On Platform="Android" Value="White"/>
+                <On Platform="iOS" Value="White"/>
             </OnPlatform>
 
             <OnPlatform x:Key="ButtonOutlineTextColor" x:TypeArguments="Color">
@@ -36,12 +39,34 @@
                 <On Platform="Android" Value="1"/>
             </OnPlatform>
 
-
+            <Style x:Key="ButtonFilled" TargetType="Button">
+                <Setter Property="FontSize" Value="Medium"/>
+                <Setter Property="CornerRadius" Value="24"/>
+                <Setter Property="HeightRequest" Value="48"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryDark}"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="Visual" Value="Material"/>
+            </Style>
+            
             <Style x:Key="ButtonOutline" TargetType="Button">
+                <Setter Property="FontSize" Value="Medium"/>
+                <Setter Property="CornerRadius" Value="24"/>
+                <Setter Property="HeightRequest" Value="48"/>
                 <Setter Property="BackgroundColor" Value="{StaticResource ButtonOutlineBackgroundColor}"/>
                 <Setter Property="TextColor" Value="{StaticResource ButtonOutlineTextColor}"/>
                 <Setter Property="BorderColor" Value="{StaticResource ButtonOutlineBorderColor}"/>
                 <Setter Property="BorderWidth" Value="{StaticResource ButtonOutlineBorderWidth}"/>
+                <Setter Property="Visual" Value="Material"/>
+            </Style>
+
+
+            <Style x:Key="MaterialIndicator" TargetType="ActivityIndicator">
+                <Setter Property="HeightRequest" Value="48"/>
+                <Setter Property="WidthRequest" Value="48"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="Visual" Value="Material"/>
+                <Setter Property="Color" Value="{StaticResource Primary}"/>
             </Style>
         </ResourceDictionary>
     </Application.Resources>

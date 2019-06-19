@@ -26,6 +26,7 @@ namespace GeoContacts.iOS
         {
             UITabBar.Appearance.SelectedImageTintColor = UIColor.FromRGB(178, 22, 9);
             global::Xamarin.Forms.Forms.Init();
+            Xamarin.Forms.FormsMaterial.Init();
             ImageCircleRenderer.Init();
             FormsToolkit.iOS.Toolkit.Init();
             LoadApplication(new App());
